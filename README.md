@@ -1,11 +1,6 @@
 # LettuceEat
 
-Checklist:
-
-In order to create a repo, you will need to decide on a project name
-Project name LettuceEat
-
-## Write 3-5 sentences on project topic
+## The Project
 	
 For young adults who have social gatherings involving group food orders, our responsive web app will ease the process of gathering, consolidating, and outputting individual food orders to be submitted as a group order. The app will store: anonymous users’ data (amount owing, dishes, custom tip amounts, and display name), food menu (dishes), and session (states, and users). Users can access a particular session and make a food order customized to their liking, based on the menu items available in the session. The session leader then takes all the consolidated order data and sends it to a food ordering service (externally from our app, eg. a waiter or UberEats app) to place the order. Additional functionalities we can implement given enough time include user authentication to create custom profiles, saving favourite/previous orders for future use, use of machine learning to automatically input menu items, and/or integration with payment platforms. 
 
@@ -26,8 +21,7 @@ For young adults who have social gatherings involving group food orders, our res
 - Passwords for users when returning to session
 - Delete sessions after x amount of days (Scheduled db purge)
 
-## Pick 2 of your minimal requirements and break each of them down into ~2-5 smaller tasks!
-This will help you divide up work among your teammates
+## Breaking down the minimal requirements:
 ### Ability for users to pick dishes
 - Display menu items (list) with prices
 - Select from menu items 
@@ -38,7 +32,7 @@ This will help you divide up work among your teammates
 - Copy and share session invite link/code
 - Ensure users that access the session can see the same data as other users on refresh
 
-## Finally, draw 2-3 rough sketch prototypes of some key tasks of your app. Sketch these physically on paper and then scan and add to your repo.
+## 2-3 rough sketch prototypes of some key tasks of the app:
 ![Page1](https://user-images.githubusercontent.com/47487758/119433880-f3d2e600-bccb-11eb-8fde-30dba851e636.png)
 ![Page2](https://user-images.githubusercontent.com/47487758/119433882-f59ca980-bccb-11eb-9dc6-4926c90f228c.png)
 
