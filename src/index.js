@@ -2,11 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './pages/App';
+import Charcuterie from 'pages/Charcuterie';
 import reportWebVitals from './utils/reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <Charcuterie >
+      <p>Hi</p>
+    </Charcuterie>
   </React.StrictMode>,
   document.getElementById('root')
 );
