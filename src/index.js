@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './pages/App';
+import Input from './components/Input'
 import Charcuterie from 'pages/Charcuterie';
 import reportWebVitals from './utils/reportWebVitals';
 
@@ -10,6 +11,12 @@ ReactDOM.render(
     {/* <App /> */}
     <Charcuterie >
       <p>Hi</p>
+      <Input size={"small"} placeholder={"Password"} type={"password"}/>
+      <Input size={"large"}/>
+      <br />
+      <Input size={"default"} label={"default"} placeholder={"disabled"} disabled={true} />
+      <br />
+      <Input size={"medium"} label={"side by side"} placeholder={"username"}/>
     </Charcuterie>
   </React.StrictMode>,
   document.getElementById('root')
