@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './pages/App';
 import Charcuterie from 'pages/Charcuterie';
 import reportWebVitals from './utils/reportWebVitals';
 import Button from 'components/Button'

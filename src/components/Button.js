@@ -9,9 +9,9 @@ const ButtonStyle = styled.button`
         return p.theme.colors.darkGreen;
     }};
   color: ${(p) => ((p.type == "secondary" || p.type == "text") ? p.theme.colors.darkGreen : "white")};
-  font-size: ${(p) => p.size ? p.theme.fontSizes[p.size] : p.theme.fontSizes.default};
-  cursor: ${p => p.disabled ? "not-allowed" : "auto"};
   opacity: ${p => p.disabled ? "0.5" : "1"};
+  cursor: ${p => p.disabled ? "not-allowed" : "auto"};
+  font-size: ${(p) => p.size ? p.theme.fontSizes[p.size] : p.theme.fontSizes.default};
   border: ${(p) => p.type == "text" ? "none" : "default"};
   border-radius: 5px;
   margin: 0.25em;
