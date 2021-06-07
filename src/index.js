@@ -4,15 +4,30 @@ import './index.css';
 // import App from './pages/App';
 import Charcuterie from 'pages/Charcuterie';
 import reportWebVitals from './utils/reportWebVitals';
-import TextIcon from 'components/TextIcon'
+import Button from 'components/Button'
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <Charcuterie >
-      <p>Hi</p>
-      <TextIcon textLetter={'a'} size={'small'} color={'#8EDB31'}>small</TextIcon>
-      <TextIcon textLetter={'b'} size={'default'} color={'#31B4DB'}>default</TextIcon>
+    <Charcuterie>
+      <h3>small</h3>
+      <Button size={"small"} type={"primary"} label={"primary"} />
+      <Button size={"small"} type={"secondary"} label={"secondary"} />
+      <Button size={"small"} type={"text"} label={"text"} />
+      <h3>medium</h3>
+      <Button size={"medium"} type={"primary"} label={"primary"} />
+      <Button size={"medium"} type={"secondary"} label={"secondary"} />
+      <Button size={"medium"} type={"text"} label={"text"} />
+      <h3>large</h3>
+      <Button size={"large"} type={"primary"} label={"primary"} />
+      <Button size={"large"} type={"secondary"} label={"secondary"} />
+      <Button size={"large"} type={"text"} label={"text"} />
+
+      <h3>others</h3>
+      <Button label={"default"} />
+      <br />
+      <Button label={"disabled"} disabled />
+      <Button label={"disabled"} type={"secondary"} disabled />
+
     </Charcuterie>
   </React.StrictMode>,
   document.getElementById('root')
