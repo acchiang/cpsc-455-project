@@ -21,13 +21,11 @@ ReactDOM.render(
       <Button size={"large"} type={"primary"} label={"primary"} />
       <Button size={"large"} type={"secondary"} label={"secondary"} />
       <Button size={"large"} type={"text"} label={"text"} />
-
       <h3>others</h3>
       <Button label={"default"} />
       <br />
       <Button label={"disabled"} disabled />
       <Button label={"disabled"} type={"secondary"} disabled />
-
     </Charcuterie>
   </React.StrictMode>,
   document.getElementById('root')

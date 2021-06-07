@@ -1,18 +1,18 @@
 import { ThemeProvider } from "styled-components";
 
-// example
 const theme = {
     colors: {
-      powderWhite: "#FFFDF9",
-      persianGreen: "#06B49A",
-      lightBlue: "#AFDBD2",
-      onyx: "#36313D"
+      darkGreen: "#064420",
+      lightGreen: "#e4efe7",
+      beige: "#faf1e6",
+      lightBeige: "#fdfaf6"
     },
     fonts: ["sans-serif", "Roboto"],
     fontSizes: {
-      small: "1em",
-      medium: "2em",
-      large: "3em"
+      small: "12px",
+      medium: "24px",
+      large: "36px",
+      default: "24px"
     }
   }
 
