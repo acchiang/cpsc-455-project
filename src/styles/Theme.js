@@ -2,10 +2,10 @@ import { ThemeProvider } from "styled-components";
 
 const theme = {
     colors: {
-      darkGreen: "#064420",
-      lightGreen: "#e4efe7",
-      beige: "#faf1e6",
-      lightBeige: "#fdfaf6"
+      primary: "#faf1e6",
+      secondary: "#e4efe7",
+      neutral: "#fdfaf6",
+      accent: "#064420"
     },
     fonts: ["sans-serif", "Roboto"],
     fontSizes: {

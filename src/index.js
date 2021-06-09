@@ -21,7 +21,8 @@ ReactDOM.render(
       <Button size={"large"} type={"secondary"} label={"secondary"} />
       <Button size={"large"} type={"text"} label={"text"} />
       <h3>others</h3>
-      <Button label={"default"} />
+      <Button label={"default"}/>
+      <Button label={"click me!"} onClick={() => { alert("button clicked");}}/>
       <br />
       <Button label={"disabled"} disabled />
       <Button label={"disabled"} type={"secondary"} disabled />
