@@ -7,7 +7,10 @@ import Button from 'components/Button'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Charcuterie>
+    <Charcuterie >
+      <p>Hi</p>
+      <TextIcon textLetter={'a'} size={'small'} color={'#8EDB31'}>small</TextIcon>
+      <TextIcon textLetter={'b'} size={'default'} color={'#31B4DB'}>default</TextIcon>
       <h3>small</h3>
       <Button size={"small"} type={"primary"} label={"primary"} />
       <Button size={"small"} type={"secondary"} label={"secondary"} />
@@ -21,8 +24,8 @@ ReactDOM.render(
       <Button size={"large"} type={"secondary"} label={"secondary"} />
       <Button size={"large"} type={"text"} label={"text"} />
       <h3>others</h3>
-      <Button label={"default"}/>
-      <Button label={"click me!"} onClick={() => { alert("button clicked");}}/>
+      <Button label={"default"} />
+      <Button label={"click me!"} onClick={() => { alert("button clicked"); }} />
       <br />
       <Button label={"disabled"} disabled />
       <Button label={"disabled"} type={"secondary"} disabled />
