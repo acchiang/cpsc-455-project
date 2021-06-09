@@ -17,6 +17,10 @@ const InputBox = styled.input`
   padding: 10px;
   border: 1px solid black;
   border-radius: 3px;
+
+  :disabled {
+    background: #EEEEEE
+  }
 `;
 
 const Label = styled.label`
