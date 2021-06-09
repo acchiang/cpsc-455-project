@@ -7,7 +7,6 @@ import TextIcon from 'components/TextIcon'
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <App /> */}
     <Charcuterie >
       <p>Hi</p>
       <TextIcon textLetter={'a'} size={'small'} color={'#8EDB31'}>small</TextIcon>
