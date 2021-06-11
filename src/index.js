@@ -4,6 +4,7 @@ import './index.css';
 import Charcuterie from 'pages/Charcuterie';
 import reportWebVitals from './utils/reportWebVitals';
 import TextIcon from 'components/TextIcon'
+import Input from "./components/Input";
 import Button from 'components/Button'
 
 ReactDOM.render(
@@ -31,9 +32,24 @@ ReactDOM.render(
       <br />
       <Button label={"disabled"} disabled />
       <Button label={"disabled"} type={"secondary"} disabled />
+
+      <h2>User Inputs</h2>
+      <Input size={"small"} placeholder={"Password"} type={"password"} />
+      <Input size={"large"} 
+        border={"2px solid green"}
+        fontColor={"grey"}/>
+      <br />
+      <Input
+        size={"default"}
+        label={"default"}
+        placeholder={"disabled"}
+        disabled
+      />
+      <br />
+      <Input size={"medium"} label={"side by side"} placeholder={"username"} />
     </Charcuterie>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
