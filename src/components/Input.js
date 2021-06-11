@@ -11,15 +11,19 @@ const InputBox = styled.input`
   width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 9}px;
   height: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
   font-size: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
+  color: ${(p) => p.fontColor ?? "black"};
   cursor: ${(p) => (p.disabled ? "not-allowed" : "text")};
   margin: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) / 3}px
     ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) / 3}px;
   padding: 10px;
-  border: 1px solid black;
+  border: ${(p) => p.border ?? "1px solid black"};
   border-radius: 3px;
-
+  
+  :placeholder{
+    color: ${(p) => p.placeholderColor ?? "black"}
+  }
   :disabled {
-    background: #EEEEEE
+    background: #EEEEEE;
   }
 `;
 

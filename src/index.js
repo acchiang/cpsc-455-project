@@ -12,7 +12,9 @@ ReactDOM.render(
     <Charcuterie>
       <p>Hi</p>
       <Input size={"small"} placeholder={"Password"} type={"password"} />
-      <Input size={"large"} />
+      <Input size={"large"} 
+        border={"2px solid green"}
+        fontColor={"grey"}/>
       <br />
       <Input
         size={"default"}
