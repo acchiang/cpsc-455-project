@@ -1,6 +1,7 @@
 import Theme from 'styles/Theme'
 import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
+import Input from "components/Input";
 
 function Charcuterie({ children }) {
   return (
@@ -27,6 +28,20 @@ function Charcuterie({ children }) {
       <br />
       <Button label={"disabled"} disabled />
       <Button label={"disabled"} type={"secondary"} disabled />
+      <h2>User Inputs</h2>
+      <Input size={"small"} placeholder={"Password"} type={"password"} />
+      <Input size={"large"} 
+        border={"2px solid green"}
+        fontColor={"grey"}/>
+      <br />
+      <Input
+        size={"default"}
+        label={"default"}
+        placeholder={"disabled"}
+        disabled
+      />
+      <br />
+      <Input size={"medium"} label={"side by side"} placeholder={"username"} />
     </Theme>
   );
 }
