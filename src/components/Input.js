@@ -11,6 +11,8 @@ const InputBox = styled.input`
   width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 9}px;
   height: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
   font-size: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
+  font-family: ${(p) => p.theme.fonts};
+  font-weight: ${(p) => p.theme.fontWeight};
   color: ${(p) => p.fontColor ?? "black"};
   cursor: ${(p) => (p.disabled ? "not-allowed" : "text")};
   margin: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) / 3}px
@@ -30,6 +32,8 @@ const InputBox = styled.input`
 const Label = styled.label`
   display: inline-block;
   font-size: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
+  font-family: ${(p) => p.theme.fonts};
+  font-weight: ${(p) => p.theme.fontWeight};
   min-width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 6}px;
   max-width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 6}px;
   text-align: left;
