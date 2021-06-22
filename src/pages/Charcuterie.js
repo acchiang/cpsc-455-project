@@ -2,7 +2,7 @@ import Theme from 'styles/Theme'
 import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
 import Input from "components/Input";
-
+import DollarAmount from "components/DollarAmount";
 function Charcuterie({ children }) {
   return (
     <Theme>
@@ -42,6 +42,8 @@ function Charcuterie({ children }) {
       />
       <br />
       <Input size={"medium"} label={"side by side"} placeholder={"username"} />
+      <h2>Dollar Amount Component</h2>
+      <DollarAmount size={"medium"} amount={"12.99"}/>
     </Theme>
   );
 }
