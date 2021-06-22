@@ -12,8 +12,8 @@ const DollarAmountStyle = styled.div`
   margin: 0.25em;
 `;
 
-const DollarAmount = ({ size, type, amount }) => (
-  <DollarAmountStyle size={size} type={type} >Subtotal: ${amount}</DollarAmountStyle>
+const DollarAmount = ({ size, type, label, amount }) => (
+  <DollarAmountStyle size={size} type={type} >{label}: ${amount}</DollarAmountStyle>
 );
 
 export default DollarAmount;

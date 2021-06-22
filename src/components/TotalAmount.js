@@ -13,8 +13,14 @@ const TotalAmountStyle = styled.div`
   margin: 0.25em;
 `;
 
-const TotalAmount = ({ size, type, amount }) => (
-  <DollarAmount></DollarAmount>
+const TotalAmount = ({ size, menuAmount, tipAmount, finalAmount }) => (
+    <>
+    <TotalAmountStyle>
+        <DollarAmount size={size} label={"Menu Total"} amount={menuAmount}></DollarAmount>
+        <DollarAmount size={size} label={"Tip Total"} amount={tipAmount}></DollarAmount>
+        <DollarAmount size={size} label={"Final Total"} amount={finalAmount}></DollarAmount>
+    </TotalAmountStyle>
+    </>
 );
 
 export default TotalAmount;
