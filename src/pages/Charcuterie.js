@@ -43,7 +43,7 @@ function Charcuterie({ children }) {
       <br />
       <Input size={"medium"} label={"side by side"} placeholder={"username"} />
       <h2>Dollar Amount Component</h2>
-      <DollarAmount size={"medium"} amount={"12.99"}/>
+      <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"}/>
     </Theme>
   );
 }
