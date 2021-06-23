@@ -50,8 +50,7 @@ function Charcuterie({ children }) {
       <TotalAmount 
         size={"medium"} 
         menuAmount={"12.99"}
-        tipAmount={"1.50"}
-        finalAmount={"15.00"}/>
+        tipAmount={"1.50"}/>
     </Theme>
   );
 }
