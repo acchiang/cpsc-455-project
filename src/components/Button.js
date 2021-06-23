@@ -7,7 +7,7 @@ const ButtonStyle = styled.button`
     if (p.type === "text") return "none";
     return p.theme.colors.accent;
   }};
-  color: ${(p) => ((p.type === "secondary" || p.type === "text") ? p.theme.colors.accent : "white")};
+  color: ${(p) => ((p.type === "secondary" || p.type === "text") ? p.theme.colors.text : "white")};
   opacity: ${p => p.disabled ? "0.5" : "1"};
   cursor: ${p => p.disabled ? "not-allowed" : "auto"};
   font-size: ${(p) => p.size ? p.theme.fontSizes[p.size] : p.theme.fontSizes.default};
