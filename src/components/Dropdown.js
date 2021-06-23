@@ -29,11 +29,8 @@ const handleSelect = (event, setSelected, setShowInput, customValue) => {
     let selectedValue = event.target.value;
     setSelected(selectedValue);
     if (setShowInput) {
-        if (selectedValue === customValue) {
-            setShowInput(true);
-        } else {
-            setShowInput(false);
-        }
+        let showInputVal = (selectedValue === customValue) ? true : false;
+        setShowInput(showInputVal);
     }
 }
 
