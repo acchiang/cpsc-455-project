@@ -3,7 +3,7 @@ import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
 import Input from "components/Input";
 import DollarAmount from "components/DollarAmount";
-import TotalAmount from "components/DollarAmount";
+import TotalAmount from "components/TotalAmount";
 
 function Charcuterie({ children }) {
   return (
@@ -50,7 +50,8 @@ function Charcuterie({ children }) {
       <TotalAmount 
         size={"medium"} 
         menuAmount={"12.99"}
-        tipAmount={"1.50"}/>
+        tipAmount={"1.50"}
+        finalAmount={"15.00"}/>
     </Theme>
   );
 }
