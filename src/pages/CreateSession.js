@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Button from 'components/Button'
 import Input from 'components/Input'
 import { Title, H2 } from 'styles/styleUtils';
+import { useHistory } from 'react-router-dom';
 
 const PageContainer = styled.div`
 display: flex;
@@ -21,6 +22,13 @@ flex-direction: row;
 `;
 
 function CreateSession({ ...props }) {
+    const history = useHistory();
+
+    // TODO: Ask server for a session and navigate to custom session ??? unscoped
+    const generateSession = () => {
+        history.push('/order-screen')
+    }
+
     return (
         <Theme>
             <PageContainer>
@@ -36,7 +44,7 @@ function CreateSession({ ...props }) {
                     <Input size={"medium"} label={"Event Name"} placeholder={"Dine Out"} />
                 </InputContainer>
                 <br />
-                <Button size={"medium"} type={"primary"} label={"Create Session"} />
+                <Button size={"medium"} type={"primary"} label={"Create Session"} onClick={generateSession}/>
             </PageContainer>
         </Theme>
     );
