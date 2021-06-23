@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { OrderContext } from "utils/Context";
 import sampleMenu from "assets/sampleMenu";
+import BackButton from "components/BackButton";
 
 function OrderScreen() {
   const [order, setOrder] = useState(null);
@@ -30,6 +31,7 @@ function OrderScreen() {
 
   return (
     <OrderContext.Provider value={[order, setOrder]}>
+      <BackButton url={"/create-session"}/>
       {JSON.stringify(order)}
     </OrderContext.Provider>
   );
