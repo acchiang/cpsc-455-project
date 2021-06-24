@@ -7,13 +7,13 @@ const DollarAmountStyle = styled.div`
   font-size: ${(p) => p.size ? p.theme.fontSizes[p.size] : p.theme.fontSizes.default};
   font-family: ${(p) => p.theme.fonts};
   font-weight: ${(p) => p.theme.fontWeight};
-  border: ${(p) => p.type === "text" ? "none" : "default"};
+  border: "default";
   border-radius: 5px;
   margin: 0.25em;
 `;
 
-const DollarAmount = ({ size, type, amount, label }) => (
-  <DollarAmountStyle size={size} type={type} >{label}: ${amount}</DollarAmountStyle>
+const DollarAmount = ({ size, label, amount }) => (
+  <DollarAmountStyle size={size}>{label}: ${amount}</DollarAmountStyle>
 );
 
 export default DollarAmount;
