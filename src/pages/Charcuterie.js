@@ -6,8 +6,7 @@ import Input from "components/Input";
 import Dropdown from "components/Dropdown";
 
 function Charcuterie({ children }) {
-  const [showInputSmall, setShowInputSmall]= useState(false);
-  const [showInputLarge, setShowInputLarge]= useState(false);
+  const [showInput, setShowInput]= useState(false);
   const optionsWithInput = ["10%", "15%", "20%", "Other"];
   const optionsNoInput = ["10%", "15%", "20%"];
 
@@ -55,7 +54,7 @@ function Charcuterie({ children }) {
       <p>medium (default)</p>
       <Dropdown options={optionsNoInput}></Dropdown>
       <p>large</p>
-      <Dropdown size={"large"} options={optionsWithInput} defaultOption={"20%"} showInput={showInputLarge} setShowInput={setShowInputLarge} customValue={"Other"}></Dropdown>
+      <Dropdown size={"large"} options={optionsWithInput} defaultOption={"20%"} showInput={showInput} setShowInput={setShowInput} customValue={"Other"}></Dropdown>
     </Theme>
   );
 }

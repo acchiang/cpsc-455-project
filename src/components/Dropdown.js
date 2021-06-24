@@ -15,23 +15,23 @@ padding: 0.25em 0.25em;
 
 const Dropdown = ({ options, defaultOption, size, showInput, setShowInput, customValue, ...props }) => {
     const [selected, setSelected] = useState(defaultOption);
+
+    const handleSelect = (event, customValue) => {
+        let selectedValue = event.target.value;
+        setSelected(selectedValue);
+        if (setShowInput) {
+            setShowInput(selectedValue === customValue)
+        }
+    }
+
     return (
         <div>
-            <DropdownSelect size={size} value={selected} onChange={(e) => handleSelect(e, setSelected, setShowInput, customValue)}>
+            <DropdownSelect size={size} value={selected} onChange={(e) => handleSelect(e, customValue)}>
                 {options.map((option, key) => { return (<option value={option} key={key}>{option}</option>) })}
             </DropdownSelect>
             {showInput && <Input size={size} placeholder={customValue} />}
         </div>
     )
-}
-
-const handleSelect = (event, setSelected, setShowInput, customValue) => {
-    let selectedValue = event.target.value;
-    setSelected(selectedValue);
-    if (setShowInput) {
-        let showInputVal = (selectedValue === customValue) ? true : false;
-        setShowInput(showInputVal);
-    }
 }
 
 export default Dropdown;
