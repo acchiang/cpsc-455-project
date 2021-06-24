@@ -19,54 +19,16 @@ const ButtonStyle = styled.button`
   }
 `;
 
-const inputSize = {
-    medium: 24,
-    large: 36,
-    default: 24,
-  };
-
-const InputBox = styled.input`
-  width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 9}px;
-  height: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
-  font-size: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
-  font-family: ${(p) => p.theme.fonts};
-  font-weight: ${(p) => p.theme.fontWeight};
-  color: ${(p) => p.fontColor ?? "black"};
-  cursor: ${(p) => (p.disabled ? "not-allowed" : "text")};
-  padding: 10px;
-  border: ${(p) => p.border ?? "1px solid black"};
-  border-radius: 3px;
-  
-  :placeholder{
-    color: ${(p) => p.placeholderColor ?? "black"}
-  }
-  :disabled {
-    background: #EEEEEE;
-  }
-`;
-
-const Label = styled.label`
-  display: inline-block;
-  font-size: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
-  font-family: ${(p) => p.theme.fonts};
-  font-weight: ${(p) => p.theme.fontWeight};
-  min-width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 6}px;
-  max-width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 6}px;
-  text-align: left;
-`;
-
 const CopyUrlStyle = styled.div`
   margin: 8px;
 `;
 
 const CopyURL = ({ size, type, label, disabled, onClick, placeholder }) => (
-    <>
     <CopyUrlStyle>
-        {label && <Label size={size}>{label}:</Label>}
-        <InputBox
-        size={size}
-        name={label ?? placeholder}
-        placeholder={placeholder}
+        <Input
+          size={size}
+          placeholder={placeholder}
+          margin="auto"
         />
         <ButtonStyle 
             size={size} 
@@ -76,7 +38,6 @@ const CopyURL = ({ size, type, label, disabled, onClick, placeholder }) => (
         Copy
         </ButtonStyle>
     </CopyUrlStyle>
-    </>
 );
 
 export default CopyURL;
