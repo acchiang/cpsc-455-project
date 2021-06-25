@@ -4,6 +4,7 @@ import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
 import Input from "components/Input";
 import Dropdown from "components/Dropdown";
+import BackButton from 'components/BackButton';
 
 function Charcuterie({ children }) {
   const [showInput, setShowInput]= useState(false);
@@ -55,6 +56,8 @@ function Charcuterie({ children }) {
       <Dropdown options={optionsNoInput}></Dropdown>
       <p>large</p>
       <Dropdown size={"large"} options={optionsWithInput} defaultOption={"20%"} showInput={showInput} setShowInput={setShowInput} customValue={"Other"}></Dropdown>
+      <p>Back button</p>
+      <BackButton url={'create-session'} />
     </Theme>
   );
 }
