@@ -8,12 +8,11 @@ const QuantityButton = styled.button`
 `
 
 const handleDecrease = (value, setValue) => {
-    if (value === 0) return; 
-    setValue(value - 1)
+    if (value > 0) setValue(value - 1); 
 }
 
 const handleIncrease = (value, setValue) => {
-    setValue(value + 1)
+    setValue(value + 1);
 }
 
 const QuantitySelectorInput = styled.input`
