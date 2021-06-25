@@ -2,6 +2,7 @@ import Theme from 'styles/Theme'
 import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
 import Input from "components/Input";
+import BackButton from 'components/BackButton';
 
 function Charcuterie({ children }) {
   return (
@@ -42,6 +43,8 @@ function Charcuterie({ children }) {
       />
       <br />
       <Input size={"medium"} label={"side by side"} placeholder={"username"} />
+      <p>Back button</p>
+      <BackButton url={'create-session'} />
     </Theme>
   );
 }
