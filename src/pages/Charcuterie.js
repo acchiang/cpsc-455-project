@@ -46,7 +46,8 @@ function Charcuterie({ children }) {
       <h2>Copy URL Component</h2>
       <CopyURL 
         size={"medium"} 
-        placeholder={"some session url"}/>
+        placeholder={"some session url"}
+        type={"secondary"}/>
     </Theme>
   );
 }
