@@ -5,12 +5,14 @@ import Button from 'components/Button'
 import Input from "components/Input";
 import Dropdown from "components/Dropdown";
 import BackButton from 'components/BackButton';
+import QuantitySelector from 'components/QuantitySelector'
 
 function Charcuterie({ children }) {
   const [showInput, setShowInput]= useState(false);
   const optionsWithInput = ["10%", "15%", "20%", "Other"];
   const optionsNoInput = ["10%", "15%", "20%"];
 
+  const [selectorValue1, setSelectorValue1]= useState(0)
   return (
     <Theme>
       <h2>User Icons</h2>
@@ -58,6 +60,7 @@ function Charcuterie({ children }) {
       <Dropdown size={"large"} options={optionsWithInput} defaultOption={"20%"} showInput={showInput} setShowInput={setShowInput} customValue={"Other"}></Dropdown>
       <p>Back button</p>
       <BackButton url={'create-session'} />
+      <QuantitySelector value={selectorValue1} setValue={setSelectorValue1} />
     </Theme>
   );
 }
