@@ -1,10 +1,16 @@
+import { useState } from 'react'
 import Theme from 'styles/Theme'
 import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
 import Input from "components/Input";
+import Dropdown from "components/Dropdown";
 import BackButton from 'components/BackButton';
 
 function Charcuterie({ children }) {
+  const [showInput, setShowInput]= useState(false);
+  const optionsWithInput = ["10%", "15%", "20%", "Other"];
+  const optionsNoInput = ["10%", "15%", "20%"];
+
   return (
     <Theme>
       <h2>User Icons</h2>
@@ -43,6 +49,13 @@ function Charcuterie({ children }) {
       />
       <br />
       <Input size={"medium"} label={"side by side"} placeholder={"username"} />
+      <h2>Dropdown</h2>
+      <p>small</p>
+      <Dropdown size={"small"} options={optionsNoInput} defaultOption={"15%"}></Dropdown>
+      <p>medium (default)</p>
+      <Dropdown options={optionsNoInput}></Dropdown>
+      <p>large</p>
+      <Dropdown size={"large"} options={optionsWithInput} defaultOption={"20%"} showInput={showInput} setShowInput={setShowInput} customValue={"Other"}></Dropdown>
       <p>Back button</p>
       <BackButton url={'create-session'} />
     </Theme>
