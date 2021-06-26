@@ -1,9 +1,20 @@
+import { useState } from 'react'
 import Theme from 'styles/Theme'
 import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
 import Input from "components/Input";
 import DollarAmount from "components/DollarAmount";
+import TotalAmount from "components/TotalAmount";
+import Dropdown from "components/Dropdown";
+import BackButton from 'components/BackButton';
+import QuantitySelector from 'components/QuantitySelector'
+
 function Charcuterie({ children }) {
+  const [showInput, setShowInput]= useState(false);
+  const optionsWithInput = ["10%", "15%", "20%", "Other"];
+  const optionsNoInput = ["10%", "15%", "20%"];
+
+  const [selectorValue1, setSelectorValue1]= useState(0)
   return (
     <Theme>
       <h2>User Icons</h2>
@@ -44,6 +55,21 @@ function Charcuterie({ children }) {
       <Input size={"medium"} label={"side by side"} placeholder={"username"} />
       <h2>Dollar Amount Component</h2>
       <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"}/>
+      <h2>Total Amount Component</h2>
+      <TotalAmount 
+        size={"medium"} 
+        menuAmount={"12.99"}
+        tipAmount={"1.50"}/>
+      <h2>Dropdown</h2>
+      <p>small</p>
+      <Dropdown size={"small"} options={optionsNoInput} defaultOption={"15%"}></Dropdown>
+      <p>medium (default)</p>
+      <Dropdown options={optionsNoInput}></Dropdown>
+      <p>large</p>
+      <Dropdown size={"large"} options={optionsWithInput} defaultOption={"20%"} showInput={showInput} setShowInput={setShowInput} customValue={"Other"}></Dropdown>
+      <p>Back button</p>
+      <BackButton url={'create-session'} />
+      <QuantitySelector value={selectorValue1} setValue={setSelectorValue1} />
     </Theme>
   );
 }

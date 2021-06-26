@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Charcuterie from 'pages/Charcuterie';
 import CreateSession from 'pages/CreateSession';
+import OrderScreen from 'pages/OrderScreen';
 import reportWebVitals from './utils/reportWebVitals';
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 
@@ -15,6 +16,9 @@ ReactDOM.render(
       <Switch>
         <Route path="/create-session">
           <CreateSession />
+        </Route>
+        <Route path="/order-screen">
+          <OrderScreen />
         </Route>
         <Route path="/">
           <Charcuterie />
