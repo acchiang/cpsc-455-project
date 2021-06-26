@@ -41,13 +41,21 @@ function OrderScreen() {
   `;
 
 
-  const PanelContainer = styled.table`
+  const PanelContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 20px;
   `
 
   const Panel = styled.td`
-    vertical-align:top
+    width: 400px;
+    vertical-align: top;
   `
+
+  const DividerPanel = styled.td`
+  vertical-align: top;
+`
 
   const Divider = styled.div`
   height: 90vh; 
@@ -66,23 +74,23 @@ function OrderScreen() {
       <PageContainer>
       <BackButton url={"/create-session"}/>
       <PanelContainer>
+        <table>
         <tr>
           <Panel>
             <h2>Menu</h2>
             <MenuSelector order={order} />
           </Panel>
-          <Panel>
+          <DividerPanel>
             <Divider/>
-          </Panel>
+          </DividerPanel>
           <Panel>
             <h2>Users</h2>
             <IconsContainer>
               <TextIcon textLetter={'t'} size={'default'} color={'#31B4DB'}>test user</TextIcon>
             </IconsContainer>
             <Button size={"small"} type={"primary"} label={"consolidate"} onClick={()=> window.location.href='/final-order'} />
-      
           </Panel>
-        </tr>
+        </tr></table>
       </PanelContainer>
       </PageContainer>
     </OrderContext.Provider>
