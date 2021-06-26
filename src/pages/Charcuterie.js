@@ -1,25 +1,35 @@
-import { useState } from 'react'
-import Theme from 'styles/Theme'
-import TextIcon from 'components/TextIcon'
-import Button from 'components/Button'
+import { useState } from "react";
+import Theme from "styles/Theme";
+import TextIcon from "components/TextIcon";
+import Button from "components/Button";
 import Input from "components/Input";
 import DollarAmount from "components/DollarAmount";
 import TotalAmount from "components/TotalAmount";
 import Dropdown from "components/Dropdown";
-import BackButton from 'components/BackButton';
-import QuantitySelector from 'components/QuantitySelector'
+import BackButton from "components/BackButton";
+import QuantitySelector from "components/QuantitySelector";
 
 function Charcuterie({ children }) {
-  const [showInput, setShowInput]= useState(false);
+  const [showInput, setShowInput] = useState(false);
   const optionsWithInput = ["10%", "15%", "20%", "Other"];
   const optionsNoInput = ["10%", "15%", "20%"];
 
-  const [selectorValue1, setSelectorValue1]= useState(0)
+  const [selectorValue1, setSelectorValue1] = useState(0);
   return (
     <Theme>
+      <Button
+        size={"medium"}
+        type={"primary"}
+        label={"Take me to the front page"}
+        onClick={() => (window.location.href = "/create-session")}
+      />
       <h2>User Icons</h2>
-      <TextIcon textLetter={'a'} size={'small'} color={'#8EDB31'}>small</TextIcon>
-      <TextIcon textLetter={'b'} size={'default'} color={'#31B4DB'}>default</TextIcon>
+      <TextIcon textLetter={"a"} size={"small"} color={"#8EDB31"}>
+        small
+      </TextIcon>
+      <TextIcon textLetter={"b"} size={"default"} color={"#31B4DB"}>
+        default
+      </TextIcon>
       <h2>Buttons</h2>
       <p>small</p>
       <Button size={"small"} type={"primary"} label={"primary"} />
@@ -35,15 +45,18 @@ function Charcuterie({ children }) {
       <Button size={"large"} type={"text"} label={"text"} />
       <p>others</p>
       <Button label={"default"} />
-      <Button label={"click me!"} onClick={() => { alert("button clicked"); }} />
+      <Button
+        label={"click me!"}
+        onClick={() => {
+          alert("button clicked");
+        }}
+      />
       <br />
       <Button label={"disabled"} disabled />
       <Button label={"disabled"} type={"secondary"} disabled />
       <h2>User Inputs</h2>
       <Input size={"small"} placeholder={"Password"} type={"password"} />
-      <Input size={"large"} 
-        border={"2px solid green"}
-        fontColor={"grey"}/>
+      <Input size={"large"} border={"2px solid green"} fontColor={"grey"} />
       <br />
       <Input
         size={"default"}
@@ -54,21 +67,29 @@ function Charcuterie({ children }) {
       <br />
       <Input size={"medium"} label={"side by side"} placeholder={"username"} />
       <h2>Dollar Amount Component</h2>
-      <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"}/>
+      <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"} />
       <h2>Total Amount Component</h2>
-      <TotalAmount 
-        size={"medium"} 
-        menuAmount={"12.99"}
-        tipAmount={"1.50"}/>
+      <TotalAmount size={"medium"} menuAmount={"12.99"} tipAmount={"1.50"} />
       <h2>Dropdown</h2>
       <p>small</p>
-      <Dropdown size={"small"} options={optionsNoInput} defaultOption={"15%"}></Dropdown>
+      <Dropdown
+        size={"small"}
+        options={optionsNoInput}
+        defaultOption={"15%"}
+      ></Dropdown>
       <p>medium (default)</p>
       <Dropdown options={optionsNoInput}></Dropdown>
       <p>large</p>
-      <Dropdown size={"large"} options={optionsWithInput} defaultOption={"20%"} showInput={showInput} setShowInput={setShowInput} customValue={"Other"}></Dropdown>
+      <Dropdown
+        size={"large"}
+        options={optionsWithInput}
+        defaultOption={"20%"}
+        showInput={showInput}
+        setShowInput={setShowInput}
+        customValue={"Other"}
+      ></Dropdown>
       <p>Back button</p>
-      <BackButton url={'create-session'} />
+      <BackButton url={"create-session"} />
       <QuantitySelector value={selectorValue1} setValue={setSelectorValue1} />
     </Theme>
   );
