@@ -22,6 +22,7 @@ const TextIconButton = styled.a`
   color: white;
   border: solid white 2px;
   background-color: ${p => p.color};
+  margin: 5px;
   ${transitionCss}
   :hover {
     opacity: 0.5;
