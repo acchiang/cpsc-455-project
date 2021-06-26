@@ -32,6 +32,12 @@ function OrderScreen() {
     setOrder(initializeOrder());
   }, []);
 
+  const PageContainer = styled.div`
+    height: 100vh; 
+    width: 100vw; 
+    background: ${p => p.theme.colors.primary};
+  `;
+
 
   const PanelContainer = styled.table`
     margin: 20px;
@@ -43,6 +49,7 @@ function OrderScreen() {
   return (
     <Theme>
     <OrderContext.Provider value={[order, setOrder]}>
+      <PageContainer>
       <BackButton url={"/create-session"}/>
       <PanelContainer>
         <tr>
@@ -52,6 +59,7 @@ function OrderScreen() {
           </Panel>
         </tr>
       </PanelContainer>
+      </PageContainer>
     </OrderContext.Provider>
     </Theme>
   );

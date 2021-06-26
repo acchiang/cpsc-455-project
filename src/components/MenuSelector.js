@@ -3,6 +3,7 @@ import { useState } from 'react'
 import QuantitySelector from './QuantitySelector';
 
 const MenuSelectorContainer = styled.div`
+  background-color: ${(p) => p.theme.colors.background};
   border-radius: 5px;
   border: ${(p) => p.border ?? "1px solid black"};
   max-width: 400px;
