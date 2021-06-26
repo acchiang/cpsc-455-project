@@ -14,12 +14,13 @@ padding: 0.25em 0.25em;
 display: inline-block;
 `;
 
-const Dropdown = ({ options, defaultOption, size, showInput, setShowInput, customValue, ...props }) => {
+const Dropdown = ({ options, defaultOption, size, showInput, setShowInput, customValue, feedValueToParent, ...props }) => {
     const [selected, setSelected] = useState(defaultOption);
 
     const handleSelect = (event, customValue) => {
         let selectedValue = event.target.value;
         setSelected(selectedValue);
+        feedValueToParent(selectedValue)
         if (setShowInput) {
             setShowInput(selectedValue === customValue)
         }

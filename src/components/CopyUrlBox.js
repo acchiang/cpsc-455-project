@@ -1,16 +1,30 @@
 import styled from "styled-components";
-import Button from "./Button";
 import Input from "./Input";
+import { FaRegCopy } from "react-icons/fa";
+
+const CopyButtonStyle = styled.span`
+  cursor: pointer;
+  vertical-align: middle;
+`;
 
 const BoxContainer = styled.div`
-  visibility: ${(p) => {return p.showElement ? 'visible' : 'hidden'}}
+  visibility: ${(p) => {
+    return p.showElement ? "visible" : "hidden";
+  }};
+  display: flex;
+  align-items: center;
 `;
 
 const CopyUrlBox = ({ url }) => {
   return (
     <BoxContainer showElement={url && url.length > 0}>
-      <Input size={"default"} value={url}/>
-      <Button size={"medium"} type={"secondary"} label={"Copy"} onClick={() =>  navigator.clipboard.writeText(url)}/>
+      <Input size={"default"} value={url} disabled />
+      <CopyButtonStyle>
+        <FaRegCopy
+          size={35}
+          onClick={() => navigator.clipboard.writeText(url)}
+        />
+      </CopyButtonStyle>
     </BoxContainer>
   );
 };
