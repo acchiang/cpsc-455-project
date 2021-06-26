@@ -12,10 +12,6 @@ const menu = [
         price: 5
     },
     {
-        name: "tuna don",
-        price: 10
-    },
-    {
         name: "enchiladas",
         price: 3
     },
