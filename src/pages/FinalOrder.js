@@ -34,36 +34,6 @@ function FinalOrder() {
     margin: 20px;
   `
 
-  const Panel = styled.td`
-    width: 400px;
-    vertical-align: top;
-  `
-
-  const DividerPanel = styled.td`
-  vertical-align: top;
-`
-
-  const Divider = styled.div`
-  height: 90vh; 
-  width: 1px; 
-  background-color: ${(p) => p.theme.colors.text};
-  margin-left: 50px;
-  margin-right: 50px;
-`
-
-  const SubtotalContainer = styled.div`
-  text-align: right; 
-  `
-
-  const IconsContainer = styled.div`
-  `
-
-  const FinalOrderContainer = styled.div`
-    text-align: center;
-  `
-
-  const optionsNoInput = ["10%", "15%", "20%"];
-
   useEffect(() => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = () => {
@@ -78,12 +48,10 @@ function FinalOrder() {
     <OrderContext.Provider value={[order, setOrder]}>
       <PageContainer>
         <TopTitleBar title={"nw++ Picnic"} backUrl={"/order-screen"}/>
-        <IconsContainer>
-          <TextIcon textLetter={'A'} size={'default'} color={'#31B4DB'}>Allison</TextIcon>
-          <TextIcon textLetter={'N'} size={'default'} color={'#91F4CA'}>Nick</TextIcon>
-          <TextIcon textLetter={'R'} size={'default'} color={'#49C4AB'}>Rebecca</TextIcon>
-          <TextIcon textLetter={'C'} size={'default'} color={'#61F4DB'}>Christy</TextIcon>
-        </IconsContainer>
+        <TextIcon textLetter={'A'} size={'default'} color={'#31B4DB'}>Allison</TextIcon>
+        <TextIcon textLetter={'N'} size={'default'} color={'#91F4CA'}>Nick</TextIcon>
+        <TextIcon textLetter={'R'} size={'default'} color={'#49C4AB'}>Rebecca</TextIcon>
+        <TextIcon textLetter={'C'} size={'default'} color={'#61F4DB'}>Christy</TextIcon>
         <h2>Final Order Summary</h2>
         <MenuContainer>
           <MenuSelector order={order}/>
