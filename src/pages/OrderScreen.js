@@ -6,6 +6,7 @@ import BackButton from "components/BackButton";
 import Button from "components/Button";
 import MenuSelector from "components/MenuSelector"
 import styled from 'styled-components'
+import TextIcon from "components/TextIcon";
 
 function OrderScreen() {
   const [order, setOrder] = useState(null);
@@ -45,6 +46,18 @@ function OrderScreen() {
   `
 
   const Panel = styled.td`
+    vertical-align:top
+  `
+
+  const Divider = styled.div`
+  height: 90vh; 
+  width: 1px; 
+  background-color: ${(p) => p.theme.colors.text};
+  margin-left: 50px;
+  margin-right: 50px;
+`
+
+  const IconsContainer = styled.div`
   `
   
   return (
@@ -58,9 +71,19 @@ function OrderScreen() {
             <h2>Menu</h2>
             <MenuSelector order={order} />
           </Panel>
+          <Panel>
+            <Divider/>
+          </Panel>
+          <Panel>
+            <h2>Users</h2>
+            <IconsContainer>
+              <TextIcon textLetter={'t'} size={'default'} color={'#31B4DB'}>test user</TextIcon>
+            </IconsContainer>
+            <Button size={"small"} type={"primary"} label={"consolidate"} onClick={()=> window.location.href='/final-order'} />
+      
+          </Panel>
         </tr>
       </PanelContainer>
-      <Button size={"small"} type={"primary"} label={"consolidate"} onClick={()=> window.location.href='/final-order'} />
       </PageContainer>
     </OrderContext.Provider>
     </Theme>
