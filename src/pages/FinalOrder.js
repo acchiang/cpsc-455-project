@@ -19,7 +19,7 @@ function FinalOrder() {
   };
 
   const PageContainer = styled.div`
-    height: 100vh; 
+    height: 110vh; 
     width: 100vw; 
     background: ${p => p.theme.colors.primary};
     justify-content: center;
