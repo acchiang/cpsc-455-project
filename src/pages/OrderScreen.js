@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Theme from 'styles/Theme'
 import { OrderContext } from "utils/Context";
 import sampleMenu from "assets/sampleMenu";
 import BackButton from "components/BackButton";
+import MenuSelector from "components/MenuSelector"
+import styled from 'styled-components'
 
 function OrderScreen() {
   const [order, setOrder] = useState(null);
@@ -29,11 +32,36 @@ function OrderScreen() {
     setOrder(initializeOrder());
   }, []);
 
+  const PageContainer = styled.div`
+    height: 100vh; 
+    width: 100vw; 
+    background: ${p => p.theme.colors.primary};
+  `;
+
+
+  const PanelContainer = styled.table`
+    margin: 20px;
+  `
+
+  const Panel = styled.td`
+  `
+  
   return (
+    <Theme>
     <OrderContext.Provider value={[order, setOrder]}>
+      <PageContainer>
       <BackButton url={"/create-session"}/>
-      {JSON.stringify(order)}
+      <PanelContainer>
+        <tr>
+          <Panel>
+            <h2>Menu</h2>
+            <MenuSelector order={order} />
+          </Panel>
+        </tr>
+      </PanelContainer>
+      </PageContainer>
     </OrderContext.Provider>
+    </Theme>
   );
 }
 
