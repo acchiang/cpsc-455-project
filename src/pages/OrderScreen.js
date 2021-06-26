@@ -5,6 +5,8 @@ import sampleMenu from "assets/sampleMenu";
 import BackButton from "components/BackButton";
 import Button from "components/Button";
 import MenuSelector from "components/MenuSelector"
+import DollarAmount from "components/DollarAmount"
+import TipAmount from "components/TipAmount"
 import styled from 'styled-components'
 import TextIcon from "components/TextIcon";
 
@@ -65,8 +67,14 @@ function OrderScreen() {
   margin-right: 50px;
 `
 
+  const SubtotalContainer = styled.div`
+  text-align: right; 
+  `
+
   const IconsContainer = styled.div`
   `
+
+  const optionsNoInput = ["10%", "15%", "20%"];
   
   return (
     <Theme>
@@ -79,6 +87,12 @@ function OrderScreen() {
           <Panel>
             <h2>Menu</h2>
             <MenuSelector order={order} />
+            <SubtotalContainer>
+              <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"}/>
+              <TipAmount size={"medium"} label={"Tip"} options={optionsNoInput}/>
+              <DollarAmount size={"medium"} label={"Order total"} amount={"21.99"}/>
+              <Button size={"small"} type={"primary"} label={"confirm order"} onClick={()=> window.location.href='/final-order'} />
+            </SubtotalContainer>
           </Panel>
           <DividerPanel>
             <Divider/>
