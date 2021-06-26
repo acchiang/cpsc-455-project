@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 const BackButtonContainer = styled.div`
   cursor: pointer;
-  width: 50px;
+  width: 300px;
   height: 50px;
 `;
 
