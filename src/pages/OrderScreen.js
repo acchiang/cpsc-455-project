@@ -3,6 +3,7 @@ import Theme from 'styles/Theme'
 import { OrderContext } from "utils/Context";
 import sampleMenu from "assets/sampleMenu";
 import BackButton from "components/BackButton";
+import Button from "components/Button";
 import MenuSelector from "components/MenuSelector"
 import styled from 'styled-components'
 
@@ -59,6 +60,7 @@ function OrderScreen() {
           </Panel>
         </tr>
       </PanelContainer>
+      <Button size={"small"} type={"primary"} label={"consolidate"} onClick={()=> window.location.href='/final-order'} />
       </PageContainer>
     </OrderContext.Provider>
     </Theme>
