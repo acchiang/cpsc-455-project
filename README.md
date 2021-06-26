@@ -6,9 +6,9 @@ For young adults who have social gatherings involving group food orders, our res
 
 ## Project task requirements:
 ### 3-5 minimal requirements (will definitely complete)
-- [ ] Ability for users to pick dishes
+- [x] Ability for users to pick dishes
 - [ ] Ability to create and access a session
-- [ ] Calculate individual food order subtotal
+- [x] Calculate individual food order subtotal
 ### 3-7 "standard" requirements (will most likely complete)
 - [ ] Persistent session for user
 - [ ] Custom tip amounts 
@@ -23,13 +23,13 @@ For young adults who have social gatherings involving group food orders, our res
 
 ## Breaking down the minimal requirements:
 ### Ability for users to pick dishes
-- [ ] Display menu items (list) with prices
-- [ ] Select from menu items 
-- [ ] Select quantity of each menu item selected
+- [x] Display menu items (list) with prices
+- [x] Select from menu items 
+- [x] Select quantity of each menu item selected
 - [ ] Search functionality to filter down menu items
 ### Ability to create and access a session
 - [ ] Generate a unique session link/code
-- [ ] Copy and share session invite link/code
+- [x] Copy and share session invite link/code
 - [ ] Ensure users that access the session can see the same data as other users on refresh
 
 ## 2-3 rough sketch prototypes of some key tasks of the app:
