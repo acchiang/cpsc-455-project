@@ -99,7 +99,7 @@ function OrderScreen() {
           <TopTitleBar
             title={"nw++ Picnic"}
             backUrl={"/create-session"}
-            copyUrl={"dummy url"}
+                copyUrl={"https://localhost:3000/order-screen"}
           />
           <PanelContainer>
             <table>

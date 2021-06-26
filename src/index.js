@@ -6,7 +6,7 @@ import CreateSession from "pages/CreateSession";
 import FinalOrder from "pages/FinalOrder";
 import OrderScreen from "pages/OrderScreen";
 import reportWebVitals from "./utils/reportWebVitals";
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
