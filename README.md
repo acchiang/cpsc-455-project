@@ -6,9 +6,9 @@ For young adults who have social gatherings involving group food orders, our res
 
 ## Project task requirements:
 ### 3-5 minimal requirements (will definitely complete)
-[x] Ability for users to pick dishes
+[ ] Ability for users to pick dishes
 [ ] Ability to create and access a session
-[x] Calculate individual food order subtotal
+[ ] Calculate individual food order subtotal
 ### 3-7 "standard" requirements (will most likely complete)
 [ ] Persistent session for user
 [ ] Custom tip amounts 
