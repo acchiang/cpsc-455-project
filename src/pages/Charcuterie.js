@@ -3,6 +3,8 @@ import Theme from 'styles/Theme'
 import TextIcon from 'components/TextIcon'
 import Button from 'components/Button'
 import Input from "components/Input";
+import DollarAmount from "components/DollarAmount";
+import TotalAmount from "components/TotalAmount";
 import Dropdown from "components/Dropdown";
 import BackButton from 'components/BackButton';
 import QuantitySelector from 'components/QuantitySelector'
@@ -51,6 +53,13 @@ function Charcuterie({ children }) {
       />
       <br />
       <Input size={"medium"} label={"side by side"} placeholder={"username"} />
+      <h2>Dollar Amount Component</h2>
+      <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"}/>
+      <h2>Total Amount Component</h2>
+      <TotalAmount 
+        size={"medium"} 
+        menuAmount={"12.99"}
+        tipAmount={"1.50"}/>
       <h2>Dropdown</h2>
       <p>small</p>
       <Dropdown size={"small"} options={optionsNoInput} defaultOption={"15%"}></Dropdown>
