@@ -10,7 +10,7 @@ const CopyUrlBox = ({ url }) => {
   return (
     <BoxContainer showElement={url && url.length > 0}>
       <Input size={"default"} value={url}/>
-      <Button size={"medium"} type={"secondary"} label={"Copy"} />
+      <Button size={"medium"} type={"secondary"} label={"Copy"} onClick={() =>  navigator.clipboard.writeText(url)}/>
     </BoxContainer>
   );
 };
