@@ -15,12 +15,18 @@ const TipAmountStyle = styled.div`
   display: inline-block;
 `;
 
-const TipAmount = ({ size, label, options, feedValueToParent }) => (
+const TipAmount = ({ size, label, options, showInput, setShowInput, feedValueToParent }) => (
   <>
     <TipAmountStyle size={size}>{label}: </TipAmountStyle>
-    <Dropdown options={options} feedValueToParent={feedValueToParent} />
+    <Dropdown
+        size={size}
+        options={options}
+        showInput={showInput}
+        setShowInput={setShowInput}
+        customValue={"Other"}
+        feedValueToParent={feedValueToParent}
+      ></Dropdown>
   </>
-  
 );
 
 export default TipAmount;

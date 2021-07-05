@@ -52,12 +52,13 @@ const FinalOrderContainer = styled.div`
   text-align: center;
 `;
 
-const optionsNoInput = ["10%", "15%", "20%"];
+const tipOptions = ["10%", "15%", "20%", "Other"];
 
 function OrderScreen() {
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
-  const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
+  const [tipPercent, setTipPercent] = useState(tipOptions[0]);
+  const [showInput, setShowInput] = useState(false);
 
   // TODO: get menu from server
   const fetchMenu = () => {
@@ -120,7 +121,9 @@ function OrderScreen() {
                       <TipAmount
                         size={"medium"}
                         label={"Tip"}
-                        options={optionsNoInput}
+                        options={tipOptions}
+                        showInput={showInput}
+                        setShowInput={setShowInput}
                         feedValueToParent={setTipPercent}
                       />
                       <DollarAmount
