@@ -5,7 +5,9 @@ import User from './user-model'
 const Session = new Schema(
     {
         name: { type: String, required: true },
-        users: { type: [User], required: true }
+        users: { type: [User], required: true },
+        menuTotalSoFar: { type: Number, required: true },
+        tipTotalSoFar: { type: Number, required: true }
     },
     { timestamps: true },
 )

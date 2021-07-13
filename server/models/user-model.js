@@ -9,6 +9,8 @@ const User = new Schema(
         email: { type: String, required: false },
         isHost: { type: Boolean, required: true },
         menuItems: { type: [Menu], required: true },
+        menuTotal: { type: Number, required: true },
+        tipTotal: { type: Number, required: true }
     },
     { timestamps: true },
 )
