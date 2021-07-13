@@ -11,4 +11,3 @@ mongoose.connection.on("error", function(error) {
 mongoose.connection.on("open", function() {
   console.log("Connected to MongoDB database.")
 })
-
