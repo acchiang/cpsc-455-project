@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
-import sampleMenu from "assets/sampleMenu";
 import BackButton from "components/BackButton";
 import Button from "components/Button";
 import MenuSelector from "components/MenuSelector";
@@ -11,6 +11,8 @@ import TotalAmount from "components/TotalAmount";
 import styled from "styled-components";
 import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
+
+const serverURL = "http://localhost:3001/";
 
 const PageContainer = styled.div`
   height: 100vh;
@@ -57,21 +59,22 @@ const optionsNoInput = ["10%", "15%", "20%"];
 function OrderScreen() {
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
+  const [menu, setMenu] = useState([]);
   const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
 
   // TODO: get menu from server
-  const fetchMenu = () => {
-    return sampleMenu;
+  const fetchMenu = async () => {
+    return axios.get(serverURL)
   };
 
   // TODO: send order to server & attach userId
-  const sendOrder = () => {};
+  const sendOrder = () => { };
 
   // TODO: get group total (including tips) from server
-  const getGroupTotals = () => {};
+  const getGroupTotals = () => { };
 
   // TODO: history.push to next page with data
-  const consolidateOrder = () => {};
+  const consolidateOrder = () => { };
 
   const updateQuantity = (name, quantity) => {
     const updatedOrder = order;
@@ -83,13 +86,14 @@ function OrderScreen() {
     );
   };
 
-  useEffect(() => {
-    // TODO: Perhaps implement webhook (socket) to listen for additional users
-    const initializeOrder = () => {
-      const menu = fetchMenu();
-      return menu.map((item) => ({ ...item, quantity: 0 }));
+  useEffect(async () => {
+    // TODO: Perhaps implement webhook (socket) to listen for additional users 
+    const initializeOrder = async () => {
+      const { data: latestMenu } = await fetchMenu();
+      setMenu(latestMenu)
+      return latestMenu.map((item) => ({ ...item, quantity: 0 }));
     };
-    setOrder(initializeOrder());
+    setOrder(await initializeOrder());
   }, []);
 
   return (
@@ -99,7 +103,7 @@ function OrderScreen() {
           <TopTitleBar
             title={"nw++ Picnic"}
             backUrl={"/create-session"}
-                copyUrl={"https://localhost:3000/order-screen"}
+            copyUrl={"https://localhost:3000/order-screen"}
           />
           <PanelContainer>
             <table>
