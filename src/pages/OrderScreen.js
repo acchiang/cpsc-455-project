@@ -63,10 +63,8 @@ function OrderScreen() {
   const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
 
   // TODO: get menu from server
-  const fetchMenu = () => {
-    return axios
-      .get(serverURL)
-      .then((response) => setMenu(response.data));
+  const fetchMenu = async () => {
+    return axios.get(serverURL)
   };
 
   // TODO: send order to server & attach userId
@@ -91,8 +89,9 @@ function OrderScreen() {
   useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users 
     const initializeOrder = async () => {
-      await fetchMenu();
-      return menu.map((item) => ({ ...item, quantity: 0 }));
+      const { data: latestMenu } = await fetchMenu();
+      setMenu(latestMenu)
+      return latestMenu.map((item) => ({ ...item, quantity: 0 }));
     };
     setOrder(await initializeOrder());
   }, []);
