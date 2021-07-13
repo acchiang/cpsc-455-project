@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Theme from "../client/src/styles/Theme";
-import { OrderContext } from "../client/src/utils/Context";
-import sampleMenu from "../client/src/assets/sampleMenu";
-import BackButton from "../client/src/components/BackButton";
-import Button from "../client/src/components/Button";
-import MenuSelector from "../client/src/components/MenuSelector";
-import DollarAmount from "../client/src/components/DollarAmount";
-import TipAmount from "../client/src/components/TipAmount";
-import TotalAmount from "../client/src/components/TotalAmount";
+import Theme from "styles/Theme";
+import { OrderContext } from "utils/Context";
+import sampleMenu from "assets/sampleMenu";
+import BackButton from "components/BackButton";
+import Button from "components/Button";
+import MenuSelector from "components/MenuSelector";
+import DollarAmount from "components/DollarAmount";
+import TipAmount from "components/TipAmount";
+import TotalAmount from "components/TotalAmount";
 import styled from "styled-components";
-import TextIcon from "../client/src/components/TextIcon";
-import TopTitleBar from "../client/src/components/TopTitleBar";
+import TextIcon from "components/TextIcon";
+import TopTitleBar from "components/TopTitleBar";
 
 const PageContainer = styled.div`
   height: 100vh;

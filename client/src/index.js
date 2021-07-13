@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Charcuterie from "../client/src/pages/Charcuterie";
-import CreateSession from "../client/src/pages/CreateSession";
-import FinalOrder from "../client/src/pages/FinalOrder";
-import OrderScreen from "../client/src/pages/OrderScreen";
+import Charcuterie from "pages/Charcuterie";
+import CreateSession from "pages/CreateSession";
+import FinalOrder from "pages/FinalOrder";
+import OrderScreen from "pages/OrderScreen";
 import reportWebVitals from "./utils/reportWebVitals";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 

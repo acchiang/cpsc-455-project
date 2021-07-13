@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { transitionCss } from "../styles/styleUtils";
+import { transitionCss } from "styles/styleUtils";
 
 const ButtonStyle = styled.button`
   background: ${(p) => {

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "client/src"
+    "baseUrl": "src"
   },
   "exclude": [
     "node_modules"

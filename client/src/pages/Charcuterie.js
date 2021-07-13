@@ -1,13 +1,13 @@
 import { useState } from "react";
-import Theme from "../client/src/styles/Theme";
-import TextIcon from "../client/src/components/TextIcon";
-import Button from "../client/src/components/Button";
-import Input from "../client/src/components/Input";
-import DollarAmount from "../client/src/components/DollarAmount";
-import TotalAmount from "../client/src/components/TotalAmount";
-import Dropdown from "../client/src/components/Dropdown";
-import BackButton from "../client/src/components/BackButton";
-import QuantitySelector from "../client/src/components/QuantitySelector";
+import Theme from "styles/Theme";
+import TextIcon from "components/TextIcon";
+import Button from "components/Button";
+import Input from "components/Input";
+import DollarAmount from "components/DollarAmount";
+import TotalAmount from "components/TotalAmount";
+import Dropdown from "components/Dropdown";
+import BackButton from "components/BackButton";
+import QuantitySelector from "components/QuantitySelector";
 
 function Charcuterie({ children }) {
   const [showInput, setShowInput] = useState(false);

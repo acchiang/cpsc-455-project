@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Dropdown from "../client/src/components/Dropdown";
+import Dropdown from "components/Dropdown";
 
 const TipAmountStyle = styled.div`
   color: ${(p) => p.theme.colors.text };

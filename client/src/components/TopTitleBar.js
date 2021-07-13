@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import BackButton from "../client/src/components/BackButton";
-import CopyUrlBox from "../client/src/components/CopyUrlBox";
+import BackButton from "components/BackButton";
+import CopyUrlBox from "components/CopyUrlBox";
 
 const TopTitleBarContainer = styled.div`
   width: 100vw;
