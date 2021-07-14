@@ -8,6 +8,7 @@ const DropdownSelect = styled.select`
   font-family: ${(p) => p.theme.fonts};
   font-weight: ${(p) => p.theme.fontWeight};
   color: ${(p) => p.theme.colors.text};
+  background-color: ${(p) => p.theme.colors.secondary};
   padding: 10px;
   border-radius: 5px;
   margin: 0.25em;
