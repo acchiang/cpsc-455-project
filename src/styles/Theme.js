@@ -47,7 +47,6 @@ const Theme = ({ children }) => {
     localTheme = 'defaultTheme'
   }
   const selectedTheme = localTheme ? THEMES[localTheme] : darkTheme
-  // const selectedTheme = darkTheme
   return (
   <ThemeProvider theme={selectedTheme}>{children}</ThemeProvider>
 )};
