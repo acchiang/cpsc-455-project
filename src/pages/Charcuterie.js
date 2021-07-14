@@ -65,7 +65,7 @@ function Charcuterie({ children }) {
         <Button label={"disabled"} type={"secondary"} disabled />
         <h2>User Inputs</h2>
         <Input size={"small"} placeholder={"Password"} type={"password"} />
-        <Input size={"large"} border={"2px solid green"} fontColor={"grey"} />
+        <Input size={"large"} border={"2px solid green"} />
         <br />
         <Input
           size={"default"}

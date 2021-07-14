@@ -13,7 +13,8 @@ const InputBox = styled.input`
   font-size: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;
   font-family: ${(p) => p.theme.fonts};
   font-weight: ${(p) => p.theme.fontWeight};
-  color: ${(p) => p.fontColor ?? "black"};
+  color: ${(p) => p.fontColor ?? p.theme.colors.text};
+  background-color: ${(p) => p.theme.colors.secondary};
   cursor: ${(p) => (p.disabled ? "not-allowed" : "text")};
   margin: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) / 3}px
     ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) / 3}px;
@@ -25,7 +26,7 @@ const InputBox = styled.input`
     color: ${(p) => p.placeholderColor ?? "black"}
   }
   :disabled {
-    background: #EEEEEE;
+    opacity: 0.5;
   }
 `;
 
