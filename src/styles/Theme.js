@@ -23,8 +23,8 @@ const defaultTheme = {
 const darkTheme = {
   colors: {
     background: "#000000",
-    primary: "#3c3c3c",
-    secondary: "#3d3d3d",
+    primary: "#3d3d3d",
+    secondary: "#3c3c3c",
     neutral: "#064420",
     accent: "#96C77F",
     text: "#ffffff"
