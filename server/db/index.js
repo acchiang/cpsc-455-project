@@ -1,6 +1,8 @@
 const mongoose = require("mongoose")
+require('dotenv').config()
 
-const mongoString = "mongodb+srv://m001-student:m001-mongodb-basics@cluster0.dvh8w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+// const mongoString = "mongodb+srv://m001-student:m001-mongodb-basics@cluster0.dvh8w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+const mongoString = "mongodb+srv://"+process.env.DB_USER+":"+process.env.DB_PASS+"@cluster0.dvh8w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 mongoose.connect(mongoString, {useNewUrlParser: true})
 
