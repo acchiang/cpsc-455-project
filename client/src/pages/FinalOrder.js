@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Theme from "../client/src/styles/Theme";
-import { OrderContext } from "../client/src/utils/Context";
-import BackButton from "../client/src/components/BackButton";
-import sampleMenu from "../client/src/assets/sampleMenu";
+import Theme from "styles/Theme";
+import { OrderContext } from "utils/Context";
+import BackButton from "components/BackButton";
+import sampleMenu from "assets/sampleMenu";
 import styled from "styled-components";
-import MenuSelector from "../client/src/components/MenuSelector";
-import TotalAmount from "../client/src/components/TotalAmount";
-import Button from "../client/src/components/Button";
-import TopTitleBar from "../client/src/components/TopTitleBar";
-import TextIcon from "../client/src/components/TextIcon";
+import MenuSelector from "components/MenuSelector";
+import TotalAmount from "components/TotalAmount";
+import Button from "components/Button";
+import TopTitleBar from "components/TopTitleBar";
+import TextIcon from "components/TextIcon";
 
 function FinalOrder() {
   const [order, setOrder] = useState(null);

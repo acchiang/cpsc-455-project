@@ -1,8 +1,8 @@
-import Theme from '../client/src/styles/Theme'
+import Theme from 'styles/Theme'
 import styled from 'styled-components'
-import Button from '../client/src/components/Button'
-import Input from '../client/src/components/Input'
-import { Title, H2 } from '../client/src/styles/styleUtils';
+import Button from 'components/Button'
+import Input from 'components/Input'
+import { Title, H2 } from 'styles/styleUtils';
 import { useHistory } from 'react-router-dom';
 import lettuce from 'assets/lettuce.png';
 
