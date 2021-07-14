@@ -48,7 +48,6 @@ const Theme = ({ children }) => {
   }
   const selectedTheme = localTheme ? THEMES[localTheme] : darkTheme
   // const selectedTheme = darkTheme
-  console.log(selectedTheme)
   return (
   <ThemeProvider theme={selectedTheme}>{children}</ThemeProvider>
 )};
