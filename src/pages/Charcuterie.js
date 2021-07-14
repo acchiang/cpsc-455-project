@@ -17,6 +17,8 @@ function Charcuterie({ children }) {
   const [selectorValue1, setSelectorValue1] = useState(0);
   return (
     <Theme>
+      <Button size={"medium"} type={"primary"} label={"light"}  onClick={() => { window.localStorage.setItem('localTheme', 'defaultTheme'); window.location.reload(); }}/>
+      <Button size={"medium"} type={"primary"} label={"dark"} onClick={() => { window.localStorage.setItem('localTheme', 'darkTheme'); window.location.reload(); }}/>
       <Button
         size={"medium"}
         type={"primary"}
