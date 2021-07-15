@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { transitionCss } from '../styles/styleUtils'
-import Caption from '../components/Caption'
+import { transitionCss } from 'styles/styleUtils'
+import Caption from './Caption'
 
 const iconSize = {
   small: 10,

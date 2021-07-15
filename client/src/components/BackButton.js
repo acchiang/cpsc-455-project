@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import backButton from "../assets/back_arrow.svg";
+import backButton from "assets/back_arrow.svg";
 import { useHistory } from "react-router-dom";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { withTheme } from 'styled-components'
