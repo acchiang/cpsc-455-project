@@ -9,10 +9,14 @@ const TopTitleBarContainer = styled.div`
   justify-content: space-between;
 `;
 
+const Title = styled.h1`
+  color: ${(p) => p.theme.colors.text};
+`;
+
 const TopTitleBar = ({ title, backUrl, copyUrl }) => (
   <TopTitleBarContainer>
     <BackButton url={backUrl} />
-    <h1>{title}</h1>
+    <Title>{title}</Title>
     <CopyUrlBox url={copyUrl} />
   </TopTitleBarContainer>
   

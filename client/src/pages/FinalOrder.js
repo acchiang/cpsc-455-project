@@ -34,6 +34,10 @@ function FinalOrder() {
     margin: 20px;
   `;
 
+  const StyledHeader = styled.h2`
+    color: ${(p) => p.theme.colors.text}
+  `;
+
   useEffect(() => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = () => {
@@ -60,7 +64,7 @@ function FinalOrder() {
           <TextIcon textLetter={"C"} size={"default"} color={"#61F4DB"}>
             Christy
           </TextIcon>
-          <h2>Final Order Summary</h2>
+          <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
             <MenuSelector order={order} />
           </MenuContainer>

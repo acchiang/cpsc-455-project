@@ -55,6 +55,10 @@ const FinalOrderContainer = styled.div`
   text-align: center;
 `;
 
+const StyledHeader = styled.h2`
+  color: ${(p) => p.theme.colors.text};
+  `
+
 const optionsNoInput = ["10%", "15%", "20%"];
 
 function OrderScreen() {
@@ -97,6 +101,7 @@ function OrderScreen() {
     setOrder(await initializeOrder());
   }, []);
 
+  
   return (
     <Theme>
       <OrderContext.Provider value={[order, setOrder]}>
@@ -111,7 +116,7 @@ function OrderScreen() {
               <tbody>
                 <tr>
                   <Panel>
-                    <h2>Menu</h2>
+                    <StyledHeader>Menu</StyledHeader>
                     <MenuSelector
                       order={order}
                       updateQuantity={updateQuantity}
@@ -148,7 +153,7 @@ function OrderScreen() {
                     <Divider />
                   </DividerPanel>
                   <Panel>
-                    <h2>Users</h2>
+                    <StyledHeader>Users</StyledHeader>
                     <IconsContainer>
                       <TextIcon
                         textLetter={"t"}
@@ -159,7 +164,7 @@ function OrderScreen() {
                       </TextIcon>
                     </IconsContainer>
                     <FinalOrderContainer>
-                      <h2>Group Total So Far</h2>
+                      <StyledHeader>Group Total So Far</StyledHeader>
                       <TotalAmount
                         size={"medium"}
                         menuAmount={"12.99"}

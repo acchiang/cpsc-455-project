@@ -16,7 +16,9 @@ const MenuItemRow = styled.tr`
   padding: 7px;
 `;
 
-const MenuItemRowData = styled.td``;
+const MenuItemRowData = styled.td`
+  color: ${(p) => p.theme.colors.text}
+`;
 
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
