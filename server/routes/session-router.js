@@ -26,11 +26,11 @@ router.post('/', async (req, res) => {
     tipTotalSoFar: 0
   })
   session.save()
-  // TODO: set owner of session
+  // TODO: set owner of session after christy's pr
   res.send(sessionId)
 })
 
-router.get('/:sessionId', async (req, res) => {
+router.get('/:sessionId/order-screen', async (req, res) => {
   const sessionId = req.params.sessionId
   const session = await Session.findById(sessionId, { __v: 0, createdAt: 0, updatedAt: 0 })
   session ? res.send(session) : res.sendStatus(404)
