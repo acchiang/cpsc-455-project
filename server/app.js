@@ -4,7 +4,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
+const passport = require("passport");
 
+const users = require("./routes/users");
 const menuRouter = require('./routes/menu');
 const db = require('./db/app.js');
 const app = express();
@@ -21,6 +23,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+
+// Routes
+app.use("/api/users", users);
 app.use('/', menuRouter);
 
 // catch 404 and forward to error handler

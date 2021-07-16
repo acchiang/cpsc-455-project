@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-import Item from './item-model'
+const Item = require("./item-model").Item;
 
 const Menu = new Schema(
     {
@@ -9,4 +9,7 @@ const Menu = new Schema(
     { timestamps: true },
 )
 
-module.exports = mongoose.model('menus', Menu)
+module.exports = {
+    model: mongoose.model('menus', Menu),
+    schema: Menu
+}

@@ -10,4 +10,7 @@ const Item = new Schema(
     { timestamps: true },
 )
 
-module.exports = mongoose.model('menuItems', Item)
+module.exports = {
+    model: mongoose.model('menuItems', Item),
+    schema: Item
+}
