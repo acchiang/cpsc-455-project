@@ -1,15 +1,19 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-import User from './user-model'
+const UserSchema = require('./user-model').schema
 
 const Session = new Schema(
     {
+        _id: String,
         name: { type: String, required: true },
-        users: { type: [User], required: true },
+        users: { type: [UserSchema], required: true },
         menuTotalSoFar: { type: Number, required: true },
         tipTotalSoFar: { type: Number, required: true }
     },
     { timestamps: true },
 )
 
-module.exports = mongoose.model('sessions', Session)
+module.exports = {
+  model: mongoose.model('sessions', Session),
+  schema: Session
+}

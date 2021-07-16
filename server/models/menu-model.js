@@ -1,12 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-import Item from './item-model'
+const ItemSchema = require('./item-model').schema
 
 const Menu = new Schema(
     {
-        items: { type: [Item], required: true },
+        items: { type: [ItemSchema], required: true },
     },
     { timestamps: true },
 )
 
-module.exports = mongoose.model('menus', Menu)
+module.exports = {
+  model: mongoose.model('menus', Menu),
+  schema: Menu
+}
