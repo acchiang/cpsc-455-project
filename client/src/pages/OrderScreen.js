@@ -105,7 +105,7 @@ function OrderScreen() {
       return latestMenu.map((item) => ({ ...item, quantity: 0 }));
     };
     const { data: { name } } = await fetchSessionData();
-    setSessionName(sessionName);
+    setSessionName(name);
     setOrder(await initializeOrder());
   }, []);
 
