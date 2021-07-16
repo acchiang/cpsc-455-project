@@ -1,5 +1,3 @@
-const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
@@ -12,7 +10,7 @@ const User = require("../models/user-model").model;
 // @route POST api/users/register
 // @desc Register user
 // @access Public
-router.post("/register", (req, res) => {
+registerUser = (req, res) => {
   // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
@@ -41,12 +39,12 @@ router.post("/register", (req, res) => {
       });
     }
   });
-});
+};
 
 // @route POST api/users/login
 // @desc Login user and return JWT token
 // @access Public
-router.post("/login", (req, res) => {
+loginUser = (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
   // Check validation
@@ -91,6 +89,9 @@ router.post("/login", (req, res) => {
       }
     });
   });
-});
+};
 
-module.exports = router;
+module.exports = {
+  registerUser,
+  loginUser
+};
