@@ -37,7 +37,7 @@ function RegisterUser({ ...props }) {
   }, [])
 
   const registerUser = async () => {
-    window.location.href = '/order-menu'
+    window.location.href = '/order-screen'
   }
 
   return (
