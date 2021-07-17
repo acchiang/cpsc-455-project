@@ -12,8 +12,9 @@ import TotalAmount from "components/TotalAmount";
 import styled from "styled-components";
 import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
+import { SessionContext } from 'pages/App.js'
 
-const serverURL = "http://localhost:3001/";
+const serverURL = "http://localhost:3001";
 
 const PageContainer = styled.div`
   height: 100vh;
@@ -66,7 +67,12 @@ function OrderScreen() {
   const [subtotal, setSubtotal] = useState(0);
   const [menu, setMenu] = useState([]);
   const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
+  const [sessionName, setSessionName] = useState("LettuceEat");
 
+  const fetchSessionData = async () => {
+    return axios.get(`${serverURL + localStorage.getItem("sessionPath")}/order-screen`)
+  }
+  
   // TODO: get menu from server
   const fetchMenu = async () => {
     return axios.get(serverURL)
@@ -98,18 +104,19 @@ function OrderScreen() {
       setMenu(latestMenu)
       return latestMenu.map((item) => ({ ...item, quantity: 0 }));
     };
+    const { data: { name } } = await fetchSessionData();
+    setSessionName(name);
     setOrder(await initializeOrder());
   }, []);
 
-  
   return (
     <Theme>
       <OrderContext.Provider value={[order, setOrder]}>
         <PageContainer>
           <TopTitleBar
-            title={"nw++ Picnic"}
+            title={sessionName}
             backUrl={"/create-session"}
-            copyUrl={"https://localhost:3000/order-screen"}
+            copyUrl={`${window.location.host + localStorage.getItem("sessionPath")}`}
           />
           <PanelContainer>
             <table>

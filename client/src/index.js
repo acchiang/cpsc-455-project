@@ -1,31 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import Charcuterie from "pages/Charcuterie";
-import CreateSession from "pages/CreateSession";
-import FinalOrder from "pages/FinalOrder";
-import OrderScreen from "pages/OrderScreen";
+import App from "pages/App";
 import reportWebVitals from "./utils/reportWebVitals";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Switch>
-        <Route path="/create-session">
-          <CreateSession />
-        </Route>
-        <Route path="/order-screen">
-          <OrderScreen />
-        </Route>
-        <Route path="/final-order">
-          <FinalOrder />
-        </Route>
-        <Route path="/">
-          <Charcuterie />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

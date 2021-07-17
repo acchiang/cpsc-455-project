@@ -18,7 +18,7 @@ const BoxContainer = styled.div`
 const CopyUrlBox = ({ url }) => {
   return (
     <BoxContainer showElement={url && url.length > 0}>
-      <Input size={"default"} value={url} disabled />
+      <Input size={"default"} width={"500px"} value={url} disabled />
       <CopyButtonStyle>
         <FaRegCopy
           size={35}

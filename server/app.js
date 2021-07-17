@@ -8,6 +8,7 @@ const passport = require("passport");
 
 const users = require("./routes/user-router");
 const menuRouter = require("./routes/menu-router");
+const sessionRouter = require("./routes/session-router");
 const db = require("./db/app.js");
 const app = express();
 const apiPort = 9000;
@@ -31,6 +32,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/", menuRouter);
+app.use("/session", sessionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Theme from 'styles/Theme'
 import styled from 'styled-components'
 import Button from 'components/Button'
@@ -22,12 +23,18 @@ const InputContainer = styled.div`
 flex-direction: row;
 `;
 
+const SERVER_URL = "http://localhost:3001"
+
 function CreateSession({ ...props }) {
     const history = useHistory();
 
     // TODO: Ask server for a session and navigate to custom session ??? unscoped
-    const generateSession = () => {
-        history.push('/order-screen')
+    const generateSession = async () => {
+      const { data: sessionId } = await axios.post(`${SERVER_URL}/session`, {
+        sessionName: document.getElementById("input-session-name").value,
+        // sessionOwner: document.getElementById("input-session-owner).value
+      })
+      history.push(`session/${sessionId}`)
     }
 
     return (
@@ -39,10 +46,10 @@ function CreateSession({ ...props }) {
                 <br />
                 <br />
                 <InputContainer>
-                    <Input size={"medium"} label={"Your Name"} placeholder={"John Doe"} />
+                    <Input id={"input-session-owner"} size={"medium"} label={"Your Name"} placeholder={"John Doe"} />
                 </InputContainer>
                 <InputContainer>
-                    <Input size={"medium"} label={"Event Name"} placeholder={"Dine Out"} />
+                    <Input id={"input-session-name"} size={"medium"} label={"Event Name"} placeholder={"Dine Out"} />
                 </InputContainer>
                 <br />
                 <Button size={"medium"} type={"primary"} label={"Create Session"} onClick={generateSession}/>
