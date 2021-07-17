@@ -23,20 +23,7 @@ const InputContainer = styled.div`
   flex-direction: row;
 `;
 
-const SERVER_URL = "http://localhost:9000";
-
-function CreateSession({ ...props }) {
-  const history = useHistory();
-
-  // TODO: Ask server for a session and navigate to custom session ??? unscoped
-  const generateSession = async () => {
-    const { data: sessionId } = await axios.post(`${SERVER_URL}/session`, {
-      sessionName: document.getElementById("input-session-name").value
-      // sessionOwner: document.getElementById("input-session-owner).value
-    });
-    history.push(`session/${sessionId}`);
-  };
-
+function RegisterUser({ ...props }) {
   return (
     <Theme>
       <PageContainer>
@@ -66,11 +53,11 @@ function CreateSession({ ...props }) {
           size={"medium"}
           type={"primary"}
           label={"Create Session"}
-          onClick={generateSession}
+          onClick={console.log("test")}
         />
       </PageContainer>
     </Theme>
   );
 }
 
-export default CreateSession;
+export default RegisterUser;
