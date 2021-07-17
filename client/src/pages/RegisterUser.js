@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
@@ -23,7 +24,22 @@ const InputContainer = styled.div`
   flex-direction: row;
 `;
 
+const SERVER_URL = "http://localhost:9000"
+
 function RegisterUser({ ...props }) {
+
+  useEffect(async () => {
+    const getSessionName = async () => {
+      const { data: { name } } = await axios.get(`${SERVER_URL}${localStorage.getItem("sessionPath")}/get-session-name`)
+      return name
+    }
+    document.getElementById('input-session-name').value = await getSessionName()
+  }, [])
+
+  const registerUser = async () => {
+    window.location.href = '/order-menu'
+  }
+
   return (
     <Theme>
       <PageContainer>
@@ -46,14 +62,15 @@ function RegisterUser({ ...props }) {
             size={"medium"}
             label={"Event Name"}
             placeholder={"Dine Out"}
+            disabled
           />
         </InputContainer>
         <br />
         <Button
           size={"medium"}
           type={"primary"}
-          label={"Create Session"}
-          onClick={console.log("test")}
+          label={"Join Session"}
+          onClick={registerUser}
         />
       </PageContainer>
     </Theme>
