@@ -28,7 +28,7 @@ For young adults who have social gatherings involving group food orders, our res
 - [x] Select quantity of each menu item selected
 - [ ] Search functionality to filter down menu items
 ### Ability to create and access a session
-- [ ] Generate a unique session link/code
+- [x] Generate a unique session link/code
 - [x] Copy and share session invite link/code
 - [ ] Ensure users that access the session can see the same data as other users on refresh
 
