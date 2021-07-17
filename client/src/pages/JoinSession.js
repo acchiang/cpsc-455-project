@@ -1,18 +1,12 @@
-import React, { useEffect, useContext } from 'react'
-import { SessionContext } from 'pages/App.js'
+import React, { useEffect } from "react";
 
 const JoinSession = () => {
-
   useEffect(() => {
     localStorage.setItem("sessionPath", window.location.pathname);
-    window.location.href = "/order-screen"
-  }, [])
- 
-  return (
-    <p>
-      Joining session...
-    </p>
-  )
-}
+    window.location.href = "/order-screen";
+  }, []);
 
-export default JoinSession
+  return <p>Joining session...</p>;
+};
+
+export default JoinSession;

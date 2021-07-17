@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
-import BackButton from "components/BackButton";
 import sampleMenu from "assets/sampleMenu";
 import styled from "styled-components";
 import MenuSelector from "components/MenuSelector";
@@ -21,7 +20,7 @@ function FinalOrder() {
   const PageContainer = styled.div`
     height: 110vh;
     width: 100vw;
-    background: ${(p) => p.theme.colors.primary};
+    background: ${p => p.theme.colors.primary};
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -35,14 +34,14 @@ function FinalOrder() {
   `;
 
   const StyledHeader = styled.h2`
-    color: ${(p) => p.theme.colors.text}
+    color: ${p => p.theme.colors.text};
   `;
 
   useEffect(() => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = () => {
       const menu = fetchMenu();
-      return menu.map((item) => ({ ...item, quantity: 0 }));
+      return menu.map(item => ({ ...item, quantity: 0 }));
     };
     setOrder(initializeOrder());
   }, []);

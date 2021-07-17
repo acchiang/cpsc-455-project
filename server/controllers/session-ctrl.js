@@ -5,7 +5,7 @@ const generateSessionId = () => {
   return Array.from(arr, val => val.toString(16)).join("");
 };
 
-const getUniqueSessionId = async () => {
+getUniqueSessionId = async (req, res) => {
   let id = generateSessionId();
   while (await Session.exists({ _id: id })) {
     id = generateSessionId();
@@ -13,7 +13,7 @@ const getUniqueSessionId = async () => {
   return id;
 };
 
-createSession = (req, res) => {
+createSession = async (req, res) => {
   const sessionId = await getUniqueSessionId();
   const session = new Session({
     _id: sessionId,
@@ -27,7 +27,7 @@ createSession = (req, res) => {
   res.send(sessionId);
 };
 
-getSessionById = (req, res) => {
+getSessionById = async (req, res) => {
   const sessionId = req.params.sessionId;
   const session = await Session.findById(sessionId, {
     __v: 0,
@@ -37,4 +37,7 @@ getSessionById = (req, res) => {
   session ? res.send(session) : res.sendStatus(404);
 };
 
-module.exports = router;
+module.exports = {
+  createSession,
+  getSessionById
+};
