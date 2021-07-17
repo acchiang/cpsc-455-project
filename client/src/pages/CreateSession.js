@@ -34,7 +34,7 @@ function CreateSession({ ...props }) {
       sessionName: document.getElementById("input-session-name").value
       // sessionOwner: document.getElementById("input-session-owner).value
     });
-    history.push(`session/${sessionId}`);
+    history.push(`session/${sessionId}/registered`);
   };
 
   return (

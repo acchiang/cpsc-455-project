@@ -37,7 +37,17 @@ getSessionById = async (req, res) => {
   session ? res.send(session) : res.sendStatus(404);
 };
 
+getSessionName = async (req, res) => {
+  const sessionId = req.params.sessionId;
+  const sessionName = await Session.findById(sessionId, {
+    name: 1
+  })
+    console.log(sessionName)
+  sessionName ? res.send(sessionName) : res.sendStatus(404)
+}
+
 module.exports = {
   createSession,
-  getSessionById
+  getSessionById,
+  getSessionName
 };

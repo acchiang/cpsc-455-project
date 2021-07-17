@@ -120,8 +120,7 @@ function OrderScreen() {
             title={sessionName}
             setTitle={setSessionName}
             backUrl={"/create-session"}
-            copyUrl={`${window.location.host +
-              localStorage.getItem("sessionPath")}`}
+            copyUrl={`${window.location.host}${localStorage.getItem("sessionPath")}`}
             sessionId={sessionId}
           />
           <PanelContainer>
