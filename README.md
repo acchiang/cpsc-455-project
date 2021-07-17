@@ -11,14 +11,14 @@ For young adults who have social gatherings involving group food orders, our res
 - [x] Calculate individual food order subtotal
 ### 3-7 "standard" requirements (will most likely complete)
 - [ ] Persistent session for user
-- [ ] Custom tip amounts 
+- [x] Custom tip amounts 
 - [ ] Responsive website (cross-browser and cross-device testing) 
-- [ ] Web accessible UX features (eg. screen-reader accessible) 
+- [x] Web accessible UX features (eg. screen-reader accessible) 
 - [ ] Categories for menu items, toggle for more details
-- [ ] Dark mode toggle
+- [x] Dark mode toggle
 ### 2-3 stretch requirements (plan to complete at least 1!)
 - [ ] WebSockets for real time updates
-- [ ] Passwords for users when returning to session
+- [x] Passwords for users when returning to session
 - [ ] Delete sessions after x amount of days (Scheduled db purge)
 
 ## Breaking down the minimal requirements:
@@ -36,3 +36,6 @@ For young adults who have social gatherings involving group food orders, our res
 ![Page1](https://user-images.githubusercontent.com/47487758/119433880-f3d2e600-bccb-11eb-8fde-30dba851e636.png)
 ![Page2](https://user-images.githubusercontent.com/47487758/119433882-f59ca980-bccb-11eb-9dc6-4926c90f228c.png)
 
+## Resources used:
+- https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
+- https://medium.com/swlh/how-to-create-your-first-mern-mongodb-express-js-react-js-and-node-js-stack-7e8b20463e66
