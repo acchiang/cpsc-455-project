@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
-import sampleMenu from "assets/sampleMenu";
-import BackButton from "components/BackButton";
 import Button from "components/Button";
 import MenuSelector from "components/MenuSelector";
 import DollarAmount from "components/DollarAmount";
@@ -12,7 +10,6 @@ import TotalAmount from "components/TotalAmount";
 import styled from "styled-components";
 import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
-import { SessionContext } from 'pages/App.js'
 
 const serverURL = "http://localhost:3001";
 
@@ -68,6 +65,7 @@ function OrderScreen() {
   const [menu, setMenu] = useState([]);
   const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
   const [sessionName, setSessionName] = useState("LettuceEat");
+  const [sessionId, setSessionId] = useState("");
 
   const fetchSessionData = async () => {
     return axios.get(`${serverURL + localStorage.getItem("sessionPath")}/order-screen`)
@@ -104,7 +102,8 @@ function OrderScreen() {
       setMenu(latestMenu)
       return latestMenu.map((item) => ({ ...item, quantity: 0 }));
     };
-    const { data: { name } } = await fetchSessionData();
+    const { data: { name, _id } } = await fetchSessionData();
+    setSessionId(_id);
     setSessionName(name);
     setOrder(await initializeOrder());
   }, []);
@@ -115,8 +114,10 @@ function OrderScreen() {
         <PageContainer>
           <TopTitleBar
             title={sessionName}
+            setTitle={setSessionName}
             backUrl={"/create-session"}
             copyUrl={`${window.location.host + localStorage.getItem("sessionPath")}`}
+            sessionId={sessionId}
           />
           <PanelContainer>
             <table>
