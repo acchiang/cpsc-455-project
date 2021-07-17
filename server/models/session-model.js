@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
-import User from './user-model'
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const User = require("./user-model").User;
 
 const Session = new Schema(
     {
@@ -12,4 +12,7 @@ const Session = new Schema(
     { timestamps: true },
 )
 
-module.exports = mongoose.model('sessions', Session)
+module.exports = {
+    model: mongoose.model('sessions', Session),
+    schema: Session
+}
