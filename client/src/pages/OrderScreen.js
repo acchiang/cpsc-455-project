@@ -11,12 +11,12 @@ import styled from "styled-components";
 import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
 
-const serverURL = "http://localhost:3001";
+const serverURL = "http://localhost:9000";
 
 const PageContainer = styled.div`
   height: 100vh;
   width: 100vw;
-  background: ${(p) => p.theme.colors.primary};
+  background: ${p => p.theme.colors.primary};
 `;
 
 const PanelContainer = styled.div`
@@ -38,7 +38,7 @@ const DividerPanel = styled.td`
 const Divider = styled.div`
   height: 90vh;
   width: 1px;
-  background-color: ${(p) => p.theme.colors.text};
+  background-color: ${p => p.theme.colors.text};
   margin-left: 50px;
   margin-right: 50px;
 `;
@@ -54,8 +54,8 @@ const FinalOrderContainer = styled.div`
 `;
 
 const StyledHeader = styled.h2`
-  color: ${(p) => p.theme.colors.text};
-  `
+  color: ${p => p.theme.colors.text};
+`;
 
 const optionsNoInput = ["10%", "15%", "20%"];
 
@@ -68,26 +68,28 @@ function OrderScreen() {
   const [sessionId, setSessionId] = useState("");
 
   const fetchSessionData = async () => {
-    return axios.get(`${serverURL + localStorage.getItem("sessionPath")}/order-screen`)
-  }
-  
+    return axios.get(
+      `${serverURL + localStorage.getItem("sessionPath")}/order-screen`
+    );
+  };
+
   // TODO: get menu from server
   const fetchMenu = async () => {
-    return axios.get(serverURL)
+    return axios.get(serverURL);
   };
 
   // TODO: send order to server & attach userId
-  const sendOrder = () => { };
+  const sendOrder = () => {};
 
   // TODO: get group total (including tips) from server
-  const getGroupTotals = () => { };
+  const getGroupTotals = () => {};
 
   // TODO: history.push to next page with data
-  const consolidateOrder = () => { };
+  const consolidateOrder = () => {};
 
   const updateQuantity = (name, quantity) => {
     const updatedOrder = order;
-    const idx = order.findIndex((i) => i.name === name);
+    const idx = order.findIndex(i => i.name === name);
     updatedOrder[idx].quantity = quantity;
     setOrder(updatedOrder);
     setSubtotal(
@@ -96,13 +98,15 @@ function OrderScreen() {
   };
 
   useEffect(async () => {
-    // TODO: Perhaps implement webhook (socket) to listen for additional users 
+    // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = async () => {
       const { data: latestMenu } = await fetchMenu();
-      setMenu(latestMenu)
-      return latestMenu.map((item) => ({ ...item, quantity: 0 }));
+      setMenu(latestMenu);
+      return latestMenu.map(item => ({ ...item, quantity: 0 }));
     };
-    const { data: { name, _id } } = await fetchSessionData();
+    const {
+      data: { name, _id }
+    } = await fetchSessionData();
     setSessionId(_id);
     setSessionName(name);
     setOrder(await initializeOrder());
@@ -116,7 +120,8 @@ function OrderScreen() {
             title={sessionName}
             setTitle={setSessionName}
             backUrl={"/create-session"}
-            copyUrl={`${window.location.host + localStorage.getItem("sessionPath")}`}
+            copyUrl={`${window.location.host +
+              localStorage.getItem("sessionPath")}`}
             sessionId={sessionId}
           />
           <PanelContainer>
