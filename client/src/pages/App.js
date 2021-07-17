@@ -4,13 +4,16 @@ import FinalOrder from "pages/FinalOrder";
 import OrderScreen from "pages/OrderScreen";
 import JoinSession from "pages/JoinSession";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "./App.css"
-
+import "./App.css";
+import RegisterUser from "./RegisterUser";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/register-user">
+          <RegisterUser />
+        </Route>
         <Route path="/create-session">
           <CreateSession />
         </Route>
@@ -28,7 +31,7 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
- );
+  );
 }
 
 export default App;

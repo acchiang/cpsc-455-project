@@ -1,23 +1,20 @@
-// import axios from 'axios'
+import axios from "axios";
 
-// const api = axios.create({
-//     baseURL: 'http://localhost:9000/api',
-// })
+const api = axios.create({
+  baseURL: "http://localhost:9000/api"
+});
 
-// export const insertCard = payload => api.post(`/card`, payload)
+export const registerUser = payload => api.post(`/users/register`, payload);
+export const loginUser = payload => api.post(`/users/login`, payload);
 // export const getAllCards = () => api.get(`/cards`)
 // export const updateCardById = (id, payload) => api.put(`/card/${id}`, payload)
 // export const deleteCardById = id => api.delete(`/card/${id}`)
 // export const deleteAllCards = () => api.delete(`/cards`)
 // export const getCardById = id => api.get(`/card/${id}`)
 
-// const apis = {
-//     insertCard,
-//     getAllCards,
-//     updateCardById,
-//     deleteCardById,
-//     deleteAllCards,
-//     getCardById,
-// }
+const apis = {
+  registerUser,
+  loginUser
+};
 
-// export default apis
+export default apis;
