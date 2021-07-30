@@ -5,6 +5,20 @@ const generateSessionId = () => {
   return Array.from(arr, val => val.toString(16)).join("");
 };
 
+getSessions = async (req, res) => {
+  Session.find({},
+    function(err, response) {
+      if (err) {
+        console.log("Error: " + err);
+        return res.json({
+          message: "Can't fetch sessions"
+        });
+      }
+      return res.send(response);
+    }
+  );
+}
+
 getUniqueSessionId = async (req, res) => {
   let id = generateSessionId();
   while (await Session.exists({ _id: id })) {
@@ -46,8 +60,27 @@ getSessionName = async (req, res) => {
   sessionName ? res.send(sessionName) : res.sendStatus(404)
 }
 
+updateSessionName = async (req, res) => {
+  const body = req.body
+  const sessionId = req.params.sessionId
+  Session.findByIdAndUpdate(sessionId, {name: body.name},
+    { new: true },
+    function(err, response) {
+      if (err) {
+        console.log("Error: " + err);
+        return res.json({
+          message: "Database Update Failure"
+        });
+      }
+      return res.send(response);
+    }
+  );
+}
+
 module.exports = {
+  getSessions,
   createSession,
   getSessionById,
-  getSessionName
+  getSessionName, 
+  updateSessionName
 };
