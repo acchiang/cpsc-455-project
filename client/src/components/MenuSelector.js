@@ -39,13 +39,13 @@ const formatter = new Intl.NumberFormat("en-US", {
 
 formatter.format(2500); /* $2,500.00 */
 
-const MenuRow = ({ orderItem, updateQuantity }) => {
+const MenuRow = ({ className, orderItem, updateQuantity }) => {
   const [quantity, setQuantity] = useState(orderItem.quantity);
   useEffect(() => {
     updateQuantity(orderItem.name, quantity);
   }, [quantity, orderItem.name, updateQuantity]);
   return (
-    <MenuItemRow key={orderItem.name}>
+    <MenuItemRow className={className} key={orderItem.name}>
       <MenuItemRowData>{orderItem.name}</MenuItemRowData>
       <MenuItemRowData>{formatter.format(orderItem.price)}</MenuItemRowData>
       <MenuItemRowData>
@@ -54,6 +54,13 @@ const MenuRow = ({ orderItem, updateQuantity }) => {
     </MenuItemRow>
   );
 };
+
+const handleHideCategory = (category) => {
+  const rowsToHide = document.getElementsByClassName(`${category}Row`)
+  for (const row of rowsToHide) {
+    row.style.display = row.style.display === "none" ? "" : "none"; 
+  }
+}
 
 const MenuSelector = ({ order, updateQuantity }) => {
   const orderItems = order ?? [];
@@ -76,13 +83,16 @@ const MenuSelector = ({ order, updateQuantity }) => {
           return (
             <React.Fragment>
               <tr>
-                <ToggleRow key={category}>
+                <ToggleRow 
+                  key={category} 
+                  onClick={() => handleHideCategory(category)}>
                   {category}
                 </ToggleRow>
               </tr>
               {categoryItems.map((orderItem) => {
                 return (
                   <MenuRow
+                    className={`${category}Row`}
                     key={orderItem._id}
                     orderItem={orderItem}
                     // HACK
