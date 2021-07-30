@@ -52,7 +52,7 @@ const MenuSelector = ({ order, updateQuantity }) => {
           {orderItems.map((orderItem) => {
             return (
               <MenuRow
-                key={orderItem.name}
+                key={orderItem._id}
                 orderItem={orderItem}
                 // HACK
                 updateQuantity={updateQuantity ?? ((a,b) => null)}

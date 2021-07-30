@@ -12,6 +12,7 @@ import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
 
 const serverURL = "http://localhost:9000";
+const menuId = "6103677a11c316178047f1f1";
 
 const PageContainer = styled.div`
   height: 100vh;
@@ -62,6 +63,7 @@ const optionsNoInput = ["10%", "15%", "20%"];
 function OrderScreen() {
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [menu, setMenu] = useState([]);
   const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
   const [sessionName, setSessionName] = useState("LettuceEat");
@@ -73,18 +75,20 @@ function OrderScreen() {
     );
   };
 
-  // TODO: get menu from server
   const fetchMenu = async () => {
-    return axios.get(serverURL);
+    return axios.get(`${serverURL}/menu/${menuId}`);
   };
 
   // TODO: send order to server & attach userId
+  // eslint-disable-next-line no-unused-vars
   const sendOrder = () => {};
 
   // TODO: get group total (including tips) from server
+  // eslint-disable-next-line no-unused-vars
   const getGroupTotals = () => {};
 
   // TODO: history.push to next page with data
+  // eslint-disable-next-line no-unused-vars
   const consolidateOrder = () => {};
 
   const updateQuantity = (name, quantity) => {
@@ -97,10 +101,11 @@ function OrderScreen() {
     );
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = async () => {
-      const { data: latestMenu } = await fetchMenu();
+      const {data: {items: latestMenu}} = await fetchMenu();
       setMenu(latestMenu);
       return latestMenu.map(item => ({ ...item, quantity: 0 }));
     };
