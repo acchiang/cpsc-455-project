@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import QuantitySelector from "./QuantitySelector";
 
 const MenuSelectorContainer = styled.div`
@@ -12,7 +12,15 @@ const MenuSelectorContainer = styled.div`
 `;
 
 const MenuTable = styled.table`
+  width: 100%;`
+
+const ToggleRow = styled.td.attrs({
+  colSpan: 4
+})` 
   width: 100%;
+  background-color: ${(p) => p.theme.colors.primary};
+  padding: 7px;
+  color: ${(p) => p.theme.colors.text};
 `;
 
 const MenuItemRow = styled.tr`
@@ -49,20 +57,41 @@ const MenuRow = ({ orderItem, updateQuantity }) => {
 
 const MenuSelector = ({ order, updateQuantity }) => {
   const orderItems = order ?? [];
+  const categorizeItems = (items) => {
+    const categorizedItems = {}
+    for (const item of items) {
+      categorizedItems[item.category] = categorizedItems[item.category] ?  [...categorizedItems[item.category], item] : [item]
+    }
+    return categorizedItems;
+  }
+
+  const categorizedOrderItems = categorizeItems(orderItems);
+  
   return (
     <MenuSelectorContainer>
       <MenuTable>
         <tbody>
-          {orderItems.map((orderItem) => {
-            return (
-              <MenuRow
-                key={orderItem.name}
-                orderItem={orderItem}
-                // HACK
-                updateQuantity={updateQuantity ?? ((a,b) => null)}
-              />
-            );
-          })}
+        {Object.keys(categorizedOrderItems).map((category) => {
+          const categoryItems = categorizedOrderItems[category]
+          return (
+            <React.Fragment>
+              <tr>
+                <ToggleRow key={category}>
+                  {category}
+                </ToggleRow>
+              </tr>
+              {categoryItems.map((orderItem) => {
+                return (
+                  <MenuRow
+                    key={orderItem._id}
+                    orderItem={orderItem}
+                    // HACK
+                    updateQuantity={updateQuantity ?? ((a,b) => null)}
+                  />
+                )
+              })}
+              </React.Fragment>
+          )})}
         </tbody>
       </MenuTable>
     </MenuSelectorContainer>
