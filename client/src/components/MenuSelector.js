@@ -11,6 +11,10 @@ const MenuSelectorContainer = styled.div`
   overflow: scroll;
 `;
 
+const MenuTable = styled.table`
+  width: 100%;
+`;
+
 const MenuItemRow = styled.tr`
   border: ${(p) => p.border ?? "1px solid black"};
   padding: 7px;
@@ -47,7 +51,7 @@ const MenuSelector = ({ order, updateQuantity }) => {
   const orderItems = order ?? [];
   return (
     <MenuSelectorContainer>
-      <table>
+      <MenuTable>
         <tbody>
           {orderItems.map((orderItem) => {
             return (
@@ -60,7 +64,7 @@ const MenuSelector = ({ order, updateQuantity }) => {
             );
           })}
         </tbody>
-      </table>
+      </MenuTable>
     </MenuSelectorContainer>
   );
 };
