@@ -80,12 +80,15 @@ function OrderScreen() {
   };
 
   // TODO: send order to server & attach userId
+  // eslint-disable-next-line no-unused-vars
   const sendOrder = () => {};
 
   // TODO: get group total (including tips) from server
+  // eslint-disable-next-line no-unused-vars
   const getGroupTotals = () => {};
 
   // TODO: history.push to next page with data
+  // eslint-disable-next-line no-unused-vars
   const consolidateOrder = () => {};
 
   const updateQuantity = (name, quantity) => {
@@ -98,6 +101,7 @@ function OrderScreen() {
     );
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = async () => {
