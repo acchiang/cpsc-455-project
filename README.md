@@ -14,7 +14,7 @@ For young adults who have social gatherings involving group food orders, our res
 - [x] Custom tip amounts 
 - [ ] Responsive website (cross-browser and cross-device testing) 
 - [x] Web accessible UX features (eg. screen-reader accessible) 
-- [ ] Categories for menu items, toggle for more details
+- [x] Categories for menu items, toggle for more details
 - [x] Dark mode toggle
 ### 2-3 stretch requirements (plan to complete at least 1!)
 - [ ] WebSockets for real time updates
