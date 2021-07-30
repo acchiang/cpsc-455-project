@@ -31,7 +31,7 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
-app.use("/", menuRouter);
+app.use("/menu", menuRouter);
 app.use("/session", sessionRouter);
 
 // catch 404 and forward to error handler

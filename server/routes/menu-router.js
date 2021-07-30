@@ -1,58 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const MenuCtrl = require("../controllers/menu-ctrl");
+const router = express.Router();
 
-var menu = [
-    {
-        name: "salmon spaghetti",
-        price: 10
-    },
-    {
-        name: "rice pudding",
-        price: 3
-    },
-    {
-        name: "mint ice cream",
-        price: 5
-    },
-    {
-        name: "enchiladas",
-        price: 3
-    },
-    {
-        name: "oreo mcflurry",
-        price: 5
-    },
-    {
-        name: "tuna don",
-        price: 10
-    },
-    {
-        name: "falafel",
-        price: 3
-    },
-    {
-        name: "shoyu ramen",
-        price: 12
-    },
-    {
-        name: "beef tripe pho",
-        price: 9
-    },
-    {
-        name: "butter chicken and naan",
-        price: 13
-    },
-    {
-        name: "tiramisu",
-        price: 5
-    }
-]
-
-/* GET: menu items */
-router.get('/', function (req, res) {
-    res.status(200);
-    console.log(menu);
-    res.send(menu);
-});
+router.get("/", MenuCtrl.getMenus);
+router.get("/:menuId", MenuCtrl.getMenuById);
+router.put("/:menuId", MenuCtrl.addItemsToMenu);
+router.post("/", MenuCtrl.createMenu);
 
 module.exports = router;
