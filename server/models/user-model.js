@@ -4,7 +4,6 @@ const MenuSchema = require("./menu-model").Menu;
 
 const User = new Schema(
   {
-    _id: String,
     name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },

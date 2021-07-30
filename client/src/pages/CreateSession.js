@@ -49,7 +49,7 @@ function CreateSession({ ...props }) {
           <Input
             id={"input-session-owner"}
             size={"medium"}
-            label={"Your Name"}
+            label={"Your Name*"}
             placeholder={"John Doe"}
           />
         </InputContainer>
@@ -57,8 +57,16 @@ function CreateSession({ ...props }) {
           <Input
             id={"input-session-name"}
             size={"medium"}
-            label={"Event Name"}
+            label={"Event Name*"}
             placeholder={"Dine Out"}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Input
+            id={"input-session-password"}
+            size={"medium"}
+            label={"Password"}
+            placeholder={"optional"}
           />
         </InputContainer>
         <br />

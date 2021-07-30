@@ -8,22 +8,24 @@ const CopyButtonStyle = styled.span`
 `;
 
 const BoxContainer = styled.div`
-  visibility: ${(p) => {
+  visibility: ${p => {
     return p.showElement ? "visible" : "hidden";
   }};
   display: flex;
   align-items: center;
 `;
 
+function copyURL(url) {
+  navigator.clipboard.writeText(url);
+  window.alert("Link copied to clipboard");
+}
+
 const CopyUrlBox = ({ url }) => {
   return (
     <BoxContainer showElement={url && url.length > 0}>
       <Input size={"default"} width={"500px"} value={url} disabled />
       <CopyButtonStyle>
-        <FaRegCopy
-          size={35}
-          onClick={() => navigator.clipboard.writeText(url)}
-        />
+        <FaRegCopy size={35} onClick={() => copyURL(url)} />
       </CopyButtonStyle>
     </BoxContainer>
   );
