@@ -51,16 +51,10 @@ function Register({ ...props }) {
         <br />
         <InputContainer>
           <Input
-            id={"input-session-first-name"}
+            id={"input-session-name"}
             size={"medium"}
-            label={"First Name*"}
-            placeholder={"John"}
-          />
-          <Input
-            id={"input-session-last-name"}
-            size={"medium"}
-            label={"Last Name*"}
-            placeholder={"Doe"}
+            label={"Name*"}
+            placeholder={"John Doe"}
           />
         </InputContainer>
         <InputContainer>
@@ -70,6 +64,8 @@ function Register({ ...props }) {
             label={"Email*"}
             placeholder={"johndoe@gmail.com"}
           />
+        </InputContainer>
+        <InputContainer>
           <Input
             id={"input-session-password"}
             size={"medium"}
