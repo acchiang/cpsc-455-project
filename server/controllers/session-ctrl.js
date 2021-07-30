@@ -66,7 +66,6 @@ updateSessionName = async (req, res) => {
     { new: true },
     function(err, response) {
       if (err) {
-        console.log("Error: " + err);
         return res.json({
           message: "Database Update Failure"
         });
