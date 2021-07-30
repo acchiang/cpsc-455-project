@@ -9,7 +9,6 @@ getSessions = async (req, res) => {
   Session.find({},
     function(err, response) {
       if (err) {
-        console.log("Error: " + err);
         return res.json({
           message: "Can't fetch sessions"
         });
