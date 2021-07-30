@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
@@ -24,21 +23,12 @@ const InputContainer = styled.div`
   flex-direction: row;
 `;
 
-const SERVER_URL = "http://localhost:9000"
+const SERVER_URL = "http://localhost:9000";
 
-function RegisterUser({ ...props }) {
-
-  useEffect(async () => {
-    const getSessionName = async () => {
-      const { data: { name } } = await axios.get(`${SERVER_URL}${localStorage.getItem("sessionPath")}/get-session-name`)
-      return name
-    }
-    document.getElementById('input-session-name').value = await getSessionName()
-  }, [])
-
-  const registerUser = async () => {
-    window.location.href = '/order-screen'
-  }
+function Login({ ...props }) {
+  const login = async () => {
+    window.location.href = "/login-event-name";
+  };
 
   return (
     <Theme>
@@ -50,31 +40,42 @@ function RegisterUser({ ...props }) {
         <br />
         <InputContainer>
           <Input
-            id={"input-session-owner"}
+            id={"input-session-first-name"}
             size={"medium"}
-            label={"Your Name"}
-            placeholder={"John Doe"}
+            label={"First Name*"}
+            placeholder={"John"}
+          />
+          <Input
+            id={"input-session-last-name"}
+            size={"medium"}
+            label={"Last Name*"}
+            placeholder={"Doe"}
           />
         </InputContainer>
         <InputContainer>
           <Input
-            id={"input-session-name"}
+            id={"input-session-email"}
             size={"medium"}
-            label={"Event Name"}
-            placeholder={"Dine Out"}
-            disabled
+            label={"Email*"}
+            placeholder={"johndoe@gmail.com"}
+          />
+          <Input
+            id={"input-session-password"}
+            size={"medium"}
+            label={"Password"}
+            placeholder={"optional"}
           />
         </InputContainer>
         <br />
         <Button
           size={"medium"}
           type={"primary"}
-          label={"Join Session"}
-          onClick={registerUser}
+          label={"Login"}
+          onClick={login}
         />
       </PageContainer>
     </Theme>
   );
 }
 
-export default RegisterUser;
+export default Login;
