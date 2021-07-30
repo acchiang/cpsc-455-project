@@ -66,6 +66,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
+app.listen(process.env.PORT || apiPort, () => console.log(`Server running on port ${apiPort}`));
 
 module.exports = app;
