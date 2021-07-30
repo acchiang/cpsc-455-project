@@ -34,6 +34,21 @@ app.use("/api/users", users);
 app.use("/menu", menuRouter);
 app.use("/session", sessionRouter);
 
+
+// Code snippet from https://stackoverflow.com/questions/36504768/deploy-the-backend-and-frontend-on-the-same-heroku-app-dyno
+// Serve static files from the React frontend app
+app.use(express.static(path.join(__dirname, '../client/build')))
+
+
+app.get("/hello", (req, res) => {
+  res.send("Hello World!");
+});
+
+// AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../client/build/index.html'))
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -50,10 +65,7 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
+app.listen(process.env.PORT || apiPort, () => console.log(`Server running on port ${apiPort}`));
 
 module.exports = app;
