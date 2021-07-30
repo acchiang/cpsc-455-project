@@ -1,0 +1,25 @@
+{
+  "name": "lettuceeat",
+  "version": "1.0.0",
+  "description": "LettuceEat",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd server && node app.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acchiang/lettuceeat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acchiang/lettuceeat/issues"
+  },
+  "homepage": "https://github.com/acchiang/lettuceeat#readme",
+  "dependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
