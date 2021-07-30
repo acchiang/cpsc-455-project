@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Input from "./Input";
 import { FaRegCopy } from "react-icons/fa";
-import { useEffect } from "react";
 
 const CopyButtonStyle = styled.span`
   cursor: pointer;
