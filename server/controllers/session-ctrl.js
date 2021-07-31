@@ -96,20 +96,6 @@ updateSessionUsers = async (req, res) => {
   );
 };
 
-updateUserOrder = async (req, res) => {
-  const { body } = req;
-  const { params: { sessionId, userId } } = req
-  const session = await getSessionById(sessionId)
-  const { users } = session
-  users.map((u) => {
-    
-  })
-  Session.updateOne(
-   { _id: sessionId, "users._id":  mongoose.Types.ObjectId(userId) },
-   { $set: { "users.$.order" : order } }
-  )
-}
-
 module.exports = {
   getSessions,
   createSession,

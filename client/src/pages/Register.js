@@ -44,6 +44,7 @@ function Register({ ...props }) {
       if (res.status === 400) {
         window.alert("Unable to create user");
       } else {
+        console.log(res.data)
         window.alert(`User created successfully`);
       }
     });
