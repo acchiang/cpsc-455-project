@@ -1,18 +1,30 @@
+import "./App.css";
 import Charcuterie from "pages/Charcuterie";
 import CreateSession from "pages/CreateSession";
 import FinalOrder from "pages/FinalOrder";
 import OrderScreen from "pages/OrderScreen";
 import JoinSession from "pages/JoinSession";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import "./App.css";
-import RegisterUser from "./RegisterUser";
+import Welcome from "pages/Welcome";
+import Login from "pages/Login";
+import LoginEventName from "pages/LoginEventName";
+import Register from "pages/Register";
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/register-user">
-          <RegisterUser />
+        <Route path="/welcome">
+          <Welcome />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/login-event-name">
+          <LoginEventName />
+        </Route>
+        <Route path="/register">
+          <Register />
         </Route>
         <Route path="/create-session">
           <CreateSession />
