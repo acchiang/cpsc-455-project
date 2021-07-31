@@ -1,4 +1,3 @@
-import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
 import Button from "components/Button";
@@ -6,6 +5,7 @@ import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
 import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
+import apis from "api";
 
 const PageContainer = styled.div`
   display: flex;
@@ -26,18 +26,24 @@ const InputContainer = styled.div`
 const SERVER_URL = "http://localhost:9000";
 
 function Register({ ...props }) {
-  const history = useHistory();
-
-  //   // TODO: Ask server for a session and navigate to custom session ??? unscoped
-  //   const generateSession = async () => {
-  //     const { data: sessionId } = await axios.post(`${SERVER_URL}/session`, {
-  //       sessionName: document.getElementById("input-session-name").value
-  //       // sessionOwner: document.getElementById("input-session-owner).value
-  //     });
-  //     history.push(`session/${sessionId}/registered`);
-  //   };
+  //   const history = useHistory();
+  async function callRegisterUserAPI(name, email, password) {
+    const newUser = {
+      name,
+      email,
+      password
+    };
+    await apis.registerUser(newUser).then(res => {
+      window.alert(`User created successfully`);
+    });
+  }
 
   const register = async () => {
+    const name = document.getElementById("input-session-name").value;
+    const email = document.getElementById("input-session-email").value;
+    const password = document.getElementById("input-session-password").value;
+    callRegisterUserAPI(name, email, password);
+    //     history.push(`session/${sessionId}/registered`);
     window.location.href = "/login-event-name";
   };
 
