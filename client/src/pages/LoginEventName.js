@@ -6,6 +6,8 @@ import { Title, H2 } from "styles/styleUtils";
 import lettuce from "assets/lettuce.png";
 import apis from "api";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const PageContainer = styled.div`
   display: flex;
@@ -25,15 +27,8 @@ const InputContainer = styled.div`
 
 const SERVER_URL = "http://localhost:9000";
 
-const joinSession = async () => {
-  window.location.href = "/order-screen";
-};
-
-const createSession = async () => {
-  window.location.href = "/order-screen";
-};
-
 function LoginEventName({ ...props }) {
+  const history = useHistory();
   const s = window.location.search;
   const param = new URLSearchParams(s);
   const email = param.get("email");
@@ -48,6 +43,38 @@ function LoginEventName({ ...props }) {
     await callGetUserByEmailAPI();
     setName(user.data.data.name);
   }, []);
+
+  const generateSession = async () => {
+    const { data: sessionId } = await axios.post(`${SERVER_URL}/session`, {
+      sessionName: document.getElementById("input-session-name").value
+    });
+    history.push(`session/${sessionId}/registered`);
+    window.location.href = "/order-screen";
+  };
+
+  async function callUpdateUsersBySessionIdAPI(sessionId) {
+    const newUser = await callGetUserByEmailAPI(email);
+    await apis.updateSessionUsersById(sessionId, newUser).then(res => {
+      window.alert(`Users updated successfully`);
+    });
+  }
+
+  async function callGetAllSessionsAPI() {
+    let sessions = await apis.getAllSessions();
+    console.log(sessions, "sessions");
+    let sessionId;
+    for (let i = 0; i < sessions.length; i++) {
+      if (sessions[i].data.data.name === name) {
+        sessionId = sessions[i]._id;
+      }
+    }
+    await callUpdateUsersBySessionIdAPI(sessionId);
+  }
+
+  const joinSession = async () => {
+    await callGetAllSessionsAPI();
+    window.location.href = "/order-screen";
+  };
 
   return (
     <Theme>
@@ -78,7 +105,7 @@ function LoginEventName({ ...props }) {
             size={"medium"}
             type={"primary"}
             label={"Create Session"}
-            onClick={createSession}
+            onClick={generateSession}
           />
         </InputContainer>
       </PageContainer>
