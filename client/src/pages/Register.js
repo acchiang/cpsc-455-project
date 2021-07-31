@@ -43,6 +43,7 @@ function Register({ ...props }) {
         window.alert("Unable to create user");
       } else {
         console.log(res.data)
+        localStorage.setItem('user', res.data)
         window.alert(`User created successfully`);
       }
     });
