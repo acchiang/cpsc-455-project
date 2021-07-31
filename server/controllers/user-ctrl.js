@@ -33,7 +33,7 @@ registerUser = (req, res) => {
           newUser.password = hash;
           newUser
             .save()
-            .then(user => res.json(user))
+            .then(user => (delete user.password) && res.json(user))
             .catch(err => console.log(err));
         });
       });
@@ -91,7 +91,56 @@ loginUser = (req, res) => {
   });
 };
 
+getUserByEmail = async (req, res) => {
+  return await User.findOne({ email: req.params.email }, (err, user) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err });
+    }
+
+    return res.status(200).json({ success: true, data: user });
+  }).catch(err => console.log(err));
+};
+
+updateUserMenuAndTipTotal = async (req, res) => {
+  const body = req.body;
+
+  if (!body) {
+    return res.status(400).json({
+      success: false,
+      error: "You must provide a body to update"
+    });
+  }
+
+  return User.findOne({ _id: req.params.id }, (err, user) => {
+    if (err) {
+      return res.status(404).json({
+        err,
+        message: "User not found!"
+      });
+    }
+    user.menuTotal = body.menuTotal;
+    user.tipTotal = body.tipTotal;
+    user
+      .save()
+      .then(() => {
+        return res.status(200).json({
+          success: true,
+          id: user._id,
+          message: "User updated!"
+        });
+      })
+      .catch(error => {
+        return res.status(404).json({
+          error,
+          message: "User not updated!"
+        });
+      });
+  });
+};
+
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  getUserByEmail,
+  updateUserMenuAndTipTotal
 };

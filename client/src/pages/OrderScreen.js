@@ -105,6 +105,10 @@ function OrderScreen() {
     );
   };
 
+  useEffect(() => {
+    axios.put('/session/update_order', order)
+  }, [order])
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
