@@ -1,5 +1,8 @@
 # LettuceEat
 
+## Description
+LettuceEat is a platform that enables friends and families to split their food bills quickly and effectively. Similar to popular scheduling platform when2meet, LettuceEat allows users to join sessions and pick out menu items on the platform to add to their user profile. One user will then be able to see all the other user's in their created session's orders and pay for it. The user paying will also be able to easily calculate how much each person owes them after tips. After more development, we hope to allow users to etrans the person paying within the app with the click of a single button.
+
 ## The Project
 	
 For young adults who have social gatherings involving group food orders, our responsive web app will ease the process of gathering, consolidating, and outputting individual food orders to be submitted as a group order. The app will store: anonymous users’ data (amount owing, dishes, custom tip amounts, and display name), food menu (dishes), and session (states, and users). Users can access a particular session and make a food order customized to their liking, based on the menu items available in the session. The session leader then takes all the consolidated order data and sends it to a food ordering service (externally from our app, eg. a waiter or UberEats app) to place the order. Additional functionalities we can implement given enough time include user authentication to create custom profiles, saving favourite/previous orders for future use, use of machine learning to automatically input menu items, and/or integration with payment platforms. 
