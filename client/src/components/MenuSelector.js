@@ -9,6 +9,9 @@ const MenuSelectorContainer = styled.div`
   max-width: 400px;
   max-height: 400px;
   overflow: scroll;
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 const MenuTable = styled.table`

@@ -18,8 +18,8 @@ function FinalOrder() {
   };
 
   const PageContainer = styled.div`
-    height: 110vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background: ${p => p.theme.colors.primary};
     justify-content: center;
     align-items: center;
@@ -65,7 +65,7 @@ function FinalOrder() {
           </TextIcon>
           <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={order} />
+            <MenuSelector order={order}/>
           </MenuContainer>
           <TotalAmount
             size={"medium"}

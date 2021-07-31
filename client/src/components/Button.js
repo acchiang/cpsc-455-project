@@ -21,6 +21,9 @@ const ButtonStyle = styled.button`
   :hover {
     opacity: 0.65;
   }
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 const Button = ({ size, type, label, disabled, onClick, ...props }) => (

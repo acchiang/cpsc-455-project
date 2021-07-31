@@ -30,6 +30,10 @@ const InputBox = styled.input`
   :disabled {
     opacity: 0.5;
   }
+  ${p => p.theme.mediaQueries.mobile} {
+    width: ${inputSize["small"] * 9}px;
+    padding: 5px;
+  }
 `;
 
 const Label = styled.label`
@@ -41,6 +45,10 @@ const Label = styled.label`
   min-width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 6}px;
   max-width: ${(p) => (inputSize[`${p.size}`] ?? inputSize["default"]) * 6}px;
   text-align: left;
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${inputSize["small"] * 1.5}px;
+    text-align: right;
+  }
 `;
 
 const Input = ({ label, size, setValue, placeholder, ...props }) => (

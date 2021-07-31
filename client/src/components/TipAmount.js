@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Dropdown from "components/Dropdown";
 
 const TipAmountStyle = styled.div`
-  color: ${(p) => p.theme.colors.text };
+  color: ${(p) => p.theme.colors.text};
   opacity: ${p => p.disabled ? "0.5" : "1"};
   cursor: ${p => p.disabled ? "not-allowed" : "auto"};
   font-size: ${(p) => p.size ? p.theme.fontSizes[p.size] : p.theme.fontSizes.default};
@@ -13,6 +13,9 @@ const TipAmountStyle = styled.div`
   border-radius: 5px;
   margin: 0.25em;
   display: inline-block;
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 const TipAmount = ({ size, label, options, feedValueToParent }) => (
@@ -20,7 +23,7 @@ const TipAmount = ({ size, label, options, feedValueToParent }) => (
     <TipAmountStyle size={size}>{label}: </TipAmountStyle>
     <Dropdown options={options} feedValueToParent={feedValueToParent} />
   </>
-  
+
 );
 
 export default TipAmount;

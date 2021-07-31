@@ -3,7 +3,7 @@ import Theme from "styles/Theme";
 import styled from "styled-components";
 import Button from "components/Button";
 import Input from "components/Input";
-import { Title, H2 } from "styles/styleUtils";
+import { Title, H2, Logo } from "styles/styleUtils";
 import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
 
@@ -12,11 +12,14 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  padding-top: 100px;
-  height: 100vh;
-  width: 100vw;
+  padding-top: 50px;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   background: ${p => p.theme.colors.primary};
+  ${p => p.theme.mediaQueries.mobile} {
+    padding-top: 50px;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -40,7 +43,8 @@ function CreateSession({ ...props }) {
   return (
     <Theme>
       <PageContainer>
-        <img id="logo" alt="LettuceEat logo" width="200" src={lettuce} />
+        <Logo id="logo" alt="LettuceEat logo" width="200" src={lettuce}></Logo>
+        <img />
         <Title>LettuceEat</Title>
         <H2>Easy bill splitting</H2>
         <br />
