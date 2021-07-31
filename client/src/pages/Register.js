@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "components/Button";
 import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
 import apis from "api";
 
@@ -26,25 +26,32 @@ const InputContainer = styled.div`
 const SERVER_URL = "http://localhost:9000";
 
 function Register({ ...props }) {
-  //   const history = useHistory();
-  async function callRegisterUserAPI(name, email, password) {
-    const newUser = {
+  let params;
+
+  async function callRegisterUserAPI() {
+    let name = document.getElementById("input-session-name").value;
+    let email = document.getElementById("input-session-email").value;
+    let password = document.getElementById("input-session-password").value;
+    let newUser = {
       name,
       email,
       password
     };
+    params = new URLSearchParams({
+      email: email
+    });
     await apis.registerUser(newUser).then(res => {
-      window.alert(`User created successfully`);
+      if (res.status === 400) {
+        window.alert("Unable to create user");
+      } else {
+        window.alert(`User created successfully`);
+      }
     });
   }
 
   const register = async () => {
-    const name = document.getElementById("input-session-name").value;
-    const email = document.getElementById("input-session-email").value;
-    const password = document.getElementById("input-session-password").value;
-    callRegisterUserAPI(name, email, password);
-    //     history.push(`session/${sessionId}/registered`);
-    window.location.href = "/login-event-name";
+    await callRegisterUserAPI();
+    window.location.href = "/login-event-name?" + params.toString();
   };
 
   return (

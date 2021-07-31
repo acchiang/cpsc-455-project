@@ -91,7 +91,18 @@ loginUser = (req, res) => {
   });
 };
 
+getUserByEmail = async (req, res) => {
+  return await User.findOne({ _id: req.params.email }, (err, user) => {
+    if (err) {
+      return res.status(400).json({ success: false, error: err });
+    }
+
+    return res.status(200).json({ success: true, data: user });
+  }).catch(err => console.log(err));
+};
+
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  getUserByEmail
 };

@@ -34,8 +34,9 @@ const createSession = async () => {
 };
 
 function LoginEventName({ ...props }) {
-  const history = useHistory();
-
+  const s = window.location.search;
+  const param = new URLSearchParams(s);
+  const email = param.get("email");
   return (
     <Theme>
       <PageContainer>
@@ -44,7 +45,7 @@ function LoginEventName({ ...props }) {
         <H2>Easy bill splitting</H2>
         <br />
         <H2>
-          <b>Placeholder Name</b>
+          <b>{email}</b>
         </H2>
         <InputContainer>
           <Input
