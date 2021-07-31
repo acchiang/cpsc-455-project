@@ -7,7 +7,9 @@ const User = new Schema(
     name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    menuTotal: { type: Number, required: false },
+    tipTotal: { type: Number, required: false }
     // items: { type: [String], required: true },
     // isHost: { type: Boolean, required: true },
     // menuItems: { type: [MenuSchema], required: true },
