@@ -15,9 +15,10 @@ const serverURL = "http://localhost:9000";
 const menuId = "6103677a11c316178047f1f1";
 
 const PageContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: ${p => p.theme.colors.primary};
+  overflow: hidden;
 `;
 
 const PanelContainer = styled.div`
@@ -56,6 +57,9 @@ const FinalOrderContainer = styled.div`
 
 const StyledHeader = styled.h2`
   color: ${p => p.theme.colors.text};
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 const optionsNoInput = ["10%", "15%", "20%"];
@@ -81,15 +85,15 @@ function OrderScreen() {
 
   // TODO: send order to server & attach userId
   // eslint-disable-next-line no-unused-vars
-  const sendOrder = () => {};
+  const sendOrder = () => { };
 
   // TODO: get group total (including tips) from server
   // eslint-disable-next-line no-unused-vars
-  const getGroupTotals = () => {};
+  const getGroupTotals = () => { };
 
   // TODO: history.push to next page with data
   // eslint-disable-next-line no-unused-vars
-  const consolidateOrder = () => {};
+  const consolidateOrder = () => { };
 
   const updateQuantity = (name, quantity) => {
     const updatedOrder = order;
@@ -105,7 +109,7 @@ function OrderScreen() {
   useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = async () => {
-      const {data: {items: latestMenu}} = await fetchMenu();
+      const { data: { items: latestMenu } } = await fetchMenu();
       setMenu(latestMenu);
       return latestMenu.map(item => ({ ...item, quantity: 0 }));
     };
@@ -161,7 +165,7 @@ function OrderScreen() {
                       <Button
                         size={"medium"}
                         type={"primary"}
-                        label={"confirm order"}
+                        label={"Confirm Order"}
                         onClick={() => (window.location.href = "/final-order")}
                       />
                     </SubtotalContainer>
@@ -190,7 +194,7 @@ function OrderScreen() {
                       <Button
                         size={"medium"}
                         type={"primary"}
-                        label={"consolidate"}
+                        label={"Consolidate"}
                         onClick={() => (window.location.href = "/final-order")}
                       />
                     </FinalOrderContainer>

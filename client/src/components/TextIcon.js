@@ -27,6 +27,9 @@ const TextIconButton = styled.a`
   :hover {
     opacity: 0.5;
   }
+  ${p => p.theme.mediaQueries.smallMobile} {
+    font-size: ${p => p.theme.fontSizes.medium};
+  }
 `
 
 export const TextIcon = ({ textLetter, children, className, size,  complete, ...rest }) => {

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import axios from "axios";
-
 import BackButton from "components/BackButton";
 import CopyUrlBox from "components/CopyUrlBox";
 import { FaPen } from "react-icons/fa";
@@ -15,6 +14,12 @@ const TopTitleBarContainer = styled.div`
 
 const Title = styled.h1`
   color: ${p => p.theme.colors.text};
+  ${p => p.theme.mediaQueries.tablet} {
+    font-size: ${p => p.theme.fontSizes.medium};
+  }
+  ${p => p.theme.mediaQueries.smallMobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 const handleEditTitle = (title, setTitle, sessionId) => {
