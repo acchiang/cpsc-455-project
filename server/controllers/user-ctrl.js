@@ -92,7 +92,7 @@ loginUser = (req, res) => {
 };
 
 getUserByEmail = async (req, res) => {
-  return await User.findOne({ _id: req.params.email }, (err, user) => {
+  return await User.findOne({ email: req.params.email }, (err, user) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }

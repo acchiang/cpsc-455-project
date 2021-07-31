@@ -7,6 +7,7 @@ const api = axios.create({
 export const registerUser = payload => api.post(`/users/register`, payload);
 export const loginUser = payload => api.post(`/users/login`, payload);
 export const createSession = payload => api.post(`/session`, payload);
+export const getUserByEmail = email => api.get(`/users/user/${email}`);
 // export const getAllCards = () => api.get(`/cards`)
 // export const updateCardById = (id, payload) => api.put(`/card/${id}`, payload)
 // export const deleteCardById = id => api.delete(`/card/${id}`)
@@ -16,7 +17,8 @@ export const createSession = payload => api.post(`/session`, payload);
 const apis = {
   registerUser,
   loginUser,
-  createSession
+  createSession,
+  getUserByEmail
 };
 
 export default apis;

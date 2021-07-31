@@ -1,11 +1,11 @@
-import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
 import Button from "components/Button";
 import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
-import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
+import apis from "api";
+import { useState, useEffect } from "react";
 
 const PageContainer = styled.div`
   display: flex;
@@ -37,6 +37,18 @@ function LoginEventName({ ...props }) {
   const s = window.location.search;
   const param = new URLSearchParams(s);
   const email = param.get("email");
+  let user;
+  const [name, setName] = useState("Welcome");
+
+  async function callGetUserByEmailAPI() {
+    user = await apis.getUserByEmail(email);
+  }
+
+  useEffect(async () => {
+    await callGetUserByEmailAPI();
+    setName(user.data.data.name);
+  }, []);
+
   return (
     <Theme>
       <PageContainer>
@@ -45,7 +57,7 @@ function LoginEventName({ ...props }) {
         <H2>Easy bill splitting</H2>
         <br />
         <H2>
-          <b>{email}</b>
+          <b>{name}</b>
         </H2>
         <InputContainer>
           <Input
