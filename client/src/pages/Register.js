@@ -23,8 +23,6 @@ const InputContainer = styled.div`
   flex-direction: row;
 `;
 
-const SERVER_URL = "http://localhost:9000";
-
 function Register({ ...props }) {
   let params;
 
@@ -44,6 +42,7 @@ function Register({ ...props }) {
       if (res.status === 400) {
         window.alert("Unable to create user");
       } else {
+        console.log(res.data)
         window.alert(`User created successfully`);
       }
     });

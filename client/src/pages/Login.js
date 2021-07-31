@@ -23,8 +23,6 @@ const InputContainer = styled.div`
   flex-direction: row;
 `;
 
-const SERVER_URL = "http://localhost:9000";
-
 function Login({ ...props }) {
   const login = async () => {
     window.location.href = "/login-event-name";
