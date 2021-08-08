@@ -43,3 +43,11 @@ For young adults who have social gatherings involving group food orders, our res
 - https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
 - https://medium.com/swlh/how-to-create-your-first-mern-mongodb-express-js-react-js-and-node-js-stack-7e8b20463e66
 - https://stackoverflow.com/questions/36504768/deploy-the-backend-and-frontend-on-the-same-heroku-app-dyno
+
+## Tech from Units 1-5:
+Unit 1 - HTML, CSS, JS:
+- Used styled components to create reusable components
+- Styled components is a CSS-in-JS styling framework that uses tagged template literals in JavaScript and CSS to write and use actual CSS for styling React components
+- Styled components are preferred because it allows our team to build many custom reusable components while staying scalable
+- Styled components are component-based and scoped so changing one element will not affect another element or behavior in the DOM
+- CSS modules can become difficult to keep clean once the project becomes a larger scale and isn't server side rendering (styled components are server side rendering) which may interfere with global styles
