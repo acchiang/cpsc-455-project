@@ -116,5 +116,6 @@ module.exports = {
   getSessionById,
   getSessionName,
   updateSessionName,
-  updateSessionUsers
+  updateSessionUsers,
+  updateUserOrder
 };
