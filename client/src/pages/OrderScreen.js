@@ -88,6 +88,8 @@ function OrderScreen() {
   const [sessionId, setSessionId] = useState("");
   const [sessionUser, setSessionUser] = useState(null);
   const [sessionUsers, setSessionUsers] = useState([]);
+  const [sessionMenuTotal, setSessionMenuTotal] = useState(0);
+  const [sessionTipTotal, setSessionTipTotal] = useState(0);
 
   const fetchSessionData = async () => {
     return axios.get(
@@ -118,14 +120,14 @@ function OrderScreen() {
   const updateMenuAndTipInDB = async () => {
     let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
     let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
-    updateMenuTotalSoFar(subtotal + menuTotalInDBSoFar.data.menuTotalSoFar);
+    let newMenuTotal = subtotal + menuTotalInDBSoFar.data.menuTotalSoFar;
     let tipTotal = subtotal * 0.01 * tipPercent.replace(/\D/g, "");
-    updateTipTotalSoFar(tipTotal + tipTotalInDBSoFar.data.tipTotalSoFar);
+    let newTipTotal = tipTotal + tipTotalInDBSoFar.data.tipTotalSoFar;
+    updateMenuTotalSoFar(newMenuTotal);
+    updateTipTotalSoFar(newTipTotal);
+    setSessionTipTotal(newTipTotal);
+    setSessionMenuTotal(newMenuTotal);
   };
-
-  // TODO: get group total (including tips) from server
-  // eslint-disable-next-line no-unused-vars
-  const getGroupTotals = () => {};
 
   // TODO: history.push to next page with data
   // eslint-disable-next-line no-unused-vars
@@ -150,6 +152,14 @@ function OrderScreen() {
       );
     }
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
+    let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
+    setSessionMenuTotal(menuTotalInDBSoFar.data.menuTotalSoFar);
+    setSessionTipTotal(tipTotalInDBSoFar.data.tipTotalSoFar);
+  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
@@ -252,8 +262,8 @@ function OrderScreen() {
                       <StyledHeader>Group Total So Far</StyledHeader>
                       <TotalAmount
                         size={"medium"}
-                        menuAmount={"12.99"}
-                        tipAmount={"1.50"}
+                        menuAmount={sessionMenuTotal}
+                        tipAmount={sessionTipTotal}
                       />
                       <Button
                         size={"medium"}
