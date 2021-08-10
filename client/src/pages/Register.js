@@ -85,7 +85,7 @@ function Register({ ...props }) {
         </InputContainer>
         <InputContainer>
           <Input
-            id={"input-session-password"}
+            id={"input-user-password"}
             size={"medium"}
             label={"Password"}
             placeholder={"optional"}
