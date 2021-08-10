@@ -23,6 +23,10 @@ const DropdownContainer = styled.div`
   display: inline-block;
 `;
 
+const ShortInputBox = styled(Input)`
+  width: 50px;
+`;
+
 const Dropdown = ({
   options,
   defaultOption,
@@ -43,6 +47,12 @@ const Dropdown = ({
       setShowInput(selectedValue === customValue);
     }
   };
+
+  const handleInput = (event) => {
+    let input = event.target.value;
+    feedValueToParent && feedValueToParent(input);
+  };
+
   return (
     <DropdownContainer>
       <DropdownSelect
@@ -58,7 +68,8 @@ const Dropdown = ({
           );
         })}
       </DropdownSelect>
-      {showInput && <Input size={size} placeholder={customValue} />}
+      {showInput &&
+        <ShortInputBox size={size} onChange={(e) => handleInput(e)} placeholder={"%"} />}
     </DropdownContainer>
   );
 };

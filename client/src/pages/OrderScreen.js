@@ -55,6 +55,7 @@ const FinalOrderContainer = styled.div`
   text-align: center;
 `;
 
+const tipOptions = ["10%", "15%", "20%", "Other"];
 const StyledHeader = styled.h2`
   color: ${p => p.theme.colors.text};
   ${p => p.theme.mediaQueries.mobile} {
@@ -62,12 +63,11 @@ const StyledHeader = styled.h2`
   }
 `;
 
-const optionsNoInput = ["10%", "15%", "20%"];
-
 function OrderScreen() {
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
-  const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
+  const [tipPercent, setTipPercent] = useState(tipOptions[0]);
+  const [showInput, setShowInput] = useState(false);
   const [sessionName, setSessionName] = useState("LettuceEat");
   const [sessionId, setSessionId] = useState("");
   const [sessionUser, setSessionUser] = useState(null);
@@ -164,7 +164,9 @@ function OrderScreen() {
                       <TipAmount
                         size={"medium"}
                         label={"Tip"}
-                        options={optionsNoInput}
+                        options={tipOptions}
+                        showInput={showInput}
+                        setShowInput={setShowInput}
                         feedValueToParent={setTipPercent}
                       />
                       <DollarAmount
