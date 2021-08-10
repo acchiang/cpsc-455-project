@@ -1,4 +1,4 @@
-const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
@@ -42,7 +42,6 @@ createSession = async (req, res) => {
     tipTotalSoFar: 0
   });
   session.save();
-  // TODO: set owner of session after christy's pr
   res.send(sessionId);
 };
 
@@ -84,13 +83,13 @@ updateSessionName = async (req, res) => {
 };
 
 findOrCreateUserInSession = async (req, res) => {
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { error, isValid } = validateLoginInput(req.body);
   if (!isValid) {
-    return res.status(400).json(errors);
+    return res.status(400).json(error);
   }
 
   const session = await Session.findById(req.params.sessionId);
-
+  
   const existingUser = session.users.find((user) => user.name === req.body.name)
   const requestedUser = {
     name: req.body.name,
