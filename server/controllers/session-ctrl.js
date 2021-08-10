@@ -135,7 +135,6 @@ findOrCreateUserInSession = async (req, res) => {
   }
 }
 
-// i hate this method because I couldn't find a clean way to do it, could use help
 updateUserOrder = async (req, res) => {
   const { params: { sessionId } } = req
   const { sessionUser, order } = req.body
