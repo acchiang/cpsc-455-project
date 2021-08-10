@@ -161,6 +161,8 @@ function OrderScreen() {
     updateMenuTotalSoFar(addedMenuTotal);
     updateTipTotalSoFar(addedTipTotal);
     // update react frontend with new group total numbers
+    setSessionMenuTotal(addedMenuTotal);
+    setSessionTipTotal(addedTipTotal);
   };
 
   const updateUserMenuTotal = async subtotal => {
