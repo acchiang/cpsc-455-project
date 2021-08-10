@@ -41,7 +41,7 @@ function FinalOrder() {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = () => {
       const menu = fetchMenu();
-      return menu.map(item => ({ ...item, quantity: 0 }));
+      return menu.map(item => ({ item, quantity: 0 }));
     };
     setOrder(initializeOrder());
   }, []);

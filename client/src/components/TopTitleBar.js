@@ -32,7 +32,7 @@ const handleEditTitle = (title, setTitle, sessionId) => {
 };
 
 const editSession = async (newTitle, setTitle, sessionId) => {
-  await axios.put(`${SERVER_URL}/session/${sessionId}`, {
+  await axios.put(`${SERVER_URL}/api/sessions/${sessionId}`, {
     name: newTitle
   });
   setTitle(newTitle);
