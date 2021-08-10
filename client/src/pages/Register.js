@@ -40,10 +40,17 @@ function Register({ ...props }) {
 
   const validateInput = () => {
     const name = document.getElementById("input-user-name").value;
-    const sessionId = localStorage.getItem("sessionId");
-    if (!sessionId)
-      return window.alert("Please check if your invite link was correct");
-    return !!name && !!sessionId;
+    const password = document.getElementById("input-user-password").value;
+    const sessionName = document.getElementById("input-session-name").value;
+    if (password && (password.length < 6 || password.length > 30)) {
+      window.alert("Password must be at between 6 to 30 characters.");
+      return false;
+    }
+    if (!name || !sessionName) {
+      window.alert("Please fill in the required fields.")
+      return false;
+    }
+    return true;
   };
 
   const register = async () => {

@@ -34,17 +34,22 @@ function CreateSession({ ...props }) {
 
       localStorage.setItem("sessionId", sessionId);
       localStorage.setItem("user", user);
-
-      window.location.href = "/order-screen";
-    } else {
-      window.alert("Please check the required fields");
     }
   };
 
   const validateInput = () => {
     const name = document.getElementById("input-user-name").value;
+    const password = document.getElementById("input-user-password").value;
     const sessionName = document.getElementById("input-session-name").value;
-    return !!name && !!sessionName;
+    if (password && (password.length < 6 || password.length > 30)) {
+      window.alert("Password must be at between 6 to 30 characters.");
+      return false;
+    }
+    if (!name || !sessionName) {
+      window.alert("Please fill in the required fields.")
+      return false;
+    }
+    return true;
   };
 
   const generateUser = async (sessionId) => {
@@ -55,10 +60,12 @@ function CreateSession({ ...props }) {
 
     try {
       const res = await apis.registerUser(sessionId, user);
+      if (res) window.location.href = "/order-screen";
       return JSON.stringify(res.data);
     } catch (e) {
-      window.alert("Unable to create user or username is taken");
-    } 
+      const { response: { data : message } } = e
+      window.alert(JSON.stringify(message));
+    }
   };
 
   const generateSession = async () => {
