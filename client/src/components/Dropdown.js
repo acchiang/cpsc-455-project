@@ -57,8 +57,8 @@ const Dropdown = ({
       >
         {options.map((option, key) => {
           return (
-            <option value={option} key={key}>
-              {option}
+            <option value={option.id || option} key={key}>
+              {option.value || option}
             </option>
           );
         })}

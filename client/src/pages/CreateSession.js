@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
@@ -6,9 +7,7 @@ import Input, {Label} from "components/Input";
 import { Title, H2, Logo } from "styles/styleUtils";
 import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
-import apis from "api";
 import Dropdown from "components/Dropdown";
-import axios from "axios";
 
 const serverURL = "http://localhost:9000";
 
@@ -32,12 +31,6 @@ const InputContainer = styled.div`
 `;
 
 function CreateSession({ ...props }) {
-  const fetchMenuData = async () => {
-    return axios.get(
-      `${serverURL}/api/menus/`
-    );
-  };
-
   const history = useHistory();
 
   // TODO: Ask server for a session and navigate to custom session ??? unscoped
@@ -49,7 +42,22 @@ function CreateSession({ ...props }) {
     history.push(`session/${sessionId}/registered`);
   };
 
-  const optionsNoInput = ["10%", "15%", "20%"];
+  const [menuOptions, setMenuOptions] = useState([])
+
+  const fetchMenus = async () => {
+    return axios.get(
+      `${serverURL}/api/menus/`
+    );
+  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+      const { data } = await fetchMenus();
+      const incomingMenuOptions = data.map(
+        (menu) => {
+          return {value: menu.name, id: menu._id};
+        })
+      setMenuOptions(incomingMenuOptions);
+  }, []);  
 
   return (
     <Theme>
@@ -86,7 +94,7 @@ function CreateSession({ ...props }) {
         <InputContainer>
         {<Label size="medium">Menu:</Label>}
           <Dropdown
-            options={optionsNoInput}
+            options={menuOptions}
             defaultOption={"15%"}
             width={"238px"}
           />
