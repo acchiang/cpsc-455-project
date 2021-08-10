@@ -2,10 +2,15 @@ import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
 import Button from "components/Button";
-import Input from "components/Input";
+import Input, {Label} from "components/Input";
 import { Title, H2, Logo } from "styles/styleUtils";
 import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
+import apis from "api";
+import Dropdown from "components/Dropdown";
+import axios from "axios";
+
+const serverURL = "http://localhost:9000";
 
 const PageContainer = styled.div`
   display: flex;
@@ -27,6 +32,12 @@ const InputContainer = styled.div`
 `;
 
 function CreateSession({ ...props }) {
+  const fetchMenuData = async () => {
+    return axios.get(
+      `${serverURL}/api/menus/`
+    );
+  };
+
   const history = useHistory();
 
   // TODO: Ask server for a session and navigate to custom session ??? unscoped
@@ -38,11 +49,12 @@ function CreateSession({ ...props }) {
     history.push(`session/${sessionId}/registered`);
   };
 
+  const optionsNoInput = ["10%", "15%", "20%"];
+
   return (
     <Theme>
       <PageContainer>
         <Logo id="logo" alt="LettuceEat logo" width="200" src={lettuce}></Logo>
-        <img />
         <Title>LettuceEat</Title>
         <H2>Easy bill splitting</H2>
         <br />
@@ -69,6 +81,14 @@ function CreateSession({ ...props }) {
             size={"medium"}
             label={"Password"}
             placeholder={"optional"}
+          />
+        </InputContainer>
+        <InputContainer>
+        {<Label size="medium">Menu:</Label>}
+          <Dropdown
+            options={optionsNoInput}
+            defaultOption={"15%"}
+            width={"238px"}
           />
         </InputContainer>
         <br />

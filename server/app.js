@@ -31,8 +31,8 @@ require("./config/passport")(passport);
 
 // Routes
 app.use("/api/users", users);
-app.use("/menu", menuRouter);
-app.use("/session", sessionRouter);
+app.use("/api/menus", menuRouter);
+app.use("/api/sessions", sessionRouter);
 
 
 // Code snippet from https://stackoverflow.com/questions/36504768/deploy-the-backend-and-frontend-on-the-same-heroku-app-dyno
