@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
-import sampleMenu from "assets/sampleMenu";
 import styled from "styled-components";
 import MenuSelector from "components/MenuSelector";
 import TotalAmount from "components/TotalAmount";
@@ -12,7 +11,6 @@ import TopTitleBar from "components/TopTitleBar";
 import TextIcon from "components/TextIcon";
 
 const serverURL = "http://localhost:9000";
-const menuId = "6103677a11c316178047f1f1";
 
 function FinalOrder() {
   const [finalOrders, setOrders] = useState(null);
