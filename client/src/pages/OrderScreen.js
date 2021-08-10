@@ -137,7 +137,9 @@ function OrderScreen() {
       pathname: '/final-order',
       state: {
         sessionName: sessionName,
+        sessionId: sessionId,
         users: sessionUsers,
+        menu: order,
         menuTotal: sessionMenuTotal,
         tipTotal: sessionTipTotal
       }
@@ -280,7 +282,6 @@ function OrderScreen() {
                         size={"medium"}
                         type={"primary"}
                         label={"Consolidate"}
-                        // onClick={() => (window.location.href = "/final-order")}
                         onClick={() => consolidateOrder()}
                       />
                     </FinalOrderContainer>

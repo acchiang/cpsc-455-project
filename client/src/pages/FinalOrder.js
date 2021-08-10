@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
 import sampleMenu from "assets/sampleMenu";
@@ -10,14 +11,12 @@ import Button from "components/Button";
 import TopTitleBar from "components/TopTitleBar";
 import TextIcon from "components/TextIcon";
 
-function FinalOrder() {
-  const [order, setOrder] = useState(null);
-  const location = useLocation();
+const serverURL = "http://localhost:9000";
+const menuId = "6103677a11c316178047f1f1";
 
-  // TODO: get menu from server
-  const fetchMenu = () => {
-    return sampleMenu;
-  };
+function FinalOrder() {
+  const [finalOrders, setOrders] = useState(null);
+  const location = useLocation();
 
   const PageContainer = styled.div`
     height: 100%;
@@ -41,18 +40,35 @@ function FinalOrder() {
 
   const IconsContainer = styled.div``;
 
-  useEffect(() => {
+  const getUserOrder = async sessionUser => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${location.state.sessionId}/update_order`,
+      { sessionUser }
+    );
+  };
+
+  useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
-    const initializeOrder = () => {
-      const menu = fetchMenu();
-      return menu.map(item => ({ item, quantity: 0 }));
+    const consolidateOrders = async () => {
+      let orders = location.state.menu;
+      orders.map(item => ({ item, quantity: 0 }));
+      location.state.users.map(async (user) => {
+        const { data } = await getUserOrder(user);
+        data.map(userOrder => {
+          if (userOrder.quantity !== 0) {
+            const idx = orders.findIndex(({ item }) => item.name === userOrder.item.name)
+            orders[idx].quantity += userOrder.quantity;
+          }
+        })
+      })
+      return orders;
     };
-    setOrder(initializeOrder());
+    setOrders(await consolidateOrders());
   }, []);
 
   return (
     <Theme>
-      <OrderContext.Provider value={[order, setOrder]}>
+      <OrderContext.Provider value={[finalOrders, setOrders]}>
         <PageContainer>
           <TopTitleBar title={location.state.sessionName} backUrl={"/order-screen"} />
           <IconsContainer>
@@ -69,7 +85,7 @@ function FinalOrder() {
           </IconsContainer>
           <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={order} />
+            <MenuSelector order={finalOrders} />
           </MenuContainer>
           <TotalAmount
             size={"medium"}
