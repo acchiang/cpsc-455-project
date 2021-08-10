@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
 import sampleMenu from "assets/sampleMenu";
@@ -11,6 +12,7 @@ import TextIcon from "components/TextIcon";
 
 function FinalOrder() {
   const [order, setOrder] = useState(null);
+  const location = useLocation();
 
   // TODO: get menu from server
   const fetchMenu = () => {
@@ -69,8 +71,8 @@ function FinalOrder() {
           </MenuContainer>
           <TotalAmount
             size={"medium"}
-            menuAmount={"12.99"}
-            tipAmount={"1.50"}
+            menuAmount={location.state.menuTotal}
+            tipAmount={location.state.tipTotal}
           />
           <Button
             size={"medium"}

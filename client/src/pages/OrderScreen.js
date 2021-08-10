@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
@@ -68,16 +69,16 @@ function OrderScreen() {
   const fetchSessionMenuTotalSoFar = async () => {
     return axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-menu-total`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-menu-total`
     );
   };
 
   const fetchSessionTipTotalSoFar = async () => {
     return axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-tip-total`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-tip-total`
     );
   };
 
@@ -90,12 +91,13 @@ function OrderScreen() {
   const [sessionUsers, setSessionUsers] = useState([]);
   const [sessionMenuTotal, setSessionMenuTotal] = useState(0);
   const [sessionTipTotal, setSessionTipTotal] = useState(0);
+  const history = useHistory();
 
   const fetchSessionData = async () => {
     return axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/order-screen`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
@@ -129,9 +131,16 @@ function OrderScreen() {
     setSessionMenuTotal(newMenuTotal);
   };
 
-  // TODO: history.push to next page with data
   // eslint-disable-next-line no-unused-vars
-  const consolidateOrder = () => {};
+  const consolidateOrder = async () => {
+    history.push({
+      pathname: '/final-order',
+      state: {
+        menuTotal: sessionMenuTotal,
+        tipTotal: sessionTipTotal
+      }
+    })
+  };
 
   const findOrUpdateOrder = async order => {
     return await axios.put(
@@ -269,7 +278,8 @@ function OrderScreen() {
                         size={"medium"}
                         type={"primary"}
                         label={"Consolidate"}
-                        onClick={() => (window.location.href = "/final-order")}
+                        // onClick={() => (window.location.href = "/final-order")}
+                        onClick={() => consolidateOrder()}
                       />
                     </FinalOrderContainer>
                   </Panel>
