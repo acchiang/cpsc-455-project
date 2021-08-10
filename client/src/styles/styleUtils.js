@@ -21,16 +21,31 @@ export const Title = styled.h1`
   ${headerText};
   font-size: ${p => p.theme.fontSizes.title};
   margin: inherit;
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.large};
+  }
 `
 
 export const H1 = styled.h2`
   ${headerText};
   font-size: ${p => p.theme.fontSizes.large};
   font-weight: ${p => p.theme.fontWeight};
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.medium};
+  }
 `
 
 export const H2 = styled.h3`
   ${headerText};
   font-size: ${p => p.theme.fontSizes.medium};
   font-weight: ${p => p.theme.fontWeight};
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
+`
+
+export const Logo = styled.img`
+  ${p => p.theme.mediaQueries.mobile} {
+    width: 100px;
+  }
 `

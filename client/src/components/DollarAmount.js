@@ -10,6 +10,10 @@ const DollarAmountStyle = styled.div`
   border: "default";
   border-radius: 5px;
   margin: 0.25em;
+
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 const DollarAmount = ({ size, label, amount }) => (

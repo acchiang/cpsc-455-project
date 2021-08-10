@@ -12,11 +12,13 @@ import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
 
 const serverURL = "http://localhost:9000";
+const menuId = "6103677a11c316178047f1f1";
 
 const PageContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: ${p => p.theme.colors.primary};
+  overflow: hidden;
 `;
 
 const PanelContainer = styled.div`
@@ -56,6 +58,9 @@ const FinalOrderContainer = styled.div`
 const tipOptions = ["10%", "15%", "20%", "Other"];
 const StyledHeader = styled.h2`
   color: ${p => p.theme.colors.text};
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 function OrderScreen() {
@@ -63,54 +68,71 @@ function OrderScreen() {
   const [subtotal, setSubtotal] = useState(0);
   const [tipPercent, setTipPercent] = useState(tipOptions[0]);
   const [showInput, setShowInput] = useState(false);
-  const [menu, setMenu] = useState([]);
   const [sessionName, setSessionName] = useState("LettuceEat");
   const [sessionId, setSessionId] = useState("");
+  const [sessionUser, setSessionUser] = useState(null);
+  const [sessionUsers, setSessionUsers] = useState([]);
 
   const fetchSessionData = async () => {
     return axios.get(
-      `${serverURL + localStorage.getItem("sessionPath")}/order-screen`
+      `${serverURL + "/api/sessions/" + localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
-  // TODO: get menu from server
   const fetchMenu = async () => {
-    return axios.get(serverURL);
+    return axios.get(`${serverURL}/menu/${menuId}`);
   };
 
-  // TODO: send order to server & attach userId
-  const sendOrder = () => { };
-
   // TODO: get group total (including tips) from server
+  // eslint-disable-next-line no-unused-vars
   const getGroupTotals = () => { };
 
   // TODO: history.push to next page with data
+  // eslint-disable-next-line no-unused-vars
   const consolidateOrder = () => { };
+
+  const findOrUpdateOrder = async (order) => {
+    return await axios.put(`${serverURL}/api/sessions/${sessionId}/update_order`, { sessionUser, order})
+  }
 
   const updateQuantity = (name, quantity) => {
     const updatedOrder = order;
-    const idx = order.findIndex(i => i.name === name);
-    updatedOrder[idx].quantity = quantity;
-    setOrder(updatedOrder);
-    setSubtotal(
-      updatedOrder.reduce((total, i) => total + i.price * i.quantity, 0)
-    );
+    const idx = order.findIndex(({item}) => item.name === name);
+    if (updatedOrder[idx].quantity !== quantity) {
+      updatedOrder[idx].quantity = quantity;
+      setOrder(updatedOrder);
+      findOrUpdateOrder(updatedOrder);
+      setSubtotal(
+        updatedOrder.reduce((total, i) => total + i.item.price * i.quantity, 0)
+      );
+    }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    // TODO: Perhaps implement webhook (socket) to listen for additional users
-    const initializeOrder = async () => {
-      const { data: latestMenu } = await fetchMenu();
-      setMenu(latestMenu);
-      return latestMenu.map(item => ({ ...item, quantity: 0 }));
-    };
     const {
-      data: { name, _id }
+      data: { name, _id, users }
     } = await fetchSessionData();
     setSessionId(_id);
     setSessionName(name);
-    setOrder(await initializeOrder());
+    setSessionUsers(users);
+    setSessionUser(JSON.parse(localStorage.getItem("user")))
   }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    const initializeOrder = async () => {
+      const { data } = await findOrUpdateOrder(null);
+      if (data && !data.length) {
+        const { data: { items: latestMenu } } = await fetchMenu();
+        return latestMenu.map(item => ({ item, quantity: 0 }));
+      }
+      return data
+    };
+    if (sessionUser && sessionId) {
+      setOrder(await initializeOrder());
+    }
+  }, [sessionUser, sessionId]);
 
   return (
     <Theme>
@@ -120,7 +142,7 @@ function OrderScreen() {
             title={sessionName}
             setTitle={setSessionName}
             backUrl={"/create-session"}
-            copyUrl={`${window.location.host}${localStorage.getItem("sessionPath")}`}
+            copyUrl={`${window.location.host}/sessions/${localStorage.getItem("sessionId")}`}
             sessionId={sessionId}
           />
           <PanelContainer>
@@ -158,7 +180,7 @@ function OrderScreen() {
                       <Button
                         size={"medium"}
                         type={"primary"}
-                        label={"confirm order"}
+                        label={"Confirm Order"}
                         onClick={() => (window.location.href = "/final-order")}
                       />
                     </SubtotalContainer>
@@ -169,13 +191,17 @@ function OrderScreen() {
                   <Panel>
                     <StyledHeader>Users</StyledHeader>
                     <IconsContainer>
-                      <TextIcon
-                        textLetter={"t"}
+                      {sessionUsers.map((u) => (
+                        <TextIcon
+                        key={u.name+u.date}
+                        textLetter={u.name?.charAt(0).toUpperCase()}
                         size={"default"}
                         color={"#31B4DB"}
                       >
-                        test user
+                        {u.name}
                       </TextIcon>
+                      ))}
+                      
                     </IconsContainer>
                     <FinalOrderContainer>
                       <StyledHeader>Group Total So Far</StyledHeader>
@@ -187,7 +213,7 @@ function OrderScreen() {
                       <Button
                         size={"medium"}
                         type={"primary"}
-                        label={"consolidate"}
+                        label={"Consolidate"}
                         onClick={() => (window.location.href = "/final-order")}
                       />
                     </FinalOrderContainer>

@@ -1,5 +1,8 @@
 # LettuceEat
 
+## Description
+LettuceEat is a platform that enables friends and families to split their food bills quickly and effectively. Similar to popular scheduling platform when2meet, LettuceEat allows users to join sessions and pick out menu items on the platform to add to their user profile. One user will then be able to see all the other user's in their created session's orders and pay for it. The user paying will also be able to easily calculate how much each person owes them after tips. After more development, we hope to allow users to etrans the person paying within the app with the click of a single button.
+
 ## The Project
 	
 For young adults who have social gatherings involving group food orders, our responsive web app will ease the process of gathering, consolidating, and outputting individual food orders to be submitted as a group order. The app will store: anonymous users’ data (amount owing, dishes, custom tip amounts, and display name), food menu (dishes), and session (states, and users). Users can access a particular session and make a food order customized to their liking, based on the menu items available in the session. The session leader then takes all the consolidated order data and sends it to a food ordering service (externally from our app, eg. a waiter or UberEats app) to place the order. Additional functionalities we can implement given enough time include user authentication to create custom profiles, saving favourite/previous orders for future use, use of machine learning to automatically input menu items, and/or integration with payment platforms. 
@@ -14,7 +17,7 @@ For young adults who have social gatherings involving group food orders, our res
 - [x] Custom tip amounts 
 - [ ] Responsive website (cross-browser and cross-device testing) 
 - [x] Web accessible UX features (eg. screen-reader accessible) 
-- [ ] Categories for menu items, toggle for more details
+- [x] Categories for menu items, toggle for more details
 - [x] Dark mode toggle
 ### 2-3 stretch requirements (plan to complete at least 1!)
 - [ ] WebSockets for real time updates
@@ -39,3 +42,22 @@ For young adults who have social gatherings involving group food orders, our res
 ## Resources used:
 - https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
 - https://medium.com/swlh/how-to-create-your-first-mern-mongodb-express-js-react-js-and-node-js-stack-7e8b20463e66
+- https://stackoverflow.com/questions/36504768/deploy-the-backend-and-frontend-on-the-same-heroku-app-dyno
+
+## Tech from Units 1-5:
+Unit 1 - HTML, CSS, JS:
+- Used styled components to create reusable components on a charcuterie page
+- Styled components is a CSS-in-JS styling framework that uses tagged template literals in JavaScript and CSS to write and use actual CSS for styling React components
+- Styled components are preferred because it allows our team to build many custom reusable components while staying scalable
+- Styled components are component-based and scoped so changing one element will not affect another element or behavior in the DOM
+- CSS modules can become difficult to keep clean once the project becomes a larger scale and isn't server side rendering (styled components are server side rendering) which may interfere with global styles
+
+Unit 2 - React and Redux:
+- Used the created styled components and React hooks (useEffect, useState, useHistory) to store states of items (within local scope) such as number of menu items ordered
+- Created small and function-specific functional components for easier testing and maintenance and to make them more resuable across the entire project
+- Functional components are plain JavaScript functions without state or lifecycle-hooks; the less code, the easier to debug
+- Kept stateful data-loading logic separate from rendering stateless logic; better to have one stateful component to load data and another stateless component to display the data
+
+Unit 3 - Mongo DB:
+- Connected project to MongoDB Atlas using Mongo CLI; used MongoDB Atlas rather than a local MongoDB because Atlas has the flexibility and scalability of a document database and we are expecting to store a lot of information for users and menu items (need scalability)
+- Used Mongoose and Axios to read and write to MongoDB Atlas TODO CONTINUE ON WHY MONGOOSE AND AXIOS

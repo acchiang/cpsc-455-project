@@ -18,8 +18,8 @@ function FinalOrder() {
   };
 
   const PageContainer = styled.div`
-    height: 110vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     background: ${p => p.theme.colors.primary};
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@ function FinalOrder() {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = () => {
       const menu = fetchMenu();
-      return menu.map(item => ({ ...item, quantity: 0 }));
+      return menu.map(item => ({ item, quantity: 0 }));
     };
     setOrder(initializeOrder());
   }, []);
@@ -65,7 +65,7 @@ function FinalOrder() {
           </TextIcon>
           <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={order} />
+            <MenuSelector order={order}/>
           </MenuContainer>
           <TotalAmount
             size={"medium"}

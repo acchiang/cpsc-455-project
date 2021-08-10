@@ -19,7 +19,7 @@ const handleIncrease = (value, setValue) => {
 const QuantitySelectorInput = styled.input`
   width: 2ch;
   height: 12px;
-  font-size: 14px;
+  font-size: ${(p) => p.theme.fontSizes.small};
   font-family: ${(p) => p.theme.fonts};
   font-weight: ${(p) => p.theme.fontWeight};
   color: ${(p) => p.theme.colors.text};

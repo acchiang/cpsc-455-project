@@ -16,21 +16,37 @@ function Charcuterie({ children }) {
   const optionsNoInput = ["10%", "15%", "20%"];
 
   const Container = styled.div`
-    background-color: ${(p) => p.theme.colors.primary};
-    color: ${(p) => p.theme.colors.text};
-  `
+    background-color: ${p => p.theme.colors.primary};
+    color: ${p => p.theme.colors.text};
+  `;
 
   const [selectorValue1, setSelectorValue1] = useState(0);
   return (
     <Theme>
       <Container>
-        <Button size={"medium"} type={"primary"} label={"light"}  onClick={() => { window.localStorage.setItem('localTheme', 'defaultTheme'); window.location.reload(); }}/>
-        <Button size={"medium"} type={"primary"} label={"dark"} onClick={() => { window.localStorage.setItem('localTheme', 'darkTheme'); window.location.reload(); }}/>
+        <Button
+          size={"medium"}
+          type={"primary"}
+          label={"light"}
+          onClick={() => {
+            window.localStorage.setItem("localTheme", "defaultTheme");
+            window.location.reload();
+          }}
+        />
+        <Button
+          size={"medium"}
+          type={"primary"}
+          label={"dark"}
+          onClick={() => {
+            window.localStorage.setItem("localTheme", "darkTheme");
+            window.location.reload();
+          }}
+        />
         <Button
           size={"medium"}
           type={"primary"}
           label={"Take me to the front page"}
-          onClick={() => (window.location.href = "/create-session")}
+          onClick={() => (window.location.href = "/welcome")}
         />
         <h2>User Icons</h2>
         <TextIcon textLetter={"a"} size={"small"} color={"#8EDB31"}>
@@ -74,7 +90,11 @@ function Charcuterie({ children }) {
           disabled
         />
         <br />
-        <Input size={"medium"} label={"side by side"} placeholder={"username"} />
+        <Input
+          size={"medium"}
+          label={"side by side"}
+          placeholder={"username"}
+        />
         <h2>Dollar Amount Component</h2>
         <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"} />
         <h2>Total Amount Component</h2>

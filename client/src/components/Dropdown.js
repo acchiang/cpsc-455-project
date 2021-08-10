@@ -14,6 +14,9 @@ const DropdownSelect = styled.select`
   margin: 0.25em;
   padding: 0.25em 0.25em;
   display: inline-block;
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${p => p.theme.fontSizes.small};
+  }
 `;
 
 const DropdownContainer = styled.div`

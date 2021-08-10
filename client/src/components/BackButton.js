@@ -8,6 +8,7 @@ const BackButtonContainer = styled.div`
   cursor: pointer;
   width: 300px;
   height: 50px;
+  padding: 10px;
 `;
 
 const BackButton = ({ url, ...props }) => {
@@ -16,7 +17,7 @@ const BackButton = ({ url, ...props }) => {
     <BackButtonContainer>
       <FaArrowCircleLeft
         color={props.theme.colors.text}
-        size={50}
+        size={35}
         src={backButton}
         alt="navigate to last page"
         onClick={() => history.push(url)}
