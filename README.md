@@ -46,8 +46,18 @@ For young adults who have social gatherings involving group food orders, our res
 
 ## Tech from Units 1-5:
 Unit 1 - HTML, CSS, JS:
-- Used styled components to create reusable components
+- Used styled components to create reusable components on a charcuterie page
 - Styled components is a CSS-in-JS styling framework that uses tagged template literals in JavaScript and CSS to write and use actual CSS for styling React components
 - Styled components are preferred because it allows our team to build many custom reusable components while staying scalable
 - Styled components are component-based and scoped so changing one element will not affect another element or behavior in the DOM
 - CSS modules can become difficult to keep clean once the project becomes a larger scale and isn't server side rendering (styled components are server side rendering) which may interfere with global styles
+
+Unit 2 - React and Redux:
+- Used the created styled components and React hooks (useEffect, useState, useHistory) to store states of items (within local scope) such as number of menu items ordered
+- Created small and function-specific functional components for easier testing and maintenance and to make them more resuable across the entire project
+- Functional components are plain JavaScript functions without state or lifecycle-hooks; the less code, the easier to debug
+- Kept stateful data-loading logic separate from rendering stateless logic; better to have one stateful component to load data and another stateless component to display the data
+
+Unit 3 - Mongo DB:
+- Connected project to MongoDB Atlas using Mongo CLI; used MongoDB Atlas rather than a local MongoDB because Atlas has the flexibility and scalability of a document database and we are expecting to store a lot of information for users and menu items (need scalability)
+- Used Mongoose and Axios to read and write to MongoDB Atlas TODO CONTINUE ON WHY MONGOOSE AND AXIOS
