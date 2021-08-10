@@ -39,6 +39,8 @@ function FinalOrder() {
     color: ${p => p.theme.colors.text};
   `;
 
+  const IconsContainer = styled.div``;
+
   useEffect(() => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
     const initializeOrder = () => {
@@ -52,22 +54,22 @@ function FinalOrder() {
     <Theme>
       <OrderContext.Provider value={[order, setOrder]}>
         <PageContainer>
-          <TopTitleBar title={"nw++ Picnic"} backUrl={"/order-screen"} />
-          <TextIcon textLetter={"A"} size={"default"} color={"#31B4DB"}>
-            Allison
-          </TextIcon>
-          <TextIcon textLetter={"N"} size={"default"} color={"#91F4CA"}>
-            Nick
-          </TextIcon>
-          <TextIcon textLetter={"R"} size={"default"} color={"#49C4AB"}>
-            Rebecca
-          </TextIcon>
-          <TextIcon textLetter={"C"} size={"default"} color={"#61F4DB"}>
-            Christy
-          </TextIcon>
+          <TopTitleBar title={location.state.sessionName} backUrl={"/order-screen"} />
+          <IconsContainer>
+            {location.state.users.map(u => (
+              <TextIcon
+                key={u.name + u.date}
+                textLetter={u.name?.charAt(0).toUpperCase()}
+                size={"default"}
+                color={"#31B4DB"}
+              >
+                {u.name}
+              </TextIcon>
+            ))}
+          </IconsContainer>
           <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={order}/>
+            <MenuSelector order={order} />
           </MenuContainer>
           <TotalAmount
             size={"medium"}

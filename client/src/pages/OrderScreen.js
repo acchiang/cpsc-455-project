@@ -136,6 +136,8 @@ function OrderScreen() {
     history.push({
       pathname: '/final-order',
       state: {
+        sessionName: sessionName,
+        users: sessionUsers,
         menuTotal: sessionMenuTotal,
         tipTotal: sessionTipTotal
       }
