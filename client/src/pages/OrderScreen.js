@@ -138,33 +138,6 @@ function OrderScreen() {
     );
   };
 
-  const updateUserMenuAndTipInDB = async () => {
-    // get the user menu and tip total
-    let userMenuTotalSoFar = await fetchMenuTotalByUser();
-    let userTipTotalSoFar = await fetchTipTotalByUser();
-    // subtract user menu and tip total from session menu and tip total
-    let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
-    let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
-    let subtractedMenuTotal = menuTotalInDBSoFar - userMenuTotalSoFar;
-    let subtractedTipTotal = tipTotalInDBSoFar - userTipTotalSoFar;
-    updateMenuTotalSoFar(subtractedMenuTotal);
-    updateTipTotalSoFar(subtractedTipTotal);
-    // update user menu and tip total to new numbers
-    updateUserMenuTotal(subtotal);
-    let tipTotal = subtotal * 0.01 * tipPercent.replace(/\D/g, "");
-    updateUserTipTotal(tipTotal);
-    // add new user menu and tip totals to session menu and tip totals
-    let updatedMenuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
-    let updatedTipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
-    let addedMenuTotal = updatedMenuTotalInDBSoFar + subtotal;
-    let addedTipTotal = updatedTipTotalInDBSoFar + tipTotal;
-    updateMenuTotalSoFar(addedMenuTotal);
-    updateTipTotalSoFar(addedTipTotal);
-    // update react frontend with new group total numbers
-    setSessionMenuTotal(addedMenuTotal);
-    setSessionTipTotal(addedTipTotal);
-  };
-
   const updateUserMenuTotal = async subtotal => {
     return await axios.put(
       `${serverURL}/api/sessions/${sessionId}/update_user_menu_total`,
@@ -218,6 +191,33 @@ function OrderScreen() {
         updatedOrder.reduce((total, i) => total + i.item.price * i.quantity, 0)
       );
     }
+  };
+
+  const updateUserMenuAndTipInDB = async () => {
+    // get the user menu and tip total
+    let userMenuTotalSoFar = await fetchMenuTotalByUser();
+    let userTipTotalSoFar = await fetchTipTotalByUser();
+    // subtract user menu and tip total from session menu and tip total
+    let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
+    let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
+    let subtractedMenuTotal = menuTotalInDBSoFar - userMenuTotalSoFar;
+    let subtractedTipTotal = tipTotalInDBSoFar - userTipTotalSoFar;
+    updateMenuTotalSoFar(subtractedMenuTotal);
+    updateTipTotalSoFar(subtractedTipTotal);
+    // update user menu and tip total to new numbers
+    updateUserMenuTotal(subtotal);
+    let tipTotal = subtotal * 0.01 * tipPercent.replace(/\D/g, "");
+    updateUserTipTotal(tipTotal);
+    // add new user menu and tip totals to session menu and tip totals
+    let updatedMenuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
+    let updatedTipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
+    let addedMenuTotal = updatedMenuTotalInDBSoFar + subtotal;
+    let addedTipTotal = updatedTipTotalInDBSoFar + tipTotal;
+    updateMenuTotalSoFar(addedMenuTotal);
+    updateTipTotalSoFar(addedTipTotal);
+    // update react frontend with new group total numbers
+    setSessionMenuTotal(addedMenuTotal);
+    setSessionTipTotal(addedTipTotal);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
