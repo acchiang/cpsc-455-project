@@ -80,7 +80,7 @@ function OrderScreen() {
   };
 
   const fetchMenu = async () => {
-    return axios.get(`${serverURL}/menu/${menuId}`);
+    return axios.get(`${serverURL}/api/menus/${menuId}`);
   };
 
   // TODO: send order to server & attach userId
