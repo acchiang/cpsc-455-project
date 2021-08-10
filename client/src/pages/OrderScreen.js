@@ -65,22 +65,6 @@ const StyledHeader = styled.h2`
 `;
 
 function OrderScreen() {
-  const fetchSessionMenuTotalSoFar = async () => {
-    return axios.get(
-      `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-menu-total`
-    );
-  };
-
-  const fetchSessionTipTotalSoFar = async () => {
-    return axios.get(
-      `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-tip-total`
-    );
-  };
-
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [tipPercent, setTipPercent] = useState(tipOptions[0]);
@@ -108,6 +92,38 @@ function OrderScreen() {
     return axios.get(`${serverURL}/menu/${menuId}`);
   };
 
+  const fetchMenuTotalByUser = async () => {
+    return await axios.get(
+      `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
+        sessionUser.name
+      }/get-user-menu-total`
+    );
+  };
+
+  const fetchTipTotalByUser = async () => {
+    return await axios.get(
+      `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
+        sessionUser.name
+      }/get-user-tip-total`
+    );
+  };
+
+  const fetchSessionMenuTotalSoFar = async () => {
+    return axios.get(
+      `${serverURL +
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/get-session-menu-total`
+    );
+  };
+
+  const fetchSessionTipTotalSoFar = async () => {
+    return axios.get(
+      `${serverURL +
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/get-session-tip-total`
+    );
+  };
+
   const updateMenuTotalSoFar = async subtotal => {
     return await axios.put(
       `${serverURL}/api/sessions/${sessionId}/update_menu_total`,
@@ -122,16 +138,43 @@ function OrderScreen() {
     );
   };
 
-  const updateMenuAndTipInDB = async () => {
+  const updateUserMenuAndTipInDB = async () => {
+    // get the user menu and tip total
+    let userMenuTotalSoFar = await fetchMenuTotalByUser();
+    let userTipTotalSoFar = await fetchTipTotalByUser();
+    // subtract user menu and tip total from session menu and tip total
     let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
     let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
-    let newMenuTotal = subtotal + menuTotalInDBSoFar.data.menuTotalSoFar;
+    let subtractedMenuTotal = menuTotalInDBSoFar - userMenuTotalSoFar;
+    let subtractedTipTotal = tipTotalInDBSoFar - userTipTotalSoFar;
+    updateMenuTotalSoFar(subtractedMenuTotal);
+    updateTipTotalSoFar(subtractedTipTotal);
+    // update user menu and tip total to new numbers
+    updateUserMenuTotal(subtotal);
     let tipTotal = subtotal * 0.01 * tipPercent.replace(/\D/g, "");
-    let newTipTotal = tipTotal + tipTotalInDBSoFar.data.tipTotalSoFar;
-    updateMenuTotalSoFar(newMenuTotal);
-    updateTipTotalSoFar(newTipTotal);
-    setSessionTipTotal(newTipTotal);
-    setSessionMenuTotal(newMenuTotal);
+    updateUserTipTotal(tipTotal);
+    // add new user menu and tip totals to session menu and tip totals
+    let updatedMenuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
+    let updatedTipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
+    let addedMenuTotal = updatedMenuTotalInDBSoFar + subtotal;
+    let addedTipTotal = updatedTipTotalInDBSoFar + tipTotal;
+    updateMenuTotalSoFar(addedMenuTotal);
+    updateTipTotalSoFar(addedTipTotal);
+    // update react frontend with new group total numbers
+  };
+
+  const updateUserMenuTotal = async subtotal => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${sessionId}/update_user_menu_total`,
+      { sessionUser, subtotal }
+    );
+  };
+
+  const updateUserTipTotal = async tipTotal => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${sessionId}/update_user_tip_total`,
+      { sessionUser, tipTotal }
+    );
   };
 
 <<<<<<< HEAD
@@ -261,7 +304,7 @@ function OrderScreen() {
                         type={"primary"}
                         label={"Confirm Order"}
                         // onClick={() => (window.location.href = "/final-order")}
-                        onClick={() => updateMenuAndTipInDB()}
+                        onClick={() => updateUserMenuAndTipInDB()}
                       />
                     </SubtotalContainer>
                   </Panel>

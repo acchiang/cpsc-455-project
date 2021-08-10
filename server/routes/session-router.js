@@ -16,9 +16,22 @@ router.get(
   SessionCtrl.getSessionTipTotalSoFar
 );
 router.get("/:sessionId/order-screen", SessionCtrl.getSessionById);
+router.get(
+  "/:sessionId/:session-user-name/get-user-menu-total",
+  SessionCtrl.getMenuTotalByUser
+);
+router.get(
+  "/:sessionId/:session-user-name/get-user-tip-total",
+  SessionCtrl.getTipTotalByUser
+);
 router.put("/:sessionId/", SessionCtrl.updateSessionName);
 router.put("/:sessionId/users", SessionCtrl.findOrCreateUserInSession);
 router.put("/:sessionId/update_order", SessionCtrl.updateUserOrder);
+router.put(
+  "/:sessionId/update_user_menu_total",
+  SessionCtrl.updateUserMenuTotal
+);
+router.put("/:sessionId/update_user_tip_total", SessionCtrl.updateUserTipTotal);
 router.put(
   "/:sessionId/update_menu_total",
   SessionCtrl.updateSessionMenuTotalSoFar

@@ -204,6 +204,48 @@ updateUserOrder = async (req, res) => {
   res.json(session.users[idx].orders);
 };
 
+updateUserMenuTotal = async (req, res) => {
+  const { params: { sessionId } } = req;
+  const { sessionUser, userMenuTotal } = req.body;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUser.name);
+  if (userMenuTotal) {
+    session.users[idx].menuTotal = userMenuTotal;
+    session.save();
+  }
+  res.json(session.users[idx].menuTotal);
+};
+
+updateUserTipTotal = async (req, res) => {
+  const { params: { sessionId } } = req;
+  const { sessionUser, userTipTotal } = req.body;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUser.name);
+  if (userTipTotal) {
+    session.users[idx].tipTotal = userTipTotal;
+    session.save();
+  }
+  res.json(session.users[idx].tipTotal);
+};
+
+getMenuTotalByUser = async (req, res) => {
+  const { params: { sessionId, sessionUserName } } = req;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUserName);
+  session.users[idx].menuTotal
+    ? res.send(session.users[idx].menuTotal)
+    : res.sendStatus(404);
+};
+
+getTipTotalByUser = async (req, res) => {
+  const { params: { sessionId, sessionUserName } } = req;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUserName);
+  session.users[idx].tipTotal
+    ? res.send(session.users[idx].tipTotal)
+    : res.sendStatus(404);
+};
+
 module.exports = {
   getSessions,
   createSession,
@@ -215,5 +257,9 @@ module.exports = {
   updateSessionMenuTotalSoFar,
   updateSessionTipTotalSoFar,
   getSessionMenuTotalSoFar,
-  getSessionTipTotalSoFar
+  getSessionTipTotalSoFar,
+  updateUserMenuTotal,
+  updateUserTipTotal,
+  getMenuTotalByUser,
+  getTipTotalByUser
 };
