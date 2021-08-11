@@ -249,7 +249,6 @@ function OrderScreen() {
                         size={"medium"}
                         type={"primary"}
                         label={"Confirm Order"}
-                        // onClick={() => (window.location.href = "/final-order")}
                         onClick={() => updateMenuAndTipInDB()}
                       />
                     </SubtotalContainer>
