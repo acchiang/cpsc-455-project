@@ -81,6 +81,7 @@ Revisiting our stretch goals:
 - [ ] WebSockets for real time updates
 - [x] Passwords for users when returning to session
 - [ ] Delete sessions after x amount of days (Scheduled db purge)
+
 We have yet to implement WebSockets for real time updates rather than calling multiple apis for updates. We also haven't implemented a scheduled db purge for freeing up space from the sessions collection. In the future, we would like to finish up these stretch goals as well as make the interface of the app more accessible or user friendly by incorporating features such as supporting multiple languages, tooltips, and reading out the menu options. For this app to become even more aligned with what we originally envisioned, we would also like to add a page where users can etrans the person paying for the entire bill with the click of a button. This would require more work on authentication and design of the app so there are no security holes.
 
 ## Contributions
