@@ -43,7 +43,7 @@ const formatter = new Intl.NumberFormat("en-US", {
 
 formatter.format(2500); /* $2,500.00 */
 
-const MenuRow = ({ className, orderItem, updateQuantity, initQuantity }) => {
+const MenuRow = ({ className, orderItem, updateQuantity, initQuantity, disableSelect }) => {
   const [quantity, setQuantity] = useState(initQuantity);
   useEffect(() => {
     updateQuantity(orderItem.name, quantity);
@@ -53,7 +53,7 @@ const MenuRow = ({ className, orderItem, updateQuantity, initQuantity }) => {
       <MenuItemRowData>{orderItem.name}</MenuItemRowData>
       <MenuItemRowData>{formatter.format(orderItem.price)}</MenuItemRowData>
       <MenuItemRowData>
-        <QuantitySelector value={quantity} setValue={setQuantity} />
+        <QuantitySelector value={quantity} setValue={setQuantity} disable={disableSelect} />
       </MenuItemRowData>
     </MenuItemRow>
   );
@@ -66,7 +66,7 @@ const handleHideCategory = (category) => {
   }
 };
 
-const MenuSelector = ({ order, updateQuantity }) => {
+const MenuSelector = ({ order, updateQuantity, disableSelect }) => {
   const orderItems = order ?? [];
   const categorizeItems = (orders) => {
     const categorizedItems = {};
@@ -106,6 +106,7 @@ const MenuSelector = ({ order, updateQuantity }) => {
                       initQuantity={quantity}
                       // HACK
                       updateQuantity={updateQuantity ?? ((a, b) => null)}
+                      disableSelect={disableSelect}
                     />
                   );
                 })}

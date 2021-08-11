@@ -39,12 +39,12 @@ For young adults who have social gatherings involving group food orders, our res
 ![Page1](https://user-images.githubusercontent.com/47487758/119433880-f3d2e600-bccb-11eb-8fde-30dba851e636.png)
 ![Page2](https://user-images.githubusercontent.com/47487758/119433882-f59ca980-bccb-11eb-9dc6-4926c90f228c.png)
 
-## Resources used:
+## Resources used
 - https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669
 - https://medium.com/swlh/how-to-create-your-first-mern-mongodb-express-js-react-js-and-node-js-stack-7e8b20463e66
 - https://stackoverflow.com/questions/36504768/deploy-the-backend-and-frontend-on-the-same-heroku-app-dyno
 
-## Tech from Units 1-5:
+## Tech from Units 1-5
 Unit 1 - HTML, CSS, JS:
 - Used styled components to create reusable components on a charcuterie page
 - Styled components is a CSS-in-JS styling framework that uses tagged template literals in JavaScript and CSS to write and use actual CSS for styling React components
@@ -60,4 +60,36 @@ Unit 2 - React and Redux:
 
 Unit 3 - Mongo DB:
 - Connected project to MongoDB Atlas using Mongo CLI; used MongoDB Atlas rather than a local MongoDB because Atlas has the flexibility and scalability of a document database and we are expecting to store a lot of information for users and menu items (need scalability)
-- Used Mongoose and Axios to read and write to MongoDB Atlas TODO CONTINUE ON WHY MONGOOSE AND AXIOS
+- Used Mongoose and Axios to read and write to MongoDB Atlas
+- Mongoose helps to create model abstractions and has validation to check that our shcema is consistent when performing any actions to our collections
+- Axios has automatic transforms of JSON data while fetch needs to make the actual request then call the .json() method on the response; Axios has a wider browser support than fetch (fetch has backward compatibility) so we can scale our application to more users using different browsers
+- Using Mongoose and Axios made it a lot easier for the team to develop, test, and debug api calls to the database
+
+Unit 4 - Node and Express:
+- Integrated Node and Express into project
+- Node is primarily used for non-blocking, event-driven servers; our app is a traditional web app and uses back-end API services which is what Node is usually used for
+- ExpressJS helped created our server-side more efficiently and effectively since it is simple, minimalist, flexibile, and scalable; provides a thin layer of fundamental web application features from the getgo so minimal setup is required, leading to faster setup of the server
+
+Unit 5 - Release Engineering:
+TODO
+
+## Above and beyond functionality
+TODO
+
+## Next steps
+Revisiting our stretch goals:
+- [ ] WebSockets for real time updates
+- [x] Passwords for users when returning to session
+- [ ] Delete sessions after x amount of days (Scheduled db purge)
+
+We have yet to implement WebSockets for real time updates rather than calling multiple apis for updates. We also haven't implemented a scheduled db purge for freeing up space from the sessions collection. In the future, we would like to finish up these stretch goals as well as make the interface of the app more accessible or user friendly by incorporating features such as supporting multiple languages, tooltips, and reading out the menu options. For this app to become even more aligned with what we originally envisioned, we would also like to add a page where users can etrans the person paying for the entire bill with the click of a button. This would require more work on authentication and design of the app so there are no security holes. Currently, manus are menus are manually added to the db. We would also like to automate this process with vision machine learning so that users can take a picture of the menu they want and upload it so that the vision api can process what items are within the menu picture and upload it to the db.
+
+## Contributions
+Allison:
+
+Christy:
+Christy worked on setting up authentication of users' apis which includes using JWTs (encrypting and decrypting them). She also worked on a portion of user-persistence by writing apis to read and write to sessions collection and updating the client interface with data from MongoDB Atlas. Christy also worked on refactoring code; created models, routes, controllers, db, configs and validation directories and refactored the code to run within those directories.
+
+Rebecca:
+
+Nick:
