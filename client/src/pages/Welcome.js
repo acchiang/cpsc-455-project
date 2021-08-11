@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import Theme from "styles/Theme";
 import styled from "styled-components";
 import Button from "components/Button";
-import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
-import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
 
 const PageContainer = styled.div`
@@ -20,26 +17,7 @@ const PageContainer = styled.div`
   background: ${p => p.theme.colors.primary};
 `;
 
-const InputContainer = styled.div`
-  flex-direction: row;
-`;
-
-const SERVER_URL = "http://localhost:9000";
-
 function Welcome({ ...props }) {
-  //   useEffect(async () => {
-  //     const getSessionName = async () => {
-  //       const {
-  //         data: { name }
-  //       } = await axios.get(
-  //         `${SERVER_URL}${localStorage.getItem("sessionPath")}/get-session-name`
-  //       );
-  //       return name;
-  //     };
-  //     document.getElementById(
-  //       "input-session-name"
-  //     ).value = await getSessionName();
-  //   }, []);
 
   const login = async () => {
     window.location.href = "/login";
