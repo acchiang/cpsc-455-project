@@ -65,7 +65,7 @@ function FinalOrder() {
           </TextIcon>
           <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={order}/>
+            <MenuSelector order={order} disableSelect={true}/>
           </MenuContainer>
           <TotalAmount
             size={"medium"}
