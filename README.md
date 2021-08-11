@@ -88,7 +88,7 @@ We have yet to implement WebSockets for real time updates rather than calling mu
 Allison:
 
 Christy:
-Christy worked on authentication of users which includes using JWTs (encrypting and decrypting them). She also worked on a portion of user-persistence by writing apis to read and write to sessions collection and updating the client interface with data from MongoDB Atlas. Christy also worked on refactoring code; created models, routes, controllers, db, configs and validation directories and refactored the code to run within those directories.
+Christy worked on setting up authentication of users' apis which includes using JWTs (encrypting and decrypting them). She also worked on a portion of user-persistence by writing apis to read and write to sessions collection and updating the client interface with data from MongoDB Atlas. Christy also worked on refactoring code; created models, routes, controllers, db, configs and validation directories and refactored the code to run within those directories.
 
 Rebecca:
 
