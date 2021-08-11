@@ -4,7 +4,7 @@ const ItemSchema = require("./item-model").schema;
 
 const OrderSchema = new Schema(
   {
-    items: { type: [ItemSchema], required: true },
+    item: { type: ItemSchema, required: true },
     quantity: { type: Number, required: true },
   }
 );

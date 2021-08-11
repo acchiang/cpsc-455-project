@@ -60,4 +60,20 @@ Unit 2 - React and Redux:
 
 Unit 3 - Mongo DB:
 - Connected project to MongoDB Atlas using Mongo CLI; used MongoDB Atlas rather than a local MongoDB because Atlas has the flexibility and scalability of a document database and we are expecting to store a lot of information for users and menu items (need scalability)
-- Used Mongoose and Axios to read and write to MongoDB Atlas TODO CONTINUE ON WHY MONGOOSE AND AXIOS
+- Used Mongoose and Axios to read and write to MongoDB Atlas
+- Mongoose helps to create model abstractions and has validation to check that our shcema is consistent when performing any actions to our collections
+- Axios has automatic transforms of JSON data while fetch needs to make the actual request then call the .json() method on the response; Axios has a wider browser support than fetch (fetch has backward compatibility) so we can scale our application to more users using different browsers
+- Using Mongoose and Axios made it a lot easier for the team to develop, test, and debug api calls to the database
+
+Unit 4 - Node and Express:
+- Integrated Node and Express into project
+- Node is primarily used for non-blocking, event-driven servers; our app is a traditional web app and uses back-end API services which is what Node is usually used for
+- ExpressJS helped created our server-side more efficiently and effectively since it is simple, minimalist, flexibile, and scalable; provides a thin layer of fundamental web application features from the getgo so minimal setup is required, leading to faster setup of the server
+
+Unit 5 - Release Engineering:
+
+## Above and beyond functionality:
+
+## Next steps:
+
+## Contributions:

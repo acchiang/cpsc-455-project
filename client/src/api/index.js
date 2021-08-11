@@ -4,20 +4,17 @@ const api = axios.create({
   baseURL: "http://localhost:9000/api"
 });
 
-export const registerUser = payload => api.post(`/users/register`, payload);
+export const registerUser = (sessionId, user) => api.put(`sessions/${sessionId}/users`, user);
 export const loginUser = payload => api.post(`/users/login`, payload);
-export const createSession = payload => api.post(`/session`, payload);
+export const createSession = payload => api.post(`/sessions`, payload);
 export const getUserByEmail = email => api.get(`/users/user/${email}`);
-export const updateSessionUsersById = (id, payload) =>
-  api.put(`/session/${id}/update-users`, payload);
-export const getAllSessions = () => api.get(`/session`);
+export const getAllSessions = () => api.get(`/sessions`);
 
 const apis = {
   registerUser,
   loginUser,
   createSession,
   getUserByEmail,
-  updateSessionUsersById,
   getAllSessions
 };
 

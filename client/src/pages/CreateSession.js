@@ -5,9 +5,9 @@ import styled from "styled-components";
 import Button from "components/Button";
 import Input, {Label} from "components/Input";
 import { Title, H2, Logo } from "styles/styleUtils";
-import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
 import Dropdown from "components/Dropdown";
+import apis from "api";
 
 const serverURL = "http://localhost:9000";
 
@@ -20,8 +20,8 @@ const PageContainer = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: ${p => p.theme.colors.primary};
-  ${p => p.theme.mediaQueries.mobile} {
+  background: ${(p) => p.theme.colors.primary};
+  ${(p) => p.theme.mediaQueries.mobile} {
     padding-top: 50px;
   }
 `;
@@ -31,16 +31,56 @@ const InputContainer = styled.div`
 `;
 
 function CreateSession({ ...props }) {
-  const history = useHistory();
+  const register = async () => {
+    const isValid = validateInput();
+    if (isValid) {
+      const sessionId = await generateSession();
+      const user = await generateUser(sessionId);
 
-  // TODO: Ask server for a session and navigate to custom session ??? unscoped
+      localStorage.setItem("sessionId", sessionId);
+      localStorage.setItem("user", user);
+    }
+  };
+
+  const validateInput = () => {
+    const name = document.getElementById("input-user-name").value;
+    const password = document.getElementById("input-user-password").value;
+    const sessionName = document.getElementById("input-session-name").value;
+    if (password && (password.length < 6 || password.length > 30)) {
+      window.alert("Password must be at between 6 to 30 characters.");
+      return false;
+    }
+    if (!name || !sessionName) {
+      window.alert("Please fill in the required fields.")
+      return false;
+    }
+    return true;
+  };
+
+  const generateUser = async (sessionId) => {
+    const user = {
+      name: document.getElementById("input-user-name").value,
+      password: document.getElementById("input-user-password").value,
+    };
+
+    try {
+      const res = await apis.registerUser(sessionId, user);
+      if (res) window.location.href = "/order-screen";
+      return JSON.stringify(res.data);
+    } catch (e) {
+      const { response: { data : message } } = e
+      window.alert(JSON.stringify(message));
+    }
+  };
+
   const generateSession = async () => {
-    const { data: sessionId } = await axios.post('/session', {
+    const payload = {
       sessionName: document.getElementById("input-session-name").value,
       menuId: document.getElementById("menu-dropdown").value
-      // sessionOwner: document.getElementById("input-session-owner).value
-    });
-    history.push(`session/${sessionId}/registered`);
+    };
+
+    const { data: sessionId } = await apis.createSession(payload);
+    return sessionId;
   };
 
   const [menuOptions, setMenuOptions] = useState([])
@@ -70,26 +110,27 @@ function CreateSession({ ...props }) {
         <br />
         <InputContainer>
           <Input
-            id={"input-session-owner"}
-            size={"medium"}
-            label={"Your Name*"}
-            placeholder={"John Doe"}
-          />
-        </InputContainer>
-        <InputContainer>
-          <Input
             id={"input-session-name"}
             size={"medium"}
             label={"Event Name*"}
-            placeholder={"Dine Out"}
+            placeholder={"Dine Out (required)"}
           />
         </InputContainer>
         <InputContainer>
           <Input
-            id={"input-session-password"}
+            id={"input-user-name"}
+            size={"medium"}
+            label={"Your Name*"}
+            placeholder={"John Doe (required)"}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Input
+            id={"input-user-password"}
             size={"medium"}
             label={"Password"}
             placeholder={"optional"}
+            type={"password"}
           />
         </InputContainer>
         <InputContainer>
@@ -105,8 +146,8 @@ function CreateSession({ ...props }) {
         <Button
           size={"medium"}
           type={"primary"}
-          label={"Create Session"}
-          onClick={generateSession}
+          label={"Create"}
+          onClick={register}
         />
       </PageContainer>
     </Theme>

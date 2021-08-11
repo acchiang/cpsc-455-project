@@ -1,10 +1,8 @@
-import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
 import Button from "components/Button";
 import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
-import { useHistory } from "react-router-dom";
 import lettuce from "assets/lettuce.png";
 
 const PageContainer = styled.div`

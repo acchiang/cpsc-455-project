@@ -55,6 +55,7 @@ const FinalOrderContainer = styled.div`
   text-align: center;
 `;
 
+const tipOptions = ["10%", "15%", "20%", "Other"];
 const StyledHeader = styled.h2`
   color: ${p => p.theme.colors.text};
   ${p => p.theme.mediaQueries.mobile} {
@@ -62,30 +63,26 @@ const StyledHeader = styled.h2`
   }
 `;
 
-const optionsNoInput = ["10%", "15%", "20%"];
-
 function OrderScreen() {
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
-  // eslint-disable-next-line no-unused-vars
-  const [menu, setMenu] = useState([]);
-  const [tipPercent, setTipPercent] = useState(optionsNoInput[0]);
+  const [tipPercent, setTipPercent] = useState(tipOptions[0]);
+  const [showInput, setShowInput] = useState(false);
   const [sessionName, setSessionName] = useState("LettuceEat");
   const [sessionId, setSessionId] = useState("");
+  const [sessionUser, setSessionUser] = useState(null);
+  const [sessionUsers, setSessionUsers] = useState([]);
+  const [selectedMenuId, setSelectedMenuId] = useState(null);
 
   const fetchSessionData = async () => {
     return axios.get(
-      `${serverURL + localStorage.getItem("sessionPath")}/order-screen`
+      `${serverURL + "/api/sessions/" + localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
   const fetchMenu = async (menuId) => {
     return axios.get(`${serverURL}/api/menus/${menuId}`);
   };
-
-  // TODO: send order to server & attach userId
-  // eslint-disable-next-line no-unused-vars
-  const sendOrder = () => { };
 
   // TODO: get group total (including tips) from server
   // eslint-disable-next-line no-unused-vars
@@ -95,35 +92,49 @@ function OrderScreen() {
   // eslint-disable-next-line no-unused-vars
   const consolidateOrder = () => { };
 
+  const findOrUpdateOrder = async (order) => {
+    return await axios.put(`${serverURL}/api/sessions/${sessionId}/update_order`, { sessionUser, order})
+  }
+
   const updateQuantity = (name, quantity) => {
     const updatedOrder = order;
-    const idx = order.findIndex(i => i.name === name);
-    updatedOrder[idx].quantity = quantity;
-    setOrder(updatedOrder);
-    setSubtotal(
-      updatedOrder.reduce((total, i) => total + i.price * i.quantity, 0)
-    );
+    const idx = order.findIndex(({item}) => item.name === name);
+    if (updatedOrder[idx].quantity !== quantity) {
+      updatedOrder[idx].quantity = quantity;
+      setOrder(updatedOrder);
+      findOrUpdateOrder(updatedOrder);
+      setSubtotal(
+        updatedOrder.reduce((total, i) => total + i.item.price * i.quantity, 0)
+      );
+    }
   };
-
-  useEffect(() => {
-    axios.put('/session/update_order', order)
-  }, [order])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    // TODO: Perhaps implement webhook (socket) to listen for additional users
-    const initializeOrder = async (menuId) => {
-      const { data: { items: latestMenu } } = await fetchMenu(menuId || DEFAULT_MENU_ID);
-      setMenu(latestMenu);
-      return latestMenu.map(item => ({ ...item, quantity: 0 }));
-    };
     const {
-      data: { name, _id, menuId }
+      data: { name, _id, users, menuId }
     } = await fetchSessionData();
     setSessionId(_id);
     setSessionName(name);
-    setOrder(await initializeOrder(menuId));
+    setSessionUsers(users);
+    setSelectedMenuId(menuId);
+    setSessionUser(JSON.parse(localStorage.getItem("user")))
   }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    const initializeOrder = async () => {
+      const { data } = await findOrUpdateOrder(null);
+      if (data && !data.length) {
+        const { data: { items: latestMenu } } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
+        return latestMenu.map(item => ({ item, quantity: 0 }));
+      }
+      return data
+    };
+    if (sessionUser && sessionId) {
+      setOrder(await initializeOrder());
+    }
+  }, [sessionUser, sessionId]);
 
   return (
     <Theme>
@@ -133,7 +144,7 @@ function OrderScreen() {
             title={sessionName}
             setTitle={setSessionName}
             backUrl={"/create-session"}
-            copyUrl={`${window.location.host}${localStorage.getItem("sessionPath")}`}
+            copyUrl={`${window.location.host}/sessions/${localStorage.getItem("sessionId")}`}
             sessionId={sessionId}
           />
           <PanelContainer>
@@ -155,7 +166,9 @@ function OrderScreen() {
                       <TipAmount
                         size={"medium"}
                         label={"Tip"}
-                        options={optionsNoInput}
+                        options={tipOptions}
+                        showInput={showInput}
+                        setShowInput={setShowInput}
                         feedValueToParent={setTipPercent}
                       />
                       <DollarAmount
@@ -180,13 +193,17 @@ function OrderScreen() {
                   <Panel>
                     <StyledHeader>Users</StyledHeader>
                     <IconsContainer>
-                      <TextIcon
-                        textLetter={"t"}
+                      {sessionUsers.map((u) => (
+                        <TextIcon
+                        key={u.name+u.date}
+                        textLetter={u.name?.charAt(0).toUpperCase()}
                         size={"default"}
                         color={"#31B4DB"}
                       >
-                        test user
+                        {u.name}
                       </TextIcon>
+                      ))}
+                      
                     </IconsContainer>
                     <FinalOrderContainer>
                       <StyledHeader>Group Total So Far</StyledHeader>
