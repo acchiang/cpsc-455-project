@@ -75,10 +75,7 @@ function OrderScreen() {
   const [sessionUsers, setSessionUsers] = useState([]);
   const [sessionMenuTotal, setSessionMenuTotal] = useState(0);
   const [sessionTipTotal, setSessionTipTotal] = useState(0);
-<<<<<<< HEAD
   const history = useHistory();
-=======
->>>>>>> aggregated group menu and tip total on right side
 
   const fetchSessionData = async () => {
     return axios.get(
@@ -152,7 +149,6 @@ function OrderScreen() {
     );
   };
 
-<<<<<<< HEAD
   // eslint-disable-next-line no-unused-vars
   const consolidateOrder = async () => {
     history.push({
@@ -167,11 +163,6 @@ function OrderScreen() {
       }
     });
   };
-=======
-  // TODO: history.push to next page with data
-  // eslint-disable-next-line no-unused-vars
-  const consolidateOrder = () => {};
->>>>>>> aggregated group menu and tip total on right side
 
   const findOrUpdateOrder = async order => {
     return await axios.put(
@@ -329,7 +320,6 @@ function OrderScreen() {
                         size={"medium"}
                         type={"primary"}
                         label={"Confirm Order"}
-                        // onClick={() => (window.location.href = "/final-order")}
                         onClick={() => updateUserMenuAndTipInDB()}
                       />
                     </SubtotalContainer>
