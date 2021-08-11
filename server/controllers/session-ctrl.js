@@ -232,7 +232,10 @@ getMenuTotalByUser = async (req, res) => {
   const { params: { sessionId, sessionUserName } } = req;
   const session = await Session.findById(sessionId);
   const idx = session.users.findIndex(u => u.name === sessionUserName);
-  session.users[idx].menuTotal
+  console.log(session.users, "session.users");
+  console.log(session.users[idx], "user itself");
+  console.log(session.users[idx].menuTotal, "menuTotal");
+  session.users[idx].menuTotal >= 0
     ? res.send(session.users[idx].menuTotal)
     : res.sendStatus(404);
 };
@@ -241,7 +244,7 @@ getTipTotalByUser = async (req, res) => {
   const { params: { sessionId, sessionUserName } } = req;
   const session = await Session.findById(sessionId);
   const idx = session.users.findIndex(u => u.name === sessionUserName);
-  session.users[idx].tipTotal
+  session.users[idx].tipTotal >= 0
     ? res.send(session.users[idx].tipTotal)
     : res.sendStatus(404);
 };

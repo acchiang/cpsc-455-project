@@ -17,11 +17,11 @@ router.get(
 );
 router.get("/:sessionId/order-screen", SessionCtrl.getSessionById);
 router.get(
-  "/:sessionId/:session-user-name/get-user-menu-total",
+  "/:sessionId/:sessionUserName/get-user-menu-total",
   SessionCtrl.getMenuTotalByUser
 );
 router.get(
-  "/:sessionId/:session-user-name/get-user-tip-total",
+  "/:sessionId/:sessionUserName/get-user-tip-total",
   SessionCtrl.getTipTotalByUser
 );
 router.put("/:sessionId/", SessionCtrl.updateSessionName);

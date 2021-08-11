@@ -93,7 +93,7 @@ function OrderScreen() {
   };
 
   const fetchMenuTotalByUser = async () => {
-    return await axios.get(
+    return axios.get(
       `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
         sessionUser.name
       }/get-user-menu-total`
@@ -101,7 +101,7 @@ function OrderScreen() {
   };
 
   const fetchTipTotalByUser = async () => {
-    return await axios.get(
+    return axios.get(
       `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
         sessionUser.name
       }/get-user-tip-total`
@@ -196,6 +196,7 @@ function OrderScreen() {
   const updateUserMenuAndTipInDB = async () => {
     // get the user menu and tip total
     let userMenuTotalSoFar = await fetchMenuTotalByUser();
+    console.log(userMenuTotalSoFar);
     let userTipTotalSoFar = await fetchTipTotalByUser();
     // subtract user menu and tip total from session menu and tip total
     let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
