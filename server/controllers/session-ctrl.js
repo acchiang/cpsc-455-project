@@ -140,8 +140,8 @@ findOrCreateUserInSession = async (req, res) => {
   }
 
   const session = await Session.findById(req.params.sessionId);
-  
-  const existingUser = session.users.find((user) => user.name === req.body.name)
+
+  const existingUser = session.users.find(user => user.name === req.body.name);
   const requestedUser = {
     name: req.body.name,
     password: req.body.password
