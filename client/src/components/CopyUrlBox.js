@@ -16,8 +16,16 @@ const BoxContainer = styled.div`
 `;
 
 function copyURL(url) {
-  navigator.clipboard.writeText(url);
-  window.alert("Link copied to clipboard");
+  navigator.clipboard.writeText(url).then(
+    function() {
+      /* clipboard successfully set */
+      window.alert("Link copied to clipboard");
+    },
+    function() {
+      /* clipboard write failed */
+      window.alert("Link did not copy to clipboard");
+    }
+  );
 }
 
 const CopyUrlBox = ({ url }) => {
