@@ -209,7 +209,7 @@ updateUserMenuTotal = async (req, res) => {
   const { sessionUser, userMenuTotal } = req.body;
   const session = await Session.findById(sessionId);
   const idx = session.users.findIndex(u => u.name === sessionUser.name);
-  if (userMenuTotal) {
+  if (userMenuTotal >= 0) {
     session.users[idx].menuTotal = userMenuTotal;
     session.save();
   }
@@ -221,7 +221,7 @@ updateUserTipTotal = async (req, res) => {
   const { sessionUser, userTipTotal } = req.body;
   const session = await Session.findById(sessionId);
   const idx = session.users.findIndex(u => u.name === sessionUser.name);
-  if (userTipTotal) {
+  if (userTipTotal >= 0) {
     session.users[idx].tipTotal = userTipTotal;
     session.save();
   }
@@ -232,11 +232,8 @@ getMenuTotalByUser = async (req, res) => {
   const { params: { sessionId, sessionUserName } } = req;
   const session = await Session.findById(sessionId);
   const idx = session.users.findIndex(u => u.name === sessionUserName);
-  console.log(session.users, "session.users");
-  console.log(session.users[idx], "user itself");
-  console.log(session.users[idx].menuTotal, "menuTotal");
-  session.users[idx].menuTotal >= 0
-    ? res.send(session.users[idx].menuTotal)
+  return session.users[idx].menuTotal >= 0
+    ? res.send(`${session.users[idx].menuTotal}`)
     : res.sendStatus(404);
 };
 
@@ -244,8 +241,8 @@ getTipTotalByUser = async (req, res) => {
   const { params: { sessionId, sessionUserName } } = req;
   const session = await Session.findById(sessionId);
   const idx = session.users.findIndex(u => u.name === sessionUserName);
-  session.users[idx].tipTotal >= 0
-    ? res.send(session.users[idx].tipTotal)
+  return session.users[idx].tipTotal >= 0
+    ? res.send(`${session.users[idx].tipTotal}`)
     : res.sendStatus(404);
 };
 

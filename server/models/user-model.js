@@ -7,8 +7,8 @@ const User = new Schema(
     name: { type: String, required: true },
     password: { type: String, required: true },
     date: { type: Date, default: Date.now },
-    menuTotal: { type: Number, default: 0, required: false },
-    tipTotal: { type: Number, default: 0, required: false },
+    menuTotal: { type: Number, default: 0, required: true },
+    tipTotal: { type: Number, default: 0, required: true },
     orders: { type: [OrderSchema], required: false }
   },
   { timestamps: true }
