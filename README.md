@@ -93,3 +93,4 @@ Christy worked on setting up authentication of users' apis which includes using 
 Rebecca:
 
 Nick:
+Nick worked on the ability to create, or join sessions/lobbies. he also worked on setting up new users inside each session/lobby, and the ability for users to log back into their account with persisting data. In addition, he also worked on update logic for user orders and persistence of various other data. As part of software development, he also helped with refactoring code, debugging code, and modifying models where needed.
