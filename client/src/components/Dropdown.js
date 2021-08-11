@@ -27,6 +27,7 @@ const DropdownContainer = styled.div`
 `;
 
 const Dropdown = ({
+  id,
   options,
   defaultOption,
   size,
@@ -50,6 +51,7 @@ const Dropdown = ({
   return (
     <DropdownContainer>
       <DropdownSelect
+        id={id}
         size={size}
         value={selected}
         width={width}

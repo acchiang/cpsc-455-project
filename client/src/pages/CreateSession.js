@@ -36,7 +36,8 @@ function CreateSession({ ...props }) {
   // TODO: Ask server for a session and navigate to custom session ??? unscoped
   const generateSession = async () => {
     const { data: sessionId } = await axios.post('/session', {
-      sessionName: document.getElementById("input-session-name").value
+      sessionName: document.getElementById("input-session-name").value,
+      menuId: document.getElementById("menu-dropdown").value
       // sessionOwner: document.getElementById("input-session-owner).value
     });
     history.push(`session/${sessionId}/registered`);
@@ -94,6 +95,7 @@ function CreateSession({ ...props }) {
         <InputContainer>
         {<Label size="medium">Menu:</Label>}
           <Dropdown
+            id={"menu-dropdown"}
             options={menuOptions}
             defaultOption={"15%"}
             width={"238px"}

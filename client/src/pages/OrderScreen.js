@@ -12,7 +12,7 @@ import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
 
 const serverURL = "http://localhost:9000";
-const menuId = "6103677a11c316178047f1f1";
+const DEFAULT_MENU_ID = "6103677a11c316178047f1f1";
 
 const PageContainer = styled.div`
   height: 100%;
@@ -79,7 +79,7 @@ function OrderScreen() {
     );
   };
 
-  const fetchMenu = async () => {
+  const fetchMenu = async (menuId) => {
     return axios.get(`${serverURL}/api/menus/${menuId}`);
   };
 
@@ -112,17 +112,17 @@ function OrderScreen() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
-    const initializeOrder = async () => {
-      const { data: { items: latestMenu } } = await fetchMenu();
+    const initializeOrder = async (menuId) => {
+      const { data: { items: latestMenu } } = await fetchMenu(menuId || DEFAULT_MENU_ID);
       setMenu(latestMenu);
       return latestMenu.map(item => ({ ...item, quantity: 0 }));
     };
     const {
-      data: { name, _id }
+      data: { name, _id, menuId }
     } = await fetchSessionData();
     setSessionId(_id);
     setSessionName(name);
-    setOrder(await initializeOrder());
+    setOrder(await initializeOrder(menuId));
   }, []);
 
   return (
