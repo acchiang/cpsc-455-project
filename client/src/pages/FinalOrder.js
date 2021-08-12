@@ -10,10 +10,12 @@ import TotalAmount from "components/TotalAmount";
 import Button from "components/Button";
 import TopTitleBar from "components/TopTitleBar";
 import TextIcon from "components/TextIcon";
+import { useTranslation } from "react-i18next";
 
 const serverURL = "http://localhost:9000";
 
 function FinalOrder() {
+  const { t } = useTranslation();
   const [finalOrders, setOrders] = useState(null);
   const location = useLocation();
 
@@ -52,6 +54,7 @@ function FinalOrder() {
       orders.map(item => ({ item, quantity: 0 }));
       location.state.users.map(async (user) => {
         const { data } = await getUserOrder(user);
+        // eslint-disable-next-line array-callback-return
         data.map(userOrder => {
           if (userOrder.quantity !== 0) {
             const idx = orders.findIndex(({ item }) => item.name === userOrder.item.name)
@@ -81,7 +84,7 @@ function FinalOrder() {
               </TextIcon>
             ))}
           </IconsContainer>
-          <StyledHeader>Final Order Summary</StyledHeader>
+          <StyledHeader>{t("final-order-summary")}</StyledHeader>
           <MenuContainer>
             <MenuSelector order={finalOrders} disableSelect={true}/>
           </MenuContainer>
@@ -93,7 +96,7 @@ function FinalOrder() {
           <Button
             size={"medium"}
             type={"primary"}
-            label={"Edit Order"}
+            label={t("edit-order")}
             onClick={() => (window.location.href = "/order-screen")}
           />
         </PageContainer>

@@ -69,7 +69,9 @@ i18n
                     "consolidate":"Consolidate",
                     "refresh":"Refresh",
                     "required-alert":"Please fill in the required fields.",
-                    "password-alert":"Password must be at between 6 to 30 characters."
+                    "password-alert":"Password must be at between 6 to 30 characters.",
+                    "final-order-summary":"Final Order Summary",
+                    "edit-order":"Edit order",
 
                 }
             },
@@ -119,7 +121,9 @@ i18n
                     "consolidate":"Consolider",
                     "refresh":"Rafraîchir",
                     "required-alert":"S'il vous plaît remplir les champs obligatoires.",
-                    "password-alert":"Le mot de passe doit comporter entre 6 et 30 caractères."
+                    "password-alert":"Le mot de passe doit comporter entre 6 et 30 caractères.",
+                    "final-order-summary":"Final Order Summary",
+                    "edit-order":"Edit order",
 
                 }
             }
