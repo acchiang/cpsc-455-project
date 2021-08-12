@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import DollarAmount from "./DollarAmount";
+import { useTranslation } from "react-i18next";
 
 const TotalAmountStyle = styled.div`
   color: ${p => p.theme.colors.text};
@@ -17,26 +18,30 @@ const TotalAmountStyle = styled.div`
   }
 `;
 
-const TotalAmount = ({ size, menuAmount, tipAmount }) => (
+const TotalAmount = ({ size, menuAmount, tipAmount }) => {
+  
+  const { t } = useTranslation();
+
+  return (
   <>
     <TotalAmountStyle>
       <DollarAmount
         size={size}
-        label={"Menu Total"}
+        label={t("menu-total")}
         amount={menuAmount}
       ></DollarAmount>
       <DollarAmount
         size={size}
-        label={"Tip Total"}
+        label={t("tip-total")}
         amount={tipAmount}
       ></DollarAmount>
       <DollarAmount
         size={size}
-        label={"Final Total"}
+        label={t("final-total")}
         amount={(Number(tipAmount) + Number(menuAmount)).toFixed(2)}
       ></DollarAmount>
     </TotalAmountStyle>
   </>
-);
+)};
 
 export default TotalAmount;
