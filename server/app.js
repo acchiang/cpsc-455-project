@@ -8,7 +8,6 @@ const passport = require("passport");
 
 const menuRouter = require("./routes/menu-router");
 const sessionRouter = require("./routes/session-router");
-const userRouter = require("./routes/user-router");
 const db = require("./db/app.js");
 const app = express();
 const apiPort = 9000;
@@ -32,7 +31,6 @@ require("./config/passport")(passport);
 // Routes
 app.use("/menu", menuRouter);
 app.use("/api/sessions", sessionRouter);
-app.use("/user", userRouter);
 
 // Code snippet from https://stackoverflow.com/questions/36504768/deploy-the-backend-and-frontend-on-the-same-heroku-app-dyno
 // Serve static files from the React frontend app
