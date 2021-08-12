@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Input from "./Input.js";
 
@@ -39,10 +39,9 @@ const Dropdown = ({
   showInput,
   setShowInput,
   customValue,
-  feedValueToParent,
-  ...props
+  feedValueToParent
 }) => {
-  const [selected, setSelected] = useState(defaultOption);
+  const [selected, setSelected] = useState();
 
   const handleSelect = (event, customValue) => {
     let selectedValue = event.target.value;
@@ -57,6 +56,10 @@ const Dropdown = ({
     let input = event.target.value;
     feedValueToParent && feedValueToParent(input);
   };
+
+  useEffect(() => {
+    setSelected(defaultOption)
+  }, [defaultOption])
 
   return (
     <DropdownContainer>

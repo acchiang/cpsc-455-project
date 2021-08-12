@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -46,7 +47,6 @@ function FinalOrder() {
   };
 
   useEffect(async () => {
-    // TODO: Perhaps implement webhook (socket) to listen for additional users
     const consolidateOrders = async () => {
       let orders = location.state.menu;
       orders.map(item => ({ item, quantity: 0 }));
