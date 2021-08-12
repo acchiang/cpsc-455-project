@@ -4,6 +4,13 @@ import { I18N_LANGUAGE } from "../i18n";
 import { Toggle } from "react-toggle-component";
 import { useState } from "react";
 
+const inputSize = {
+  small: 12,
+  medium: 24,
+  large: 36,
+  default: 24
+};
+
 const Label = styled.label`
   display: grid;
   grid-auto-flow: column;
@@ -16,6 +23,10 @@ const Label = styled.label`
   font-family: ${p => p.theme.fonts};
   font-weight: ${p => p.theme.fontWeight};
   color: ${p => p.fontColor ?? p.theme.colors.text};
+  ${p => p.theme.mediaQueries.mobile} {
+    font-size: ${inputSize["small"] * 1.5}px;
+    text-align: right;
+  }
 `;
 
 const Padding = styled.div`
