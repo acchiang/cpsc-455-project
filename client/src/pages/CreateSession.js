@@ -9,6 +9,7 @@ import { Title, H2, Logo } from "styles/styleUtils";
 import lettuce from "assets/lettuce.png";
 import Dropdown from "components/Dropdown";
 import apis from "api";
+import { useTranslation } from "react-i18next";
 
 const serverURL = "http://localhost:9000";
 
@@ -32,6 +33,8 @@ const InputContainer = styled.div`
 `;
 
 function CreateSession({ ...props }) {
+
+  const { t } = useTranslation();
   const register = async () => {
     const isValid = validateInput();
     if (isValid) {
@@ -107,37 +110,37 @@ function CreateSession({ ...props }) {
     <Theme>
       <PageContainer>
         <Logo id="logo" alt="LettuceEat logo" width="200" src={lettuce}></Logo>
-        <Title>LettuceEat</Title>
-        <H2>Easy ordering and bill splitting</H2>
+        <Title>{t("title")}</Title>
+        <H2>{t("tagline")}</H2>
         <br />
         <br />
         <InputContainer>
           <Input
             id={"input-session-name"}
             size={"medium"}
-            label={"Event Name*"}
-            placeholder={"Dine Out (required)"}
+            label={t("event-name")}
+            placeholder={t("event-name-placeholder")}
           />
         </InputContainer>
         <InputContainer>
           <Input
             id={"input-user-name"}
             size={"medium"}
-            label={"Your Name*"}
-            placeholder={"John Doe (required)"}
+            label={t("users-name")}
+            placeholder={t("users-name-placeholder")}
           />
         </InputContainer>
         <InputContainer>
           <Input
             id={"input-user-password"}
             size={"medium"}
-            label={"Password"}
-            placeholder={"optional"}
+            label={t("password")}
+            placeholder={t("optional")}
             type={"password"}
           />
         </InputContainer>
         <InputContainer>
-        {<Label size="medium">Menu:</Label>}
+        {<Label size="medium">{t("Menu")+":"}</Label>}
           <Dropdown
             id={"menu-dropdown"}
             options={menuOptions}
@@ -149,7 +152,7 @@ function CreateSession({ ...props }) {
         <Button
           size={"medium"}
           type={"primary"}
-          label={"Create"}
+          label={t("create")}
           onClick={register}
         />
       </PageContainer>
