@@ -27,7 +27,7 @@ function Register({ ...props }) {
     const sessionId = localStorage.getItem("sessionId");
     const user = {
       name: document.getElementById("input-user-name").value,
-      password: document.getElementById("input-session-password").value,
+      password: document.getElementById("input-user-password").value,
     };
 
     try {
@@ -41,12 +41,11 @@ function Register({ ...props }) {
   const validateInput = () => {
     const name = document.getElementById("input-user-name").value;
     const password = document.getElementById("input-user-password").value;
-    const sessionName = document.getElementById("input-session-name").value;
     if (password && (password.length < 6 || password.length > 30)) {
       window.alert("Password must be at between 6 to 30 characters.");
       return false;
     }
-    if (!name || !sessionName) {
+    if (!name) {
       window.alert("Please fill in the required fields.")
       return false;
     }

@@ -4,7 +4,8 @@ const ItemSchema = require("./item-model").schema;
 
 const Menu = new Schema(
   {
-    items: { type: [ItemSchema], required: true }
+    items: { type: [ItemSchema], required: true },
+    name: { type: String, required: true },
   },
   { timestamps: true }
 );

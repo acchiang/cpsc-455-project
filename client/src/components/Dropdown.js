@@ -17,6 +17,9 @@ const DropdownSelect = styled.select`
   ${p => p.theme.mediaQueries.mobile} {
     font-size: ${p => p.theme.fontSizes.small};
   }
+  ${p => p.width && `
+    max-width: ${p.width};
+  `}
 `;
 
 const DropdownContainer = styled.div`
@@ -28,9 +31,11 @@ const ShortInputBox = styled(Input)`
 `;
 
 const Dropdown = ({
+  id,
   options,
   defaultOption,
   size,
+  width,
   showInput,
   setShowInput,
   customValue,
@@ -56,14 +61,16 @@ const Dropdown = ({
   return (
     <DropdownContainer>
       <DropdownSelect
+        id={id}
         size={size}
         value={selected}
+        width={width}
         onChange={(e) => handleSelect(e, customValue)}
       >
         {options.map((option, key) => {
           return (
-            <option value={option} key={key}>
-              {option}
+            <option value={option.id || option} key={key}>
+              {option.value || option}
             </option>
           );
         })}

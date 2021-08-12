@@ -36,7 +36,7 @@ const InputBox = styled.input`
   }
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   color: ${(p) => p.theme.colors.text};
   display: inline-block;
   font-size: ${(p) => inputSize[`${p.size}`] ?? inputSize["default"]}px;

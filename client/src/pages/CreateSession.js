@@ -1,10 +1,15 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Theme from "styles/Theme";
 import styled from "styled-components";
 import Button from "components/Button";
-import Input from "components/Input";
+import Input, {Label} from "components/Input";
 import { Title, H2, Logo } from "styles/styleUtils";
 import lettuce from "assets/lettuce.png";
+import Dropdown from "components/Dropdown";
 import apis from "api";
+
+const serverURL = "http://localhost:9000";
 
 const PageContainer = styled.div`
   display: flex;
@@ -72,18 +77,35 @@ function CreateSession({ ...props }) {
 
   const generateSession = async () => {
     const payload = {
-      sessionName: document.getElementById("input-session-name").value
+      sessionName: document.getElementById("input-session-name").value,
+      menuId: document.getElementById("menu-dropdown").value
     };
 
     const { data: sessionId } = await apis.createSession(payload);
     return sessionId;
   };
 
+  const [menuOptions, setMenuOptions] = useState([])
+
+  const fetchMenus = async () => {
+    return axios.get(
+      `${serverURL}/api/menus/`
+    );
+  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+      const { data } = await fetchMenus();
+      const incomingMenuOptions = data.map(
+        (menu) => {
+          return {value: menu.name, id: menu._id};
+        })
+      setMenuOptions(incomingMenuOptions);
+  }, []);  
+
   return (
     <Theme>
       <PageContainer>
         <Logo id="logo" alt="LettuceEat logo" width="200" src={lettuce}></Logo>
-        <img />
         <Title>LettuceEat</Title>
         <H2>Easy ordering and bill splitting</H2>
         <br />
@@ -111,6 +133,15 @@ function CreateSession({ ...props }) {
             label={"Password"}
             placeholder={"optional"}
             type={"password"}
+          />
+        </InputContainer>
+        <InputContainer>
+        {<Label size="medium">Menu:</Label>}
+          <Dropdown
+            id={"menu-dropdown"}
+            options={menuOptions}
+            defaultOption={"15%"}
+            width={"238px"}
           />
         </InputContainer>
         <br />

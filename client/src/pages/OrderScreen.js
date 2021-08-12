@@ -13,7 +13,7 @@ import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
 
 const serverURL = "http://localhost:9000";
-const menuId = "6103677a11c316178047f1f1";
+const DEFAULT_MENU_ID = "6103677a11c316178047f1f1";
 
 const PageContainer = styled.div`
   height: 100%;
@@ -73,10 +73,11 @@ function OrderScreen() {
   const [sessionId, setSessionId] = useState("");
   const [sessionUser, setSessionUser] = useState(null);
   const [sessionUsers, setSessionUsers] = useState([]);
+  const [selectedMenuId, setSelectedMenuId] = useState(null);
   const [sessionMenuTotal, setSessionMenuTotal] = useState(0);
   const [sessionTipTotal, setSessionTipTotal] = useState(0);
   const history = useHistory();
-
+  
   const fetchSessionData = async () => {
     return axios.get(
       `${serverURL +
@@ -85,8 +86,8 @@ function OrderScreen() {
     );
   };
 
-  const fetchMenu = async () => {
-    return axios.get(`${serverURL}/menu/${menuId}`);
+  const fetchMenu = async (menuId) => {
+    return axios.get(`${serverURL}/api/menus/${menuId}`);
   };
 
   const fetchMenuTotalByUser = async () => {
@@ -246,11 +247,12 @@ function OrderScreen() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const {
-      data: { name, _id, users }
+      data: { name, _id, users, menuId }
     } = await fetchSessionData();
     setSessionId(_id);
     setSessionName(name);
     setSessionUsers(users);
+    setSelectedMenuId(menuId);
     setSessionUser(JSON.parse(localStorage.getItem("user")));
   }, []);
 
@@ -259,9 +261,9 @@ function OrderScreen() {
     const initializeOrder = async () => {
       const { data } = await findOrUpdateOrder(null);
       if (data && !data.length) {
-        const {
+      const {
           data: { items: latestMenu }
-        } = await fetchMenu();
+        } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
         return latestMenu.map(item => ({ item, quantity: 0 }));
       }
       return data;

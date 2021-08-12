@@ -8,7 +8,8 @@ const Session = new Schema(
     name: { type: String, required: true },
     users: { type: [UserSchema], required: true },
     menuTotalSoFar: { type: Number, default: 0, required: true },
-    tipTotalSoFar: { type: Number, default: 0, required: true }
+    tipTotalSoFar: { type: Number, default: 0, required: true },
+    menuId: { type: String, required: true }
   },
   { timestamps: true }
 );

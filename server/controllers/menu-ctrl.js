@@ -63,8 +63,10 @@ getMenus = async (req, res) => {
   }
 
 createMenu = async (req, res) => {
+    const body = req.body;
     const menu = new Menu({
-        items:[],
+        items: [],
+        name: body.name,
     });
     menu.save();
     res.send(menu);
@@ -77,7 +79,7 @@ getMenuById = async (req, res) => {
 };
 
 addItemsToMenu = async (req, res) => {
-    const body = req.body
+    const body = req.body;
     const newMenuItem = new Item(
         {
             name: body.name,
@@ -87,7 +89,6 @@ addItemsToMenu = async (req, res) => {
     )
     const menuId = req.params.menuId
     const menu = await Menu.findById(menuId);
-    console.log(menu)
     const menuItems = menu ? menu.items : res.sendStatus(404);
     Menu.findByIdAndUpdate(menuId, {items: menuItems.concat(newMenuItem)},
         { new: true },

@@ -37,6 +37,7 @@ createSession = async (req, res) => {
   const session = new Session({
     _id: sessionId,
     name: req.body.sessionName || sessionId,
+    menuId: req.body.menuId,
     users: [],
     menuTotalSoFar: 0,
     tipTotalSoFar: 0
