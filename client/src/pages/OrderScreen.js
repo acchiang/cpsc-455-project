@@ -318,7 +318,7 @@ function OrderScreen() {
                       <DollarAmount
                         size={"medium"}
                         label={"Subtotal"}
-                        amount={subtotal}
+                        amount={subtotal.toFixed(2)}
                       />
                       <TipAmount
                         value={tipPercent}
@@ -332,10 +332,7 @@ function OrderScreen() {
                       <DollarAmount
                         size={"medium"}
                         label={"Order total"}
-                        amount={
-                          subtotal +
-                          subtotal * 0.01 * tipPercent.replace(/\D/g, "")
-                        }
+                        amount={(subtotal + subtotal * 0.01 * tipPercent.replace(/\D/g, "")).toFixed(2)}
                       />
                       <Button
                         size={"medium"}
