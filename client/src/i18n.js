@@ -61,7 +61,13 @@ i18n
                     "optional": "optional",
                     "menu": "Menu",
                     "create": "Create",
-                    "":"",
+                    "tip":"Tip",
+                    "order-total":"Order total",
+                    "confirm-order":"Confirm order",
+                    "users":"Users",
+                    "group-total":"Group Total So Far",
+                    "consolidate":"Consolidate",
+                    "refresh":"Refresh"
 
                 }
             },
@@ -87,7 +93,7 @@ i18n
                     "side-by-side":"cote à cote",
                     "username":"nom d'utilisateur",
                     "dollar-amt-component": "Composante montant en dollars",
-                    "subtotal":"total",
+                    "subtotal":"Total",
                     "total-amt-component": "Composant montant total",
                     "dropdown":"Menu déroulant",
                     "other":"autre",
@@ -103,6 +109,13 @@ i18n
                     "optional": "optionnel",
                     "menu": "Menu",
                     "create": "Créer",
+                    "tip":"Pourboire",
+                    "order-total":"Total de la commande",
+                    "confirm-order":"Confirmer la commande",
+                    "users":"Utilisateurs",
+                    "group-total":"Total du groupe à ce jour",
+                    "consolidate":"Consolider",
+                    "refresh":"Rafraîchir"
                 }
             }
         },
