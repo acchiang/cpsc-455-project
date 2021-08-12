@@ -65,8 +65,8 @@ function ToggleLinks({ ...props }) {
         <Label>
           {language}
           <Toggle
-            leftBackgroundColor="blue"
-            rightBackgroundColor="green"
+            leftBackgroundColor="green"
+            rightBackgroundColor="grey"
             borderColor="black"
             knobColor="white"
             name="toggle-language"
