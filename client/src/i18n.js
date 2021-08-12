@@ -42,7 +42,15 @@ i18n
                 translation: {
                     "title": "LettuceEat en français",
                     "tagline": "Commande et fractionnement de facture faciles",
-                    "toggle-lang": "anglaise"
+                    "toggle-lang": "anglaise",
+                    "event-name": "Nom de l'événement*",
+                    "event-name-placeholder": "Dîner (obligatoire)",
+                    "users-name": "Votre nom*",
+                    "users-name-placeholder": "Jean Dupont (obligatoire)",
+                    "password": "Le mot de passe",
+                    "optional": "optionnel",
+                    "menu": "Menu",
+                    "create": "Créer",
                 }
             }
         },
