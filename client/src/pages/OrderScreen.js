@@ -228,6 +228,11 @@ function OrderScreen() {
     await setSessionTipTotal(addedTipTotal.toFixed(2));
   };
 
+  const handleTipChange = (updatedTipPercent) => {
+    localStorage.setItem('tipPercent', updatedTipPercent)
+    setTipPercent(updatedTipPercent)
+  }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
@@ -254,6 +259,7 @@ function OrderScreen() {
     setSessionUsers(users);
     setSelectedMenuId(menuId);
     setSessionUser(JSON.parse(localStorage.getItem("user")));
+    setTipPercent(localStorage.getItem('tipPercent') || tipOptions[0])
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -266,6 +272,9 @@ function OrderScreen() {
         } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
         return latestMenu.map(item => ({ item, quantity: 0 }));
       }
+      setSubtotal(
+        data.reduce((total, i) => total + i.item.price * i.quantity, 0)
+      );
       return data;
     };
     if (sessionUser && sessionId) {
@@ -303,12 +312,13 @@ function OrderScreen() {
                         amount={subtotal}
                       />
                       <TipAmount
+                        value={tipPercent}
                         size={"medium"}
                         label={"Tip"}
                         options={tipOptions}
                         showInput={showInput}
                         setShowInput={setShowInput}
-                        feedValueToParent={setTipPercent}
+                        feedValueToParent={handleTipChange}
                       />
                       <DollarAmount
                         size={"medium"}
