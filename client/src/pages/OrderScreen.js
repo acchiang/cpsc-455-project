@@ -13,7 +13,7 @@ import styled from "styled-components";
 import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const serverURL = "http://localhost:9000";
 const DEFAULT_MENU_ID = "6103677a11c316178047f1f1";
@@ -95,8 +95,8 @@ function OrderScreen() {
   const fetchSessionData = async () => {
     return axios.get(
       `${serverURL +
-      "/api/sessions/" +
-      localStorage.getItem("sessionId")}/order-screen`
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
@@ -123,16 +123,16 @@ function OrderScreen() {
   const fetchSessionMenuTotalSoFar = async () => {
     return await axios.get(
       `${serverURL +
-      "/api/sessions/" +
-      localStorage.getItem("sessionId")}/get-session-menu-total`
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/get-session-menu-total`
     );
   };
 
   const fetchSessionTipTotalSoFar = async () => {
     return await axios.get(
       `${serverURL +
-      "/api/sessions/" +
-      localStorage.getItem("sessionId")}/get-session-tip-total`
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/get-session-tip-total`
     );
   };
 
@@ -169,9 +169,8 @@ function OrderScreen() {
       data: { items: menu }
     } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
     return menu.map(item => ({ item, quantity: 0 }));
-  }
+  };
 
-  // eslint-disable-next-line no-unused-vars
   const consolidateOrder = async () => {
     history.push({
       pathname: "/final-order",
@@ -264,10 +263,10 @@ function OrderScreen() {
     await setSessionTipTotal(addedTipTotal.toFixed(2));
   };
 
-  const handleTipChange = (updatedTipPercent) => {
-    localStorage.setItem('tipPercent', updatedTipPercent)
-    setTipPercent(updatedTipPercent)
-  }
+  const handleTipChange = updatedTipPercent => {
+    localStorage.setItem("tipPercent", updatedTipPercent);
+    setTipPercent(updatedTipPercent);
+  };
 
   useEffect(async () => {
     refresh();
@@ -282,7 +281,7 @@ function OrderScreen() {
     setSessionUsers(users);
     setSelectedMenuId(menuId);
     setSessionUser(JSON.parse(localStorage.getItem("user")));
-    setTipPercent(localStorage.getItem('tipPercent') || tipOptions[0])
+    setTipPercent(localStorage.getItem("tipPercent") || tipOptions[0]);
   }, []);
 
   useEffect(async () => {
@@ -320,10 +319,7 @@ function OrderScreen() {
           <PanelContainer>
             <Panel>
               <StyledHeader>{t("menu")}</StyledHeader>
-              <MenuSelector
-                order={order}
-                updateQuantity={updateQuantity}
-              />
+              <MenuSelector order={order} updateQuantity={updateQuantity} />
               <SubtotalContainer>
                 <DollarAmount
                   size={"medium"}
@@ -344,8 +340,8 @@ function OrderScreen() {
                   label={t("order-total")}
                   amount={(
                     subtotal +
-                    subtotal * 0.01 * tipPercent.replace(/\D/g, "")).toFixed(2)
-                  }
+                    subtotal * 0.01 * tipPercent.replace(/\D/g, "")
+                  ).toFixed(2)}
                 />
                 <Button
                   size={"medium"}

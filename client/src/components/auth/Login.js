@@ -18,7 +18,6 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(userData);
   };
   render() {
     const { errors } = this.state;
