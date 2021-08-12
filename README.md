@@ -8,6 +8,7 @@ LettuceEat is a platform that enables friends and families to order food and spl
 For young adults who have social gatherings involving group food orders, our responsive web app will ease the process of gathering, consolidating, and outputting individual food orders to be submitted as a group order. The app will store: anonymous users’ data (amount owing, dishes, custom tip amounts, and display name), food menu (dishes), and session (states, and users). Users can access a particular session and make a food order customized to their liking, based on the menu items available in the session. The session leader then takes all the consolidated order data and sends it to a food ordering service (externally from our app, eg. a waiter or UberEats app) to place the order. Additional functionalities we can implement given enough time include user authentication to create custom profiles, saving favourite/previous orders for future use, use of machine learning to automatically input menu items, and/or integration with payment platforms. 
 
 ## Project task requirements:
+(Checked off items have been completed. All unchecked items have been investigated, considered in terms of feasibility for our timeline, and discussed for next steps in the future as we extend this project beyond the scope of this course. Viewing the checklist in dark mode on GitHub may be difficult, we recommend switching to light mode for better contrast.) 
 ### 3-5 minimal requirements (will definitely complete)
 - [x] Ability for users to pick dishes
 - [x] Ability to create and access a session
@@ -70,10 +71,16 @@ Unit 4 - Node and Express:
 - ExpressJS helped created our server-side more efficiently and effectively since it is simple, minimalist, flexibile, and scalable; provides a thin layer of fundamental web application features from the getgo so minimal setup is required, leading to faster setup of the server
 
 Unit 5 - Release Engineering:
-- 
+- The app is deployed on Heroku, using a Procfile that specifies a web-based build that serves up server/app.js from our server-side half of our repository. Heroku also automatically builds our app's client-side half each time for deployment with the heroku-postbuild script in our root package.json that runs npm install && npm run build on the appropriate directories. 
+- Our database is a noSQL db using Atlas/MongoDB. 
+- We manually deploy our dev branch with Heroku when the entire team completes QA and reviews. We have investigated GitHub actions and are keen to integrate more CI/CD functionality. 
 
 ## Above and beyond functionality
-TODO
+- We used i18next for powerful internationalization/localization, and have fully integrated toggleable string constants to switch from English to French (and vice versa). Each user is able to have their custom local setting for their preferred localization. The setup is robust enough to support any number of future languages integrations/translations. https://react.i18next.com/
+- We took extra considerations to ensure the application would be supported cross-browser and cross-device. 
+- We conducted user experience surveys at the lo-fi and hi-fi stages of our product ideation and design. We completed a vector-based UI mockup in addition to our lo-fi sketches in order to flesh out the product and conduct meaningful surveys. https://www.figma.com/file/xbpYbjVfbKGEYeqI53BNP4/LettuceEat. Contact our team for full access to the Figma files. 
+- We reviewed additional WCAG/w3 web accessibility standards training as a team to ensure the colour palette contrasts in all theme modes for our application would meet the official guidelines for visual accessibility. In terms of functionality, the text contrast on our project meets or exceeds these standards.  https://www.w3.org/WAI/fundamentals/foundations-course/
+- We have a toggle-able dark mode which persists across separate visits for the user on a given browser/device. This adds additional accessibility and customizability for the user. 
 
 ## Next steps
 Revisiting our stretch goals:
