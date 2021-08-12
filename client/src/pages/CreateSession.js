@@ -141,7 +141,7 @@ function CreateSession({ ...props }) {
           />
         </InputContainer>
         <InputContainer>
-        {<Label size="medium">{t("Menu")+":"}</Label>}
+        {<Label size="medium">{t("menu")+":"}</Label>}
           <Dropdown
             id={"menu-dropdown"}
             options={menuOptions}
