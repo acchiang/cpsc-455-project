@@ -65,22 +65,6 @@ const StyledHeader = styled.h2`
 `;
 
 function OrderScreen() {
-  const fetchSessionMenuTotalSoFar = async () => {
-    return axios.get(
-      `${serverURL +
-      "/api/sessions/" +
-      localStorage.getItem("sessionId")}/get-session-menu-total`
-    );
-  };
-
-  const fetchSessionTipTotalSoFar = async () => {
-    return axios.get(
-      `${serverURL +
-      "/api/sessions/" +
-      localStorage.getItem("sessionId")}/get-session-tip-total`
-    );
-  };
-
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [tipPercent, setTipPercent] = useState(tipOptions[0]);
@@ -96,13 +80,45 @@ function OrderScreen() {
   const fetchSessionData = async () => {
     return axios.get(
       `${serverURL +
-      "/api/sessions/" +
-      localStorage.getItem("sessionId")}/order-screen`
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
   const fetchMenu = async () => {
     return axios.get(`${serverURL}/menu/${menuId}`);
+  };
+
+  const fetchMenuTotalByUser = async () => {
+    return await axios.get(
+      `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
+        sessionUser.name
+      }/get-user-menu-total`
+    );
+  };
+
+  const fetchTipTotalByUser = async () => {
+    return await axios.get(
+      `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
+        sessionUser.name
+      }/get-user-tip-total`
+    );
+  };
+
+  const fetchSessionMenuTotalSoFar = async () => {
+    return await axios.get(
+      `${serverURL +
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/get-session-menu-total`
+    );
+  };
+
+  const fetchSessionTipTotalSoFar = async () => {
+    return await axios.get(
+      `${serverURL +
+        "/api/sessions/" +
+        localStorage.getItem("sessionId")}/get-session-tip-total`
+    );
   };
 
   const updateMenuTotalSoFar = async subtotal => {
@@ -119,22 +135,24 @@ function OrderScreen() {
     );
   };
 
-  const updateMenuAndTipInDB = async () => {
-    let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
-    let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
-    let newMenuTotal = subtotal + menuTotalInDBSoFar.data.menuTotalSoFar;
-    let tipTotal = subtotal * 0.01 * tipPercent.replace(/\D/g, "");
-    let newTipTotal = tipTotal + tipTotalInDBSoFar.data.tipTotalSoFar;
-    updateMenuTotalSoFar(newMenuTotal);
-    updateTipTotalSoFar(newTipTotal);
-    setSessionTipTotal(newTipTotal);
-    setSessionMenuTotal(newMenuTotal);
+  const updateUserMenuTotal = async userMenuTotal => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${sessionId}/update_user_menu_total`,
+      { sessionUser, userMenuTotal }
+    );
+  };
+
+  const updateUserTipTotal = async userTipTotal => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${sessionId}/update_user_tip_total`,
+      { sessionUser, userTipTotal }
+    );
   };
 
   // eslint-disable-next-line no-unused-vars
   const consolidateOrder = async () => {
     history.push({
-      pathname: '/final-order',
+      pathname: "/final-order",
       state: {
         sessionName: sessionName,
         sessionId: sessionId,
@@ -143,7 +161,7 @@ function OrderScreen() {
         menuTotal: sessionMenuTotal,
         tipTotal: sessionTipTotal
       }
-    })
+    });
   };
 
   const findOrUpdateOrder = async order => {
@@ -166,12 +184,63 @@ function OrderScreen() {
     }
   };
 
+  const updateUserMenuAndTipInDB = async () => {
+    // get the user menu and tip total
+    let userMenuTotalSoFar = (await fetchMenuTotalByUser()).data;
+    let userTipTotalSoFar = (await fetchTipTotalByUser()).data;
+    // subtract user menu and tip total from session menu and tip total
+    let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
+      .menuTotalSoFar;
+    let tipTotalInDBSoFar = (await fetchSessionTipTotalSoFar()).data
+      .tipTotalSoFar;
+    if (menuTotalInDBSoFar === null) {
+      menuTotalInDBSoFar = 0;
+    }
+    if (tipTotalInDBSoFar === null) {
+      tipTotalInDBSoFar = 0;
+    }
+    let subtractedMenuTotal = menuTotalInDBSoFar - userMenuTotalSoFar;
+    if (subtractedMenuTotal < 0) {
+      subtractedMenuTotal = 0;
+    }
+    let subtractedTipTotal = tipTotalInDBSoFar - userTipTotalSoFar;
+    if (subtractedTipTotal < 0) {
+      subtractedTipTotal = 0;
+    }
+    await updateMenuTotalSoFar(subtractedMenuTotal);
+    await updateTipTotalSoFar(subtractedTipTotal);
+    // update user menu and tip total to new numbers
+    await updateUserMenuTotal(subtotal);
+    let tipTotal = subtotal * 0.01 * tipPercent.replace(/\D/g, "");
+    await updateUserTipTotal(tipTotal);
+    // add new user menu and tip totals to session menu and tip totals
+    let updatedMenuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
+      .menuTotalSoFar;
+    let updatedTipTotalInDBSoFar = (await fetchSessionTipTotalSoFar()).data
+      .tipTotalSoFar;
+    let addedMenuTotal = updatedMenuTotalInDBSoFar + subtotal;
+    let addedTipTotal = updatedTipTotalInDBSoFar + tipTotal;
+    await updateMenuTotalSoFar(addedMenuTotal);
+    await updateTipTotalSoFar(addedTipTotal);
+    // update react frontend with new group total numbers
+    await setSessionMenuTotal(addedMenuTotal);
+    await setSessionTipTotal(addedTipTotal.toFixed(2));
+  };
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
-    let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
-    setSessionMenuTotal(menuTotalInDBSoFar.data.menuTotalSoFar);
-    setSessionTipTotal(tipTotalInDBSoFar.data.tipTotalSoFar);
+    let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
+      .menuTotalSoFar;
+    let tipTotalInDBSoFar = (await fetchSessionTipTotalSoFar()).data
+      .tipTotalSoFar;
+    if (menuTotalInDBSoFar === null) {
+      menuTotalInDBSoFar = 0;
+    }
+    if (tipTotalInDBSoFar === null) {
+      tipTotalInDBSoFar = 0;
+    }
+    setSessionMenuTotal(menuTotalInDBSoFar.toFixed(2));
+    setSessionTipTotal(tipTotalInDBSoFar.toFixed(2));
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -251,7 +320,7 @@ function OrderScreen() {
                         size={"medium"}
                         type={"primary"}
                         label={"Confirm Order"}
-                        onClick={() => updateMenuAndTipInDB()}
+                        onClick={() => updateUserMenuAndTipInDB()}
                       />
                     </SubtotalContainer>
                   </Panel>

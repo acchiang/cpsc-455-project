@@ -140,8 +140,8 @@ findOrCreateUserInSession = async (req, res) => {
   }
 
   const session = await Session.findById(req.params.sessionId);
-  
-  const existingUser = session.users.find((user) => user.name === req.body.name)
+
+  const existingUser = session.users.find(user => user.name === req.body.name);
   const requestedUser = {
     name: req.body.name,
     password: req.body.password
@@ -204,6 +204,48 @@ updateUserOrder = async (req, res) => {
   res.json(session.users[idx].orders);
 };
 
+updateUserMenuTotal = async (req, res) => {
+  const { params: { sessionId } } = req;
+  const { sessionUser, userMenuTotal } = req.body;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUser.name);
+  if (userMenuTotal >= 0) {
+    session.users[idx].menuTotal = userMenuTotal;
+    session.save();
+  }
+  res.json(session.users[idx].menuTotal);
+};
+
+updateUserTipTotal = async (req, res) => {
+  const { params: { sessionId } } = req;
+  const { sessionUser, userTipTotal } = req.body;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUser.name);
+  if (userTipTotal >= 0) {
+    session.users[idx].tipTotal = userTipTotal;
+    session.save();
+  }
+  res.json(session.users[idx].tipTotal);
+};
+
+getMenuTotalByUser = async (req, res) => {
+  const { params: { sessionId, sessionUserName } } = req;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUserName);
+  return session.users[idx].menuTotal >= 0
+    ? res.send(`${session.users[idx].menuTotal}`)
+    : res.sendStatus(404);
+};
+
+getTipTotalByUser = async (req, res) => {
+  const { params: { sessionId, sessionUserName } } = req;
+  const session = await Session.findById(sessionId);
+  const idx = session.users.findIndex(u => u.name === sessionUserName);
+  return session.users[idx].tipTotal >= 0
+    ? res.send(`${session.users[idx].tipTotal}`)
+    : res.sendStatus(404);
+};
+
 module.exports = {
   getSessions,
   createSession,
@@ -215,5 +257,9 @@ module.exports = {
   updateSessionMenuTotalSoFar,
   updateSessionTipTotalSoFar,
   getSessionMenuTotalSoFar,
-  getSessionTipTotalSoFar
+  getSessionTipTotalSoFar,
+  updateUserMenuTotal,
+  updateUserTipTotal,
+  getMenuTotalByUser,
+  getTipTotalByUser
 };
