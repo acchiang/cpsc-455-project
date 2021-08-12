@@ -17,7 +17,7 @@ const DollarAmountStyle = styled.div`
 `;
 
 const DollarAmount = ({ size, label, amount }) => (
-  <DollarAmountStyle size={size}>{label}: ${amount}</DollarAmountStyle>
+  <DollarAmountStyle size={size}>{label}: ${amount.toLocaleString('en')}</DollarAmountStyle>
 );
 
 export default DollarAmount;
