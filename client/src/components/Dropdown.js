@@ -16,9 +16,10 @@ const DropdownSelect = styled.select`
   display: inline-block;
   ${p => p.theme.mediaQueries.mobile} {
     font-size: ${p => p.theme.fontSizes.small};
+    width: 120px;
   }
   ${p => p.width && `
-    max-width: ${p.width};
+    width: ${p.width};
   `}
 `;
 
