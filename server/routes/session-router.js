@@ -24,6 +24,10 @@ router.get(
   "/:sessionId/:sessionUserName/get-user-tip-total",
   SessionCtrl.getTipTotalByUser
 );
+router.get(
+  "/:sessionId/get-all-orders",
+  SessionCtrl.getAllOrders
+);
 router.put("/:sessionId/", SessionCtrl.updateSessionName);
 router.put("/:sessionId/users", SessionCtrl.findOrCreateUserInSession);
 router.put("/:sessionId/update_order", SessionCtrl.updateUserOrder);
