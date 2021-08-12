@@ -77,12 +77,12 @@ function OrderScreen() {
   const [sessionMenuTotal, setSessionMenuTotal] = useState(0);
   const [sessionTipTotal, setSessionTipTotal] = useState(0);
   const history = useHistory();
-  
+
   const fetchSessionData = async () => {
     return axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/order-screen`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
@@ -109,16 +109,16 @@ function OrderScreen() {
   const fetchSessionMenuTotalSoFar = async () => {
     return await axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-menu-total`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-menu-total`
     );
   };
 
   const fetchSessionTipTotalSoFar = async () => {
     return await axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-tip-total`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-tip-total`
     );
   };
 
@@ -150,6 +150,13 @@ function OrderScreen() {
     );
   };
 
+  const initializeMenu = async () => {
+    const {
+      data: { items: menu }
+    } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
+    return menu.map(item => ({ item, quantity: 0 }));
+  }
+
   // eslint-disable-next-line no-unused-vars
   const consolidateOrder = async () => {
     history.push({
@@ -158,7 +165,7 @@ function OrderScreen() {
         sessionName: sessionName,
         sessionId: sessionId,
         users: sessionUsers,
-        menu: order,
+        menu: await initializeMenu(),
         menuTotal: sessionMenuTotal,
         tipTotal: sessionTipTotal
       }
@@ -261,7 +268,7 @@ function OrderScreen() {
     const initializeOrder = async () => {
       const { data } = await findOrUpdateOrder(null);
       if (data && !data.length) {
-      const {
+        const {
           data: { items: latestMenu }
         } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
         return latestMenu.map(item => ({ item, quantity: 0 }));

@@ -45,23 +45,22 @@ function FinalOrder() {
     );
   };
 
-  useEffect(async () => {
-    // TODO: Perhaps implement webhook (socket) to listen for additional users
-    const consolidateOrders = async () => {
-      let orders = location.state.menu;
-      orders.map(item => ({ item, quantity: 0 }));
-      location.state.users.map(async (user) => {
-        const { data } = await getUserOrder(user);
-        data.map(userOrder => {
-          if (userOrder.quantity !== 0) {
-            const idx = orders.findIndex(({ item }) => item.name === userOrder.item.name)
-            orders[idx].quantity += userOrder.quantity;
-          }
-        })
+  const consolidateOrder = async () => {
+    let orders = location.state.menu;
+    location.state.users.map(async (user) => {
+      const { data } = await getUserOrder(user);
+      data.map(userOrder => {
+        if (userOrder.quantity !== 0) {
+          const idx = orders.findIndex(({ item }) => item.name === userOrder.item.name)
+          orders[idx].quantity += userOrder.quantity;
+        }
       })
-      return orders;
-    };
-    setOrders(await consolidateOrders());
+    })
+    return orders;
+  }
+
+  useEffect(async () => {
+    setOrders(await consolidateOrder()); 
   }, []);
 
   return (
@@ -83,7 +82,7 @@ function FinalOrder() {
           </IconsContainer>
           <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={finalOrders} disableSelect={true}/>
+            <MenuSelector order={finalOrders} disableSelect={true} />
           </MenuContainer>
           <TotalAmount
             size={"medium"}
@@ -95,6 +94,12 @@ function FinalOrder() {
             type={"primary"}
             label={"Edit Order"}
             onClick={() => (window.location.href = "/order-screen")}
+          />
+          <Button
+            size={"medium"}
+            type={"primary"}
+            label={"Refresh"}
+            onClick={() => consolidateOrder()}
           />
         </PageContainer>
       </OrderContext.Provider>
