@@ -1,14 +1,19 @@
-import React from "react";
+import React, {Suspense} from "react";
 import ReactDOM from "react-dom";
 import App from "pages/App";
 import reportWebVitals from "./utils/reportWebVitals";
 
 import "./index.css";
 
+// import i18n (needs to be bundled ;)) 
+import './i18n';
+
 ReactDOM.render(
+  <Suspense fallback="loading">
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+  </Suspense>,
   document.getElementById("root")
 );
 

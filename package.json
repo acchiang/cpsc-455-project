@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/acchiang/lettuceeat#readme",
   "dependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^6.2.0",
+    "i18next": "^20.4.0",
+    "react-i18next": "^11.11.4"
   }
 }
