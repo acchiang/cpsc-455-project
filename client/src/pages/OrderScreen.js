@@ -198,6 +198,10 @@ function OrderScreen() {
     }
     setSessionMenuTotal(menuTotalInDBSoFar.toFixed(2));
     setSessionTipTotal(tipTotalInDBSoFar.toFixed(2));
+    const {
+      data: { users }
+    } = await fetchSessionData();
+    setSessionUsers(users);
   };
 
   const findOrUpdateOrder = async order => {
