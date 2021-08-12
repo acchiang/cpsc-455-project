@@ -9,8 +9,14 @@ import TotalAmount from "components/TotalAmount";
 import Dropdown from "components/Dropdown";
 import BackButton from "components/BackButton";
 import QuantitySelector from "components/QuantitySelector";
+import { I18N_LANGUAGE } from "../i18n"
+
+import { useTranslation } from 'react-i18next';
 
 function Charcuterie({ children }) {
+
+  const { t, i18n } = useTranslation();
+
   const [showInput, setShowInput] = useState(false);
   const optionsWithInput = ["10%", "15%", "20%", "Other"];
   const optionsNoInput = ["10%", "15%", "20%"];
@@ -40,6 +46,20 @@ function Charcuterie({ children }) {
           onClick={() => {
             window.localStorage.setItem("localTheme", "darkTheme");
             window.location.reload();
+          }}
+        />
+        <Button
+          size={"medium"}
+          type={"primary"}
+          label={t("toggle-lang")}
+          onClick={() => {
+            if(i18n.language === "en") {
+              i18n.changeLanguage("fr"); 
+              window.localStorage.setItem(I18N_LANGUAGE, "fr");
+            } else {
+              i18n.changeLanguage("en");
+              window.localStorage.setItem(I18N_LANGUAGE, "en");
+            }
           }}
         />
         <Button
