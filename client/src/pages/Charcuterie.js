@@ -33,7 +33,7 @@ function Charcuterie({ children }) {
         <Button
           size={"medium"}
           type={"primary"}
-          label={"light"}
+          label={t("light")}
           onClick={() => {
             window.localStorage.setItem("localTheme", "defaultTheme");
             window.location.reload();
@@ -42,7 +42,7 @@ function Charcuterie({ children }) {
         <Button
           size={"medium"}
           type={"primary"}
-          label={"dark"}
+          label={t("dark")}
           onClick={() => {
             window.localStorage.setItem("localTheme", "darkTheme");
             window.location.reload();
@@ -65,79 +65,79 @@ function Charcuterie({ children }) {
         <Button
           size={"medium"}
           type={"primary"}
-          label={"Take me to the front page"}
+          label={t("front-page")}
           onClick={() => (window.location.href = "/")}
         />
-        <h2>User Icons</h2>
+        <h2>{t("user-icons")}</h2>
         <TextIcon textLetter={"a"} size={"small"} color={"#8EDB31"}>
-          small
+          {t("small")}
         </TextIcon>
         <TextIcon textLetter={"b"} size={"default"} color={"#31B4DB"}>
-          default
+          {t("default")}
         </TextIcon>
-        <h2>Buttons</h2>
-        <p>small</p>
-        <Button size={"small"} type={"primary"} label={"primary"} />
-        <Button size={"small"} type={"secondary"} label={"secondary"} />
-        <Button size={"small"} type={"text"} label={"text"} />
-        <p>medium</p>
-        <Button size={"medium"} type={"primary"} label={"primary"} />
-        <Button size={"medium"} type={"secondary"} label={"secondary"} />
-        <Button size={"medium"} type={"text"} label={"text"} />
-        <p>large</p>
-        <Button size={"large"} type={"primary"} label={"primary"} />
-        <Button size={"large"} type={"secondary"} label={"secondary"} />
-        <Button size={"large"} type={"text"} label={"text"} />
-        <p>others</p>
-        <Button label={"default"} />
+        <h2>{t("buttons")}</h2>
+        <p>{t("small")}</p>
+        <Button size={"small"} type={"primary"} label={t("primary")} />
+        <Button size={"small"} type={"secondary"} label={t("secondary")} />
+        <Button size={"small"} type={"text"} label={t("text")} />
+        <p>{t("medium")}</p>
+        <Button size={"medium"} type={"primary"} label={t("primary")} />
+        <Button size={"medium"} type={"secondary"} label={t("secondary")} />
+        <Button size={"medium"} type={"text"} label={t("text")} />
+        <p>{t("large")}</p>
+        <Button size={"large"} type={"primary"} label={t("primary")} />
+        <Button size={"large"} type={"secondary"} label={t("secondary")} />
+        <Button size={"large"} type={"text"} label={t("text")} />
+        <p>{t("others")}</p>
+        <Button label={t("default")} />
         <Button
-          label={"click me!"}
+          label={t("click-me")}
           onClick={() => {
-            alert("button clicked");
+            alert(t("button-clicked"));
           }}
         />
         <br />
-        <Button label={"disabled"} disabled />
-        <Button label={"disabled"} type={"secondary"} disabled />
-        <h2>User Inputs</h2>
-        <Input size={"small"} placeholder={"Password"} type={"password"} />
+        <Button label={t("disabled")} disabled />
+        <Button label={t("disabled")} type={"secondary"} disabled />
+        <h2>{t("user-inputs")}</h2>
+        <Input size={"small"} placeholder={t("password")} type={"password"} />
         <Input size={"large"} border={"2px solid green"} />
         <br />
         <Input
           size={"default"}
           label={"default"}
-          placeholder={"disabled"}
+          placeholder={t("disabled")}
           disabled
         />
         <br />
         <Input
           size={"medium"}
-          label={"side by side"}
-          placeholder={"username"}
+          label={t("side-by-side")}
+          placeholder={t("username")}
         />
-        <h2>Dollar Amount Component</h2>
-        <DollarAmount size={"medium"} label={"Subtotal"} amount={"12.99"} />
-        <h2>Total Amount Component</h2>
+        <h2>{t("dollar-amt-component")}</h2>
+        <DollarAmount size={"medium"} label={t("subtotal")} amount={"12.99"} />
+        <h2>{t("total-amt-component")}</h2>
         <TotalAmount size={"medium"} menuAmount={"12.99"} tipAmount={"1.50"} />
-        <h2>Dropdown</h2>
-        <p>small</p>
+        <h2>{t("dropdown")}</h2>
+        <p>{t("small")}</p>
         <Dropdown
           size={"small"}
           options={optionsNoInput}
           defaultOption={"15%"}
         ></Dropdown>
-        <p>medium (default)</p>
+        <p>{t("medium")}</p>
         <Dropdown options={optionsNoInput}></Dropdown>
-        <p>large</p>
+        <p>{t("large")}</p>
         <Dropdown
           size={"large"}
           options={optionsWithInput}
           defaultOption={"20%"}
           showInput={showInput}
           setShowInput={setShowInput}
-          customValue={"Other"}
+          customValue={t("other")}
         ></Dropdown>
-        <p>Back button</p>
+        <p>{t("back-button")}</p>
         <BackButton url={"create-session"} />
         <QuantitySelector value={selectorValue1} setValue={setSelectorValue1} />
       </Container>
