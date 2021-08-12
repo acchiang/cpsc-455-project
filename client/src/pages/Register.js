@@ -5,6 +5,7 @@ import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
 import lettuce from "assets/lettuce.png";
 import apis from "api";
+import { useTranslation } from "react-i18next";
 
 const PageContainer = styled.div`
   display: flex;
@@ -22,7 +23,9 @@ const InputContainer = styled.div`
   flex-direction: row;
 `;
 
+
 function Register({ ...props }) {
+  const { t } = useTranslation();
   async function callRegisterUserAPI() {
     const sessionId = localStorage.getItem("sessionId");
     const user = {
@@ -34,7 +37,7 @@ function Register({ ...props }) {
       const res = await apis.registerUser(sessionId, user);
       return JSON.stringify(res.data);
     } catch (e) {
-      window.alert("Unable to create user or username is taken");
+      window.alert(t("user-failed-alert"));
     }
   }
 
@@ -42,11 +45,11 @@ function Register({ ...props }) {
     const name = document.getElementById("input-user-name").value;
     const password = document.getElementById("input-user-password").value;
     if (password && (password.length < 6 || password.length > 30)) {
-      window.alert("Password must be at between 6 to 30 characters.");
+      window.alert(t("password-alert"));
       return false;
     }
     if (!name) {
-      window.alert("Please fill in the required fields.")
+      window.alert(t("required-alert"));
       return false;
     }
     return true;
@@ -62,7 +65,7 @@ function Register({ ...props }) {
         window.location.href = "/order-screen";
       }
     } else {
-      window.alert("Please check the required fields");
+      window.alert(t("required-alert"));
     }
   };
 
@@ -78,16 +81,16 @@ function Register({ ...props }) {
           <Input
             id={"input-user-name"}
             size={"medium"}
-            label={"Name*"}
-            placeholder={"John Doe (required)"}
+            label={t("users-name")}
+            placeholder={t("users-name-placeholder")}
           />
         </InputContainer>
         <InputContainer>
           <Input
             id={"input-user-password"}
             size={"medium"}
-            label={"Password"}
-            placeholder={"optional"}
+            label={t("password")}
+            placeholder={t("optional")}
             type={"password"}
           />
         </InputContainer>
@@ -95,7 +98,7 @@ function Register({ ...props }) {
         <Button
           size={"medium"}
           type={"primary"}
-          label={"Join"}
+          label={t("join")}
           onClick={register}
         />
       </PageContainer>

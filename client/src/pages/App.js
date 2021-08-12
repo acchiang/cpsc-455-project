@@ -7,8 +7,10 @@ import JoinSession from "pages/JoinSession";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "pages/Login";
 import Register from "pages/Register";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t } = useTranslation();
   return (
     <BrowserRouter>
       <Switch>
@@ -16,7 +18,7 @@ function App() {
           <Login />
         </Route>
         <Route path="/register">
-          <Register />
+          <Register userFailedString={t("user-failed-alert")} />
         </Route>
         <Route path="/order-screen">
           <OrderScreen />

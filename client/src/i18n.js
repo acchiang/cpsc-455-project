@@ -58,7 +58,10 @@ i18n.use(initReactI18next)
                     "menu-total":"Menu Total",
                     "tip-total":"Tip Total",
                     "final-total":"Final Total",
-                    
+                    "link-alert":"Link copied to clipboard",
+                    "link-failed-alert":"Link did not copy to clipboard",
+                    "user-failed-alert":"Unable to create user or username is taken",
+                    "join":"Join"
                 }
             },
             fr: {
@@ -113,7 +116,10 @@ i18n.use(initReactI18next)
                     "menu-total":"Total du Menu",
                     "tip-total":"Pourboire Total",
                     "final-total":"Fin Totale",
-
+                    "link-alert":"Lien copié dans le presse-papiers",
+                    "link-failed-alert":"Link did not copy to clipboard",
+                    "user-failed-alert":"Le lien n'a pas été copié dans le presse-papiers",
+                    "join":"Rejoindre"
                 }
             }
         },
