@@ -244,6 +244,13 @@ getTipTotalByUser = async (req, res) => {
     : res.sendStatus(404);
 };
 
+getAllOrders = async (req, res) => {
+  const { params: { sessionId } } = req;
+  const session = await Session.findById(sessionId);
+  const orders = session.users.map((u) => u.orders).flat();
+  res.send(JSON.stringify(orders));
+}
+
 module.exports = {
   getSessions,
   createSession,
@@ -259,5 +266,6 @@ module.exports = {
   updateUserMenuTotal,
   updateUserTipTotal,
   getMenuTotalByUser,
-  getTipTotalByUser
+  getTipTotalByUser,
+  getAllOrders
 };

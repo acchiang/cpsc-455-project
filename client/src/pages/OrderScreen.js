@@ -95,8 +95,8 @@ function OrderScreen() {
   const fetchSessionData = async () => {
     return axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/order-screen`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
@@ -123,16 +123,16 @@ function OrderScreen() {
   const fetchSessionMenuTotalSoFar = async () => {
     return await axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-menu-total`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-menu-total`
     );
   };
 
   const fetchSessionTipTotalSoFar = async () => {
     return await axios.get(
       `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-tip-total`
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-tip-total`
     );
   };
 
@@ -164,6 +164,14 @@ function OrderScreen() {
     );
   };
 
+  const initializeMenu = async () => {
+    const {
+      data: { items: menu }
+    } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
+    return menu.map(item => ({ item, quantity: 0 }));
+  }
+
+  // eslint-disable-next-line no-unused-vars
   const consolidateOrder = async () => {
     history.push({
       pathname: "/final-order",
@@ -171,7 +179,7 @@ function OrderScreen() {
         sessionName: sessionName,
         sessionId: sessionId,
         users: sessionUsers,
-        menu: order,
+        menu: await initializeMenu(),
         menuTotal: sessionMenuTotal,
         tipTotal: sessionTipTotal
       }
@@ -320,7 +328,7 @@ function OrderScreen() {
                 <DollarAmount
                   size={"medium"}
                   label={t("subtotal")}
-                  amount={subtotal}
+                  amount={subtotal.toFixed(2)}
                 />
                 <TipAmount
                   value={tipPercent}
@@ -334,9 +342,9 @@ function OrderScreen() {
                 <DollarAmount
                   size={"medium"}
                   label={t("order-total")}
-                  amount={
+                  amount={(
                     subtotal +
-                    subtotal * 0.01 * tipPercent.replace(/\D/g, "")
+                    subtotal * 0.01 * tipPercent.replace(/\D/g, "")).toFixed(2)
                   }
                 />
                 <Button

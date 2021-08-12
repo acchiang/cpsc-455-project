@@ -14,56 +14,56 @@ import { useTranslation } from "react-i18next";
 
 const serverURL = "http://localhost:9000";
 
+const PageContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  background: ${(p) => p.theme.colors.primary};
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const MenuContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+`;
+
+const StyledHeader = styled.h2`
+  color: ${(p) => p.theme.colors.text};
+`;
+
+const IconsContainer = styled.div``;
+
 function FinalOrder() {
   const { t } = useTranslation();
   const [finalOrders, setOrders] = useState(null);
   const location = useLocation();
 
-  const PageContainer = styled.div`
-    height: 100%;
-    width: 100%;
-    background: ${p => p.theme.colors.primary};
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  `;
-
-  const MenuContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-  `;
-
-  const StyledHeader = styled.h2`
-    color: ${p => p.theme.colors.text};
-  `;
-
-  const IconsContainer = styled.div``;
-
-  const getUserOrder = async sessionUser => {
-    return await axios.put(
-      `${serverURL}/api/sessions/${location.state.sessionId}/update_order`,
-      { sessionUser }
+  const getAllOrders = async () => {
+    return await axios.get(
+      `${serverURL}/api/sessions/${location.state.sessionId}/get-all-orders`
     );
   };
 
+  const consolidateOrders = async () => {
+    let orders = location.state.menu;
+    orders.map((item) => ({ item, quantity: 0 }));
+    const { data } = await getAllOrders();
+    debugger
+    data.forEach(({item, quantity}) => {
+      if (quantity !== 0) {
+        const idx = orders.findIndex(
+          (o) => o.item.name === item.name
+        );
+        orders[idx].quantity += quantity;
+      }
+    });
+    return orders
+  };
+
   useEffect(async () => {
-    const consolidateOrders = async () => {
-      let orders = location.state.menu;
-      orders.map(item => ({ item, quantity: 0 }));
-      location.state.users.map(async (user) => {
-        const { data } = await getUserOrder(user);
-        // eslint-disable-next-line array-callback-return
-        data.map(userOrder => {
-          if (userOrder.quantity !== 0) {
-            const idx = orders.findIndex(({ item }) => item.name === userOrder.item.name)
-            orders[idx].quantity += userOrder.quantity;
-          }
-        })
-      })
-      return orders;
-    };
     setOrders(await consolidateOrders());
   }, []);
 
@@ -71,9 +71,12 @@ function FinalOrder() {
     <Theme>
       <OrderContext.Provider value={[finalOrders, setOrders]}>
         <PageContainer>
-          <TopTitleBar title={location.state.sessionName} backUrl={"/order-screen"} />
+          <TopTitleBar
+            title={location.state.sessionName}
+            backUrl={"/order-screen"}
+          />
           <IconsContainer>
-            {location.state.users.map(u => (
+            {location.state.users.map((u) => (
               <TextIcon
                 key={u.name + u.date}
                 textLetter={u.name?.charAt(0).toUpperCase()}
@@ -86,7 +89,7 @@ function FinalOrder() {
           </IconsContainer>
           <StyledHeader>{t("final-order-summary")}</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={finalOrders} disableSelect={true}/>
+            <MenuSelector order={finalOrders} disableSelect={true} />
           </MenuContainer>
           <TotalAmount
             size={"medium"}
@@ -98,6 +101,12 @@ function FinalOrder() {
             type={"primary"}
             label={t("edit-order")}
             onClick={() => (window.location.href = "/order-screen")}
+          />
+          <Button
+            size={"medium"}
+            type={"primary"}
+            label={"Refresh"}
+            onClick={() => consolidateOrders()}
           />
         </PageContainer>
       </OrderContext.Provider>

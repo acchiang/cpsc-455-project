@@ -70,7 +70,7 @@ Unit 4 - Node and Express:
 - ExpressJS helped created our server-side more efficiently and effectively since it is simple, minimalist, flexibile, and scalable; provides a thin layer of fundamental web application features from the getgo so minimal setup is required, leading to faster setup of the server
 
 Unit 5 - Release Engineering:
-TODO
+- 
 
 ## Above and beyond functionality
 TODO
@@ -85,7 +85,7 @@ We have yet to implement WebSockets for real time updates rather than calling mu
 
 ## Contributions
 Allison:
-Allison worked on ideating the specs for a reusable internal set of UI components, assembling the components into a skeleton for the front-end, incorporating elements for responsive web design, creating a dark mode and themeable assets, structuring the project repository's directories, standardizing the scripts we use to run the local and production app, and deploying the app to Heroku (while connected to MongoDB/Atlas). Allison made an active effort to champion accessibiliy for the project, including completing checks to ensure WCAG compliance, investigating localization, and determining further extensions such as adding aria labels for screenreading accessibility. 
+Allison worked on ideating the specs for a reusable internal set of UI components, assembling the components into a skeleton for the front-end, incorporating elements for responsive web design, creating a dark mode and themeable assets, structuring the project repository's directories, standardizing the scripts we use to run the local and production app, deploying the app to Heroku (while connected to MongoDB/Atlas), and adding capabilities for localization. Allison made an active effort to champion accessibiliy for the project, including completing checks to ensure WCAG compliance, investigating localization, and determining further extensions such as adding aria labels for screenreading accessibility. 
 
 Christy:
 Christy worked on setting up authentication of users' apis which includes using JWTs (encrypting and decrypting them). She also worked on a portion of user-persistence by writing apis to read and write to sessions collection and updating the client interface with data from MongoDB Atlas. Christy also worked on refactoring code; created models, routes, controllers, db, configs and validation directories and refactored the code to run within those directories.
