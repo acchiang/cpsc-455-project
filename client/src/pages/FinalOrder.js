@@ -12,8 +12,6 @@ import TopTitleBar from "components/TopTitleBar";
 import TextIcon from "components/TextIcon";
 import { useTranslation } from "react-i18next";
 
-const serverURL = "http://localhost:9000";
-
 const PageContainer = styled.div`
   height: 100%;
   width: 100%;
@@ -43,7 +41,7 @@ function FinalOrder() {
 
   const getAllOrders = async () => {
     return await axios.get(
-      `${serverURL}/api/sessions/${location.state.sessionId}/get-all-orders`
+      `/api/sessions/${location.state.sessionId}/get-all-orders`
     );
   };
 

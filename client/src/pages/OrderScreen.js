@@ -15,7 +15,6 @@ import TopTitleBar from "components/TopTitleBar";
 
 import { useTranslation } from "react-i18next";
 
-const serverURL = "http://localhost:9000";
 const DEFAULT_MENU_ID = "6103677a11c316178047f1f1";
 
 const PageContainer = styled.div`
@@ -94,19 +93,17 @@ function OrderScreen() {
 
   const fetchSessionData = async () => {
     return axios.get(
-      `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/order-screen`
+      `/api/sessions/${localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
   const fetchMenu = async menuId => {
-    return axios.get(`${serverURL}/api/menus/${menuId}`);
+    return axios.get(`/api/menus/${menuId}`);
   };
 
   const fetchMenuTotalByUser = async () => {
     return await axios.get(
-      `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
+      `/api/sessions/${localStorage.getItem("sessionId")}/${
         sessionUser.name
       }/get-user-menu-total`
     );
@@ -114,7 +111,7 @@ function OrderScreen() {
 
   const fetchTipTotalByUser = async () => {
     return await axios.get(
-      `${serverURL}/api/sessions/${localStorage.getItem("sessionId")}/${
+      `/api/sessions/${localStorage.getItem("sessionId")}/${
         sessionUser.name
       }/get-user-tip-total`
     );
@@ -122,44 +119,40 @@ function OrderScreen() {
 
   const fetchSessionMenuTotalSoFar = async () => {
     return await axios.get(
-      `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-menu-total`
+      `/api/sessions/${localStorage.getItem("sessionId")}/get-session-menu-total`
     );
   };
 
   const fetchSessionTipTotalSoFar = async () => {
     return await axios.get(
-      `${serverURL +
-        "/api/sessions/" +
-        localStorage.getItem("sessionId")}/get-session-tip-total`
+      `/api/sessions/${localStorage.getItem("sessionId")}/get-session-tip-total`
     );
   };
 
   const updateMenuTotalSoFar = async subtotal => {
     return await axios.put(
-      `${serverURL}/api/sessions/${sessionId}/update_menu_total`,
+      `/api/sessions/${sessionId}/update_menu_total`,
       { menuTotalSoFar: subtotal }
     );
   };
 
   const updateTipTotalSoFar = async tipTotal => {
     return await axios.put(
-      `${serverURL}/api/sessions/${sessionId}/update_tip_total`,
+      `/api/sessions/${sessionId}/update_tip_total`,
       { tipTotalSoFar: tipTotal }
     );
   };
 
   const updateUserMenuTotal = async userMenuTotal => {
     return await axios.put(
-      `${serverURL}/api/sessions/${sessionId}/update_user_menu_total`,
+      `/api/sessions/${sessionId}/update_user_menu_total`,
       { sessionUser, userMenuTotal }
     );
   };
 
   const updateUserTipTotal = async userTipTotal => {
     return await axios.put(
-      `${serverURL}/api/sessions/${sessionId}/update_user_tip_total`,
+      `/api/sessions/${sessionId}/update_user_tip_total`,
       { sessionUser, userTipTotal }
     );
   };
@@ -206,7 +199,7 @@ function OrderScreen() {
 
   const findOrUpdateOrder = async order => {
     return await axios.put(
-      `${serverURL}/api/sessions/${sessionId}/update_order`,
+      `/api/sessions/${sessionId}/update_order`,
       { sessionUser, order }
     );
   };

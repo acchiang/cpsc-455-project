@@ -4,8 +4,6 @@ import BackButton from "components/BackButton";
 import CopyUrlBox from "components/CopyUrlBox";
 import { FaPen } from "react-icons/fa";
 
-const SERVER_URL = "http://localhost:9000";
-
 const TopTitleBarContainer = styled.div`
   width: 100vw;
   display: flex;
@@ -32,7 +30,7 @@ const handleEditTitle = (title, setTitle, sessionId) => {
 };
 
 const editSession = async (newTitle, setTitle, sessionId) => {
-  await axios.put(`${SERVER_URL}/api/sessions/${sessionId}`, {
+  await axios.put(`/api/sessions/${sessionId}`, {
     name: newTitle
   });
   setTitle(newTitle);

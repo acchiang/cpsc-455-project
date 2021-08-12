@@ -12,8 +12,6 @@ import apis from "api";
 import { useTranslation } from "react-i18next";
 import ToggleLinks from "components/ToggleLinks";
 
-const serverURL = "http://localhost:9000";
-
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -94,7 +92,7 @@ function CreateSession({ ...props }) {
 
   const fetchMenus = async () => {
     return axios.get(
-      `${serverURL}/api/menus/`
+      `/api/menus/`
     );
   };
 
