@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -150,7 +151,6 @@ function OrderScreen() {
     );
   };
 
-  // eslint-disable-next-line no-unused-vars
   const consolidateOrder = async () => {
     history.push({
       pathname: "/final-order",
@@ -233,7 +233,6 @@ function OrderScreen() {
     setTipPercent(updatedTipPercent)
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
       .menuTotalSoFar;
@@ -249,7 +248,6 @@ function OrderScreen() {
     setSessionTipTotal(tipTotalInDBSoFar.toFixed(2));
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const {
       data: { name, _id, users, menuId }
@@ -262,7 +260,6 @@ function OrderScreen() {
     setTipPercent(localStorage.getItem('tipPercent') || tipOptions[0])
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const initializeOrder = async () => {
       const { data } = await findOrUpdateOrder(null);

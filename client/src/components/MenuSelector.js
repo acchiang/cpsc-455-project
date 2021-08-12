@@ -104,7 +104,6 @@ const MenuSelector = ({ order, updateQuantity, disableSelect }) => {
                       key={item._id}
                       orderItem={item}
                       initQuantity={quantity}
-                      // HACK
                       updateQuantity={updateQuantity ?? ((a, b) => null)}
                       disableSelect={disableSelect}
                     />
