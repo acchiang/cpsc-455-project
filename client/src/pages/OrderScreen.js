@@ -17,7 +17,6 @@ const serverURL = "http://localhost:9000";
 const DEFAULT_MENU_ID = "6103677a11c316178047f1f1";
 
 const PageContainer = styled.div`
-  height: 100%;
   width: 100%;
   background: ${p => p.theme.colors.primary};
   overflow: hidden;
@@ -26,17 +25,28 @@ const PageContainer = styled.div`
 const PanelContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin: 20px;
+  flex-direction: row;
+  ${p => p.theme.mediaQueries.mobile} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
-const Panel = styled.td`
+const Panel = styled.div`
   width: 400px;
   vertical-align: top;
+  ${p => p.theme.mediaQueries.mobile} {
+    width: 70vw;
+  }
 `;
 
-const DividerPanel = styled.td`
+const DividerPanel = styled.div`
   vertical-align: top;
+  ${p => p.theme.mediaQueries.mobile} {
+    display: none;
+  }
 `;
 
 const Divider = styled.div`
@@ -297,87 +307,81 @@ function OrderScreen() {
             sessionId={sessionId}
           />
           <PanelContainer>
-            <table>
-              <tbody>
-                <tr>
-                  <Panel>
-                    <StyledHeader>Menu</StyledHeader>
-                    <MenuSelector
-                      order={order}
-                      updateQuantity={updateQuantity}
-                    />
-                    <SubtotalContainer>
-                      <DollarAmount
-                        size={"medium"}
-                        label={"Subtotal"}
-                        amount={subtotal}
-                      />
-                      <TipAmount
-                        value={tipPercent}
-                        size={"medium"}
-                        label={"Tip"}
-                        options={tipOptions}
-                        showInput={showInput}
-                        setShowInput={setShowInput}
-                        feedValueToParent={handleTipChange}
-                      />
-                      <DollarAmount
-                        size={"medium"}
-                        label={"Order total"}
-                        amount={
-                          subtotal +
-                          subtotal * 0.01 * tipPercent.replace(/\D/g, "")
-                        }
-                      />
-                      <Button
-                        size={"medium"}
-                        type={"primary"}
-                        label={"Confirm Order"}
-                        onClick={() => updateUserMenuAndTipInDB()}
-                      />
-                    </SubtotalContainer>
-                  </Panel>
-                  <DividerPanel>
-                    <Divider />
-                  </DividerPanel>
-                  <Panel>
-                    <StyledHeader>Users</StyledHeader>
-                    <IconsContainer>
-                      {sessionUsers.map(u => (
-                        <TextIcon
-                          key={u.name + u.date}
-                          textLetter={u.name?.charAt(0).toUpperCase()}
-                          size={"default"}
-                          color={"#31B4DB"}
-                        >
-                          {u.name}
-                        </TextIcon>
-                      ))}
-                    </IconsContainer>
-                    <FinalOrderContainer>
-                      <StyledHeader>Group Total So Far</StyledHeader>
-                      <TotalAmount
-                        size={"medium"}
-                        menuAmount={sessionMenuTotal}
-                        tipAmount={sessionTipTotal}
-                      />
-                      <Button
-                        size={"medium"}
-                        type={"primary"}
-                        label={"Consolidate"}
-                        onClick={() => consolidateOrder()}
-                      />
-                      <Button
-                        size={"medium"}
-                        type={"primary"}
-                        label={"Refresh"}
-                        onClick={() => refresh()}
-                      />
-                    </FinalOrderContainer>
-                  </Panel>
-                </tr>
-              </tbody>
-            </table>
+            <Panel>
+              <StyledHeader>Menu</StyledHeader>
+              <MenuSelector
+                order={order}
+                updateQuantity={updateQuantity}
+              />
+              <SubtotalContainer>
+                <DollarAmount
+                  size={"medium"}
+                  label={"Subtotal"}
+                  amount={subtotal}
+                />
+                <TipAmount
+                  value={tipPercent}
+                  size={"medium"}
+                  label={"Tip"}
+                  options={tipOptions}
+                  showInput={showInput}
+                  setShowInput={setShowInput}
+                  feedValueToParent={handleTipChange}
+                />
+                <DollarAmount
+                  size={"medium"}
+                  label={"Order total"}
+                  amount={
+                    subtotal +
+                    subtotal * 0.01 * tipPercent.replace(/\D/g, "")
+                  }
+                />
+                <Button
+                  size={"medium"}
+                  type={"primary"}
+                  label={"Confirm Order"}
+                  onClick={() => updateUserMenuAndTipInDB()}
+                />
+              </SubtotalContainer>
+            </Panel>
+            <DividerPanel>
+              <Divider />
+            </DividerPanel>
+            <Panel>
+              <StyledHeader>Users</StyledHeader>
+              <IconsContainer>
+                {sessionUsers.map(u => (
+                  <TextIcon
+                    key={u.name + u.date}
+                    textLetter={u.name?.charAt(0).toUpperCase()}
+                    size={"default"}
+                    color={"#31B4DB"}
+                  >
+                    {u.name}
+                  </TextIcon>
+                ))}
+              </IconsContainer>
+              <FinalOrderContainer>
+                <StyledHeader>Group Total So Far</StyledHeader>
+                <TotalAmount
+                  size={"medium"}
+                  menuAmount={sessionMenuTotal}
+                  tipAmount={sessionTipTotal}
+                />
+                <Button
+                  size={"medium"}
+                  type={"primary"}
+                  label={"Consolidate"}
+                  onClick={() => consolidateOrder()}
+                />
+                <Button
+                  size={"medium"}
+                  type={"primary"}
+                  label={"Refresh"}
+                  onClick={() => refresh()}
+                />
+              </FinalOrderContainer>
+            </Panel>
           </PanelContainer>
         </PageContainer>
       </OrderContext.Provider>
