@@ -13,6 +13,8 @@ import styled from "styled-components";
 import TextIcon from "components/TextIcon";
 import TopTitleBar from "components/TopTitleBar";
 
+import { useTranslation } from 'react-i18next';
+
 const serverURL = "http://localhost:9000";
 const DEFAULT_MENU_ID = "6103677a11c316178047f1f1";
 
@@ -76,11 +78,12 @@ const StyledHeader = styled.h2`
 `;
 
 function OrderScreen() {
+  const { t } = useTranslation();
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [tipPercent, setTipPercent] = useState(tipOptions[0]);
   const [showInput, setShowInput] = useState(false);
-  const [sessionName, setSessionName] = useState("LettuceEat");
+  const [sessionName, setSessionName] = useState(t("title"));
   const [sessionId, setSessionId] = useState("");
   const [sessionUser, setSessionUser] = useState(null);
   const [sessionUsers, setSessionUsers] = useState([]);
@@ -316,7 +319,7 @@ function OrderScreen() {
           />
           <PanelContainer>
             <Panel>
-              <StyledHeader>Menu</StyledHeader>
+              <StyledHeader>{t("menu")}</StyledHeader>
               <MenuSelector
                 order={order}
                 updateQuantity={updateQuantity}
@@ -324,13 +327,13 @@ function OrderScreen() {
               <SubtotalContainer>
                 <DollarAmount
                   size={"medium"}
-                  label={"Subtotal"}
+                  label={t("subtotal")}
                   amount={subtotal.toFixed(2)}
                 />
                 <TipAmount
                   value={tipPercent}
                   size={"medium"}
-                  label={"Tip"}
+                  label={t("tip")}
                   options={tipOptions}
                   showInput={showInput}
                   setShowInput={setShowInput}
@@ -338,7 +341,7 @@ function OrderScreen() {
                 />
                 <DollarAmount
                   size={"medium"}
-                  label={"Order total"}
+                  label={t("order-total")}
                   amount={(
                     subtotal +
                     subtotal * 0.01 * tipPercent.replace(/\D/g, "")).toFixed(2)
@@ -347,7 +350,7 @@ function OrderScreen() {
                 <Button
                   size={"medium"}
                   type={"primary"}
-                  label={"Confirm Order"}
+                  label={t("confirm-order")}
                   onClick={() => updateUserMenuAndTipInDB()}
                 />
               </SubtotalContainer>
@@ -356,7 +359,7 @@ function OrderScreen() {
               <Divider />
             </DividerPanel>
             <Panel>
-              <StyledHeader>Users</StyledHeader>
+              <StyledHeader>{t("users")}</StyledHeader>
               <IconsContainer>
                 {sessionUsers.map(u => (
                   <TextIcon
@@ -370,7 +373,7 @@ function OrderScreen() {
                 ))}
               </IconsContainer>
               <FinalOrderContainer>
-                <StyledHeader>Group Total So Far</StyledHeader>
+                <StyledHeader>{t("group-total")}</StyledHeader>
                 <TotalAmount
                   size={"medium"}
                   menuAmount={sessionMenuTotal}
@@ -379,13 +382,13 @@ function OrderScreen() {
                 <Button
                   size={"medium"}
                   type={"primary"}
-                  label={"Consolidate"}
+                  label={t("consolidate")}
                   onClick={() => consolidateOrder()}
                 />
                 <Button
                   size={"medium"}
                   type={"primary"}
-                  label={"Refresh"}
+                  label={t("refresh")}
                   onClick={() => refresh()}
                 />
               </FinalOrderContainer>

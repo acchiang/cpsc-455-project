@@ -10,6 +10,7 @@ import TotalAmount from "components/TotalAmount";
 import Button from "components/Button";
 import TopTitleBar from "components/TopTitleBar";
 import TextIcon from "components/TextIcon";
+import { useTranslation } from "react-i18next";
 
 const serverURL = "http://localhost:9000";
 
@@ -36,6 +37,7 @@ const StyledHeader = styled.h2`
 const IconsContainer = styled.div``;
 
 function FinalOrder() {
+  const { t } = useTranslation();
   const [finalOrders, setOrders] = useState(null);
   const location = useLocation();
 
@@ -85,7 +87,7 @@ function FinalOrder() {
               </TextIcon>
             ))}
           </IconsContainer>
-          <StyledHeader>Final Order Summary</StyledHeader>
+          <StyledHeader>{t("final-order-summary")}</StyledHeader>
           <MenuContainer>
             <MenuSelector order={finalOrders} disableSelect={true} />
           </MenuContainer>
@@ -97,7 +99,7 @@ function FinalOrder() {
           <Button
             size={"medium"}
             type={"primary"}
-            label={"Edit Order"}
+            label={t("edit-order")}
             onClick={() => (window.location.href = "/order-screen")}
           />
           <Button
