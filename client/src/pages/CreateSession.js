@@ -20,8 +20,8 @@ const PageContainer = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
-  background: ${(p) => p.theme.colors.primary};
-  ${(p) => p.theme.mediaQueries.mobile} {
+  background: ${p => p.theme.colors.primary};
+  ${p => p.theme.mediaQueries.mobile} {
     padding-top: 50px;
   }
 `;
@@ -51,16 +51,16 @@ function CreateSession({ ...props }) {
       return false;
     }
     if (!name || !sessionName) {
-      window.alert("Please fill in the required fields.")
+      window.alert("Please fill in the required fields.");
       return false;
     }
     return true;
   };
 
-  const generateUser = async (sessionId) => {
+  const generateUser = async sessionId => {
     const user = {
       name: document.getElementById("input-user-name").value,
-      password: document.getElementById("input-user-password").value,
+      password: document.getElementById("input-user-password").value
     };
 
     try {
@@ -68,7 +68,9 @@ function CreateSession({ ...props }) {
       if (res) window.location.href = "/order-screen";
       return JSON.stringify(res.data);
     } catch (e) {
-      const { response: { data : message } } = e
+      const {
+        response: { data: message }
+      } = e;
       window.alert(JSON.stringify(message));
     }
   };
@@ -105,7 +107,7 @@ function CreateSession({ ...props }) {
       <PageContainer>
         <Logo id="logo" alt="LettuceEat logo" width="200" src={lettuce}></Logo>
         <Title>LettuceEat</Title>
-        <H2>Easy bill splitting</H2>
+        <H2>Easy ordering and bill splitting</H2>
         <br />
         <br />
         <InputContainer>
