@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Theme from "styles/Theme";
@@ -92,7 +93,7 @@ function CreateSession({ ...props }) {
       `${serverURL}/api/menus/`
     );
   };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(async () => {
       const { data } = await fetchMenus();
       const incomingMenuOptions = data.map(

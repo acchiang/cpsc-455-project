@@ -149,7 +149,6 @@ findOrCreateUserInSession = async (req, res) => {
   };
 
   if (!existingUser) {
-    // Create user
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(requestedUser.password, salt, (err, hash) => {
         if (err) throw err;
@@ -162,13 +161,11 @@ findOrCreateUserInSession = async (req, res) => {
       });
     });
   } else {
-    // User already exists, try logging in
     const isMatch = await bcrypt.compare(
       requestedUser.password,
       existingUser.password
     );
     if (isMatch) {
-      // Sign token
       jwt.sign(
         requestedUser,
         keys.secretOrKey,

@@ -32,7 +32,6 @@ require("./config/passport")(passport);
 app.use("/api/menus", menuRouter);
 app.use("/api/sessions", sessionRouter);
 
-// Code snippet from https://stackoverflow.com/questions/36504768/deploy-the-backend-and-frontend-on-the-same-heroku-app-dyno
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, "../client/build")));
 
@@ -52,11 +51,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render("error");
 });

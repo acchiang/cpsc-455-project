@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -86,7 +87,7 @@ function OrderScreen() {
     );
   };
 
-  const fetchMenu = async (menuId) => {
+  const fetchMenu = async menuId => {
     return axios.get(`${serverURL}/api/menus/${menuId}`);
   };
 
@@ -172,6 +173,21 @@ function OrderScreen() {
     });
   };
 
+  const refresh = async () => {
+    let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
+      .menuTotalSoFar;
+    let tipTotalInDBSoFar = (await fetchSessionTipTotalSoFar()).data
+      .tipTotalSoFar;
+    if (menuTotalInDBSoFar === null) {
+      menuTotalInDBSoFar = 0;
+    }
+    if (tipTotalInDBSoFar === null) {
+      tipTotalInDBSoFar = 0;
+    }
+    setSessionMenuTotal(menuTotalInDBSoFar.toFixed(2));
+    setSessionTipTotal(tipTotalInDBSoFar.toFixed(2));
+  };
+
   const findOrUpdateOrder = async order => {
     return await axios.put(
       `${serverURL}/api/sessions/${sessionId}/update_order`,
@@ -235,23 +251,15 @@ function OrderScreen() {
     await setSessionTipTotal(addedTipTotal.toFixed(2));
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleTipChange = (updatedTipPercent) => {
+    localStorage.setItem('tipPercent', updatedTipPercent)
+    setTipPercent(updatedTipPercent)
+  }
+
   useEffect(async () => {
-    let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
-      .menuTotalSoFar;
-    let tipTotalInDBSoFar = (await fetchSessionTipTotalSoFar()).data
-      .tipTotalSoFar;
-    if (menuTotalInDBSoFar === null) {
-      menuTotalInDBSoFar = 0;
-    }
-    if (tipTotalInDBSoFar === null) {
-      tipTotalInDBSoFar = 0;
-    }
-    setSessionMenuTotal(menuTotalInDBSoFar.toFixed(2));
-    setSessionTipTotal(tipTotalInDBSoFar.toFixed(2));
+    refresh();
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const {
       data: { name, _id, users, menuId }
@@ -261,9 +269,9 @@ function OrderScreen() {
     setSessionUsers(users);
     setSelectedMenuId(menuId);
     setSessionUser(JSON.parse(localStorage.getItem("user")));
+    setTipPercent(localStorage.getItem('tipPercent') || tipOptions[0])
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const initializeOrder = async () => {
       const { data } = await findOrUpdateOrder(null);
@@ -273,6 +281,9 @@ function OrderScreen() {
         } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
         return latestMenu.map(item => ({ item, quantity: 0 }));
       }
+      setSubtotal(
+        data.reduce((total, i) => total + i.item.price * i.quantity, 0)
+      );
       return data;
     };
     if (sessionUser && sessionId) {
@@ -310,12 +321,13 @@ function OrderScreen() {
                         amount={subtotal}
                       />
                       <TipAmount
+                        value={tipPercent}
                         size={"medium"}
                         label={"Tip"}
                         options={tipOptions}
                         showInput={showInput}
                         setShowInput={setShowInput}
-                        feedValueToParent={setTipPercent}
+                        feedValueToParent={handleTipChange}
                       />
                       <DollarAmount
                         size={"medium"}
@@ -362,6 +374,12 @@ function OrderScreen() {
                         type={"primary"}
                         label={"Consolidate"}
                         onClick={() => consolidateOrder()}
+                      />
+                      <Button
+                        size={"medium"}
+                        type={"primary"}
+                        label={"Refresh"}
+                        onClick={() => refresh()}
                       />
                     </FinalOrderContainer>
                   </Panel>

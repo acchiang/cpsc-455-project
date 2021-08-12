@@ -86,31 +86,28 @@ const MenuSelector = ({ order, updateQuantity, disableSelect }) => {
       <MenuTable>
         <tbody>
           {Object.keys(categorizedOrderItems).map((category) => {
-            const categoryItems = categorizedOrderItems[category];
             return (
-              <>
+              <React.Fragment key={category}>
                 <tr>
                   <ToggleRow
-                    key={category}
                     onClick={() => handleHideCategory(category)}
                   >
                     {category}
                   </ToggleRow>
                 </tr>
-                {categoryItems.map(({ item, quantity }) => {
+                {categorizedOrderItems[category].map(({ item, quantity }) => {
                   return (
                     <MenuRow
                       className={`${category}Row`}
                       key={item._id}
                       orderItem={item}
                       initQuantity={quantity}
-                      // HACK
                       updateQuantity={updateQuantity ?? ((a, b) => null)}
                       disableSelect={disableSelect}
                     />
                   );
                 })}
-              </>
+              </React.Fragment>
             );
           })}
         </tbody>
