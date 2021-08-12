@@ -13,9 +13,9 @@ For young adults who have social gatherings involving group food orders, our res
 - [x] Ability to create and access a session
 - [x] Calculate individual food order subtotal
 ### 3-7 "standard" requirements (will most likely complete)
-- [ ] Persistent session for user
+- [x] Persistent session for user
 - [x] Custom tip amounts 
-- [ ] Responsive website (cross-browser and cross-device testing) 
+- [x] Responsive website (cross-browser and cross-device testing) 
 - [x] Web accessible UX features (eg. screen-reader accessible) 
 - [x] Categories for menu items, toggle for more details
 - [x] Dark mode toggle
@@ -29,11 +29,10 @@ For young adults who have social gatherings involving group food orders, our res
 - [x] Display menu items (list) with prices
 - [x] Select from menu items 
 - [x] Select quantity of each menu item selected
-- [ ] Search functionality to filter down menu items
 ### Ability to create and access a session
 - [x] Generate a unique session link/code
 - [x] Copy and share session invite link/code
-- [ ] Ensure users that access the session can see the same data as other users on refresh
+- [x] Ensure users that access the session can see the same data as other users on refresh
 
 ## 2-3 rough sketch prototypes of some key tasks of the app:
 ![Page1](https://user-images.githubusercontent.com/47487758/119433880-f3d2e600-bccb-11eb-8fde-30dba851e636.png)
@@ -82,7 +81,7 @@ Revisiting our stretch goals:
 - [x] Passwords for users when returning to session
 - [ ] Delete sessions after x amount of days (Scheduled db purge)
 
-We have yet to implement WebSockets for real time updates rather than calling multiple apis for updates. We also haven't implemented a scheduled db purge for freeing up space from the sessions collection. In the future, we would like to finish up these stretch goals as well as make the interface of the app more accessible or user friendly by incorporating features such as supporting multiple languages, tooltips, and reading out the menu options. For this app to become even more aligned with what we originally envisioned, we would also like to add a page where users can etrans the person paying for the entire bill with the click of a button. This would require more work on authentication and design of the app so there are no security holes. Currently, manus are menus are manually added to the db. We would also like to automate this process with vision machine learning so that users can take a picture of the menu they want and upload it so that the vision api can process what items are within the menu picture and upload it to the db.
+We have yet to implement WebSockets for real time updates rather than calling multiple apis for updates. We also haven't implemented a scheduled db purge for freeing up space from the sessions collection. In the future, we would like to finish up these stretch goals as well as make the interface of the app more accessible or user friendly by incorporating features such as supporting multiple languages, tooltips, and reading out the menu options. For this app to become even more aligned with what we originally envisioned, we would also like to add a page where users can e-transfer the person paying for the entire bill with the click of a button. This would require more work on authentication and design of the app so there are no security holes. Currently, our menus are manually added to the db. We would also like to automate this process with vision machine learning so that users can take a picture of the menu they want and upload it so that the vision api can process what items are within the menu picture and upload it to the db.
 
 ## Contributions
 Allison:
@@ -92,6 +91,7 @@ Christy:
 Christy worked on setting up authentication of users' apis which includes using JWTs (encrypting and decrypting them). She also worked on a portion of user-persistence by writing apis to read and write to sessions collection and updating the client interface with data from MongoDB Atlas. Christy also worked on refactoring code; created models, routes, controllers, db, configs and validation directories and refactored the code to run within those directories.
 
 Rebecca:
+Rebecca worked on building front-end components, putting together the basic skeleton of a couple pages, setting up the back-end server using Express, and propagating consolidated data across pages. She also contributed to making improvements to the user interface, like adding basic desktop browser responsiveness and helping out with mid-fidelity designs. 
 
 Nick:
-Nick worked on the ability to create, or join sessions/lobbies. he also worked on setting up new users inside each session/lobby, and the ability for users to log back into their account with persisting data. In addition, he also worked on update logic for user orders and persistence of various other data. As part of software development, he also helped with refactoring code, debugging code, and modifying models where needed.
+Nick worked on the ability to create, or join sessions/lobbies. he also worked on setting up new users inside each session/lobby, and the ability for users to log back into their account with persisting data. In addition, he also worked on update logic for user orders and persistence of various other data. As part of software development, he also helped with refactoring code, squashing bugs, adding responsiveness, and changing db schemas (when needed).
