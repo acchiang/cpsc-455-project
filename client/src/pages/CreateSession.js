@@ -51,11 +51,11 @@ function CreateSession({ ...props }) {
     const password = document.getElementById("input-user-password").value;
     const sessionName = document.getElementById("input-session-name").value;
     if (password && (password.length < 6 || password.length > 30)) {
-      window.alert("Password must be at between 6 to 30 characters.");
+      window.alert(t("password-alert"));
       return false;
     }
     if (!name || !sessionName) {
-      window.alert("Please fill in the required fields.");
+      window.alert(t("required-alert"));
       return false;
     }
     return true;

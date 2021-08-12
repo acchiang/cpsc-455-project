@@ -67,7 +67,9 @@ i18n
                     "users":"Users",
                     "group-total":"Group Total So Far",
                     "consolidate":"Consolidate",
-                    "refresh":"Refresh"
+                    "refresh":"Refresh",
+                    "required-alert":"Please fill in the required fields.",
+                    "password-alert":"Password must be at between 6 to 30 characters."
 
                 }
             },
@@ -115,7 +117,10 @@ i18n
                     "users":"Utilisateurs",
                     "group-total":"Total du groupe à ce jour",
                     "consolidate":"Consolider",
-                    "refresh":"Rafraîchir"
+                    "refresh":"Rafraîchir",
+                    "required-alert":"S'il vous plaît remplir les champs obligatoires.",
+                    "password-alert":"Le mot de passe doit comporter entre 6 et 30 caractères."
+
                 }
             }
         },
