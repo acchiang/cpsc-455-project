@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
@@ -64,6 +65,22 @@ const StyledHeader = styled.h2`
 `;
 
 function OrderScreen() {
+  const fetchSessionMenuTotalSoFar = async () => {
+    return axios.get(
+      `${serverURL +
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-menu-total`
+    );
+  };
+
+  const fetchSessionTipTotalSoFar = async () => {
+    return axios.get(
+      `${serverURL +
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/get-session-tip-total`
+    );
+  };
+
   const [order, setOrder] = useState(null);
   const [subtotal, setSubtotal] = useState(0);
   const [tipPercent, setTipPercent] = useState(tipOptions[0]);
@@ -73,10 +90,15 @@ function OrderScreen() {
   const [sessionUser, setSessionUser] = useState(null);
   const [sessionUsers, setSessionUsers] = useState([]);
   const [selectedMenuId, setSelectedMenuId] = useState(null);
-
+  const [sessionMenuTotal, setSessionMenuTotal] = useState(0);
+  const [sessionTipTotal, setSessionTipTotal] = useState(0);
+  const history = useHistory();
+  
   const fetchSessionData = async () => {
     return axios.get(
-      `${serverURL + "/api/sessions/" + localStorage.getItem("sessionId")}/order-screen`
+      `${serverURL +
+      "/api/sessions/" +
+      localStorage.getItem("sessionId")}/order-screen`
     );
   };
 
@@ -84,21 +106,57 @@ function OrderScreen() {
     return axios.get(`${serverURL}/api/menus/${menuId}`);
   };
 
-  // TODO: get group total (including tips) from server
-  // eslint-disable-next-line no-unused-vars
-  const getGroupTotals = () => { };
+  const updateMenuTotalSoFar = async subtotal => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${sessionId}/update_menu_total`,
+      { menuTotalSoFar: subtotal }
+    );
+  };
 
-  // TODO: history.push to next page with data
-  // eslint-disable-next-line no-unused-vars
-  const consolidateOrder = () => { };
+  const updateTipTotalSoFar = async tipTotal => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${sessionId}/update_tip_total`,
+      { tipTotalSoFar: tipTotal }
+    );
+  };
 
-  const findOrUpdateOrder = async (order) => {
-    return await axios.put(`${serverURL}/api/sessions/${sessionId}/update_order`, { sessionUser, order})
-  }
+  const updateMenuAndTipInDB = async () => {
+    let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
+    let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
+    let newMenuTotal = subtotal + menuTotalInDBSoFar.data.menuTotalSoFar;
+    let tipTotal = subtotal * 0.01 * tipPercent.replace(/\D/g, "");
+    let newTipTotal = tipTotal + tipTotalInDBSoFar.data.tipTotalSoFar;
+    updateMenuTotalSoFar(newMenuTotal);
+    updateTipTotalSoFar(newTipTotal);
+    setSessionTipTotal(newTipTotal);
+    setSessionMenuTotal(newMenuTotal);
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const consolidateOrder = async () => {
+    history.push({
+      pathname: '/final-order',
+      state: {
+        sessionName: sessionName,
+        sessionId: sessionId,
+        users: sessionUsers,
+        menu: order,
+        menuTotal: sessionMenuTotal,
+        tipTotal: sessionTipTotal
+      }
+    })
+  };
+
+  const findOrUpdateOrder = async order => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${sessionId}/update_order`,
+      { sessionUser, order }
+    );
+  };
 
   const updateQuantity = (name, quantity) => {
     const updatedOrder = order;
-    const idx = order.findIndex(({item}) => item.name === name);
+    const idx = order.findIndex(({ item }) => item.name === name);
     if (updatedOrder[idx].quantity !== quantity) {
       updatedOrder[idx].quantity = quantity;
       setOrder(updatedOrder);
@@ -111,6 +169,14 @@ function OrderScreen() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
+    let menuTotalInDBSoFar = await fetchSessionMenuTotalSoFar();
+    let tipTotalInDBSoFar = await fetchSessionTipTotalSoFar();
+    setSessionMenuTotal(menuTotalInDBSoFar.data.menuTotalSoFar);
+    setSessionTipTotal(tipTotalInDBSoFar.data.tipTotalSoFar);
+  }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
     const {
       data: { name, _id, users, menuId }
     } = await fetchSessionData();
@@ -118,7 +184,7 @@ function OrderScreen() {
     setSessionName(name);
     setSessionUsers(users);
     setSelectedMenuId(menuId);
-    setSessionUser(JSON.parse(localStorage.getItem("user")))
+    setSessionUser(JSON.parse(localStorage.getItem("user")));
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,10 +192,12 @@ function OrderScreen() {
     const initializeOrder = async () => {
       const { data } = await findOrUpdateOrder(null);
       if (data && !data.length) {
-        const { data: { items: latestMenu } } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
+      const {
+          data: { items: latestMenu }
+        } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
         return latestMenu.map(item => ({ item, quantity: 0 }));
       }
-      return data
+      return data;
     };
     if (sessionUser && sessionId) {
       setOrder(await initializeOrder());
@@ -144,7 +212,9 @@ function OrderScreen() {
             title={sessionName}
             setTitle={setSessionName}
             backUrl={"/create-session"}
-            copyUrl={`${window.location.host}/sessions/${localStorage.getItem("sessionId")}`}
+            copyUrl={`${window.location.host}/sessions/${localStorage.getItem(
+              "sessionId"
+            )}`}
             sessionId={sessionId}
           />
           <PanelContainer>
@@ -183,7 +253,7 @@ function OrderScreen() {
                         size={"medium"}
                         type={"primary"}
                         label={"Confirm Order"}
-                        onClick={() => (window.location.href = "/final-order")}
+                        onClick={() => updateMenuAndTipInDB()}
                       />
                     </SubtotalContainer>
                   </Panel>
@@ -193,30 +263,29 @@ function OrderScreen() {
                   <Panel>
                     <StyledHeader>Users</StyledHeader>
                     <IconsContainer>
-                      {sessionUsers.map((u) => (
+                      {sessionUsers.map(u => (
                         <TextIcon
-                        key={u.name+u.date}
-                        textLetter={u.name?.charAt(0).toUpperCase()}
-                        size={"default"}
-                        color={"#31B4DB"}
-                      >
-                        {u.name}
-                      </TextIcon>
+                          key={u.name + u.date}
+                          textLetter={u.name?.charAt(0).toUpperCase()}
+                          size={"default"}
+                          color={"#31B4DB"}
+                        >
+                          {u.name}
+                        </TextIcon>
                       ))}
-                      
                     </IconsContainer>
                     <FinalOrderContainer>
                       <StyledHeader>Group Total So Far</StyledHeader>
                       <TotalAmount
                         size={"medium"}
-                        menuAmount={"12.99"}
-                        tipAmount={"1.50"}
+                        menuAmount={sessionMenuTotal}
+                        tipAmount={sessionTipTotal}
                       />
                       <Button
                         size={"medium"}
                         type={"primary"}
                         label={"Consolidate"}
-                        onClick={() => (window.location.href = "/final-order")}
+                        onClick={() => consolidateOrder()}
                       />
                     </FinalOrderContainer>
                   </Panel>

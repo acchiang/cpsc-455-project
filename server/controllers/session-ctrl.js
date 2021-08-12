@@ -61,8 +61,23 @@ getSessionName = async (req, res) => {
   const sessionName = await Session.findById(sessionId, {
     name: 1
   });
-  console.log(sessionName);
   sessionName ? res.send(sessionName) : res.sendStatus(404);
+};
+
+getSessionMenuTotalSoFar = async (req, res) => {
+  const sessionId = req.params.sessionId;
+  const sessionMenuTotalSoFar = await Session.findById(sessionId, {
+    menuTotalSoFar: 1
+  });
+  sessionMenuTotalSoFar ? res.send(sessionMenuTotalSoFar) : res.sendStatus(404);
+};
+
+getSessionTipTotalSoFar = async (req, res) => {
+  const sessionId = req.params.sessionId;
+  const sessionTipTotalSoFar = await Session.findById(sessionId, {
+    tipTotalSoFar: 1
+  });
+  sessionTipTotalSoFar ? res.send(sessionTipTotalSoFar) : res.sendStatus(404);
 };
 
 updateSessionName = async (req, res) => {
@@ -71,6 +86,42 @@ updateSessionName = async (req, res) => {
   Session.findByIdAndUpdate(
     sessionId,
     { name: body.name },
+    { new: true },
+    function(err, response) {
+      if (err) {
+        return res.json({
+          message: "Database Update Failure"
+        });
+      }
+      return res.send(response);
+    }
+  );
+};
+
+updateSessionMenuTotalSoFar = async (req, res) => {
+  const { params: { sessionId } } = req;
+  const { menuTotalSoFar } = req.body;
+  Session.findByIdAndUpdate(
+    sessionId,
+    { menuTotalSoFar: menuTotalSoFar },
+    { new: true },
+    function(err, response) {
+      if (err) {
+        return res.json({
+          message: "Database Update Failure"
+        });
+      }
+      return res.send(response);
+    }
+  );
+};
+
+updateSessionTipTotalSoFar = async (req, res) => {
+  const { params: { sessionId } } = req;
+  const { tipTotalSoFar } = req.body;
+  Session.findByIdAndUpdate(
+    sessionId,
+    { tipTotalSoFar: tipTotalSoFar },
     { new: true },
     function(err, response) {
       if (err) {
@@ -95,7 +146,7 @@ findOrCreateUserInSession = async (req, res) => {
   const requestedUser = {
     name: req.body.name,
     password: req.body.password
-  }
+  };
 
   if (!existingUser) {
     // Create user
@@ -104,14 +155,18 @@ findOrCreateUserInSession = async (req, res) => {
         if (err) throw err;
         requestedUser.password = hash;
         session.users.push(requestedUser);
-        session.save()
+        session
+          .save()
           .then(() => res.json(requestedUser))
           .catch(err => console.log(err));
       });
     });
   } else {
     // User already exists, try logging in
-    const isMatch = await bcrypt.compare(requestedUser.password, existingUser.password)
+    const isMatch = await bcrypt.compare(
+      requestedUser.password,
+      existingUser.password
+    );
     if (isMatch) {
       // Sign token
       jwt.sign(
@@ -131,22 +186,24 @@ findOrCreateUserInSession = async (req, res) => {
         }
       );
     } else {
-      res.status(400).json({ passwordincorrect: "Password incorrect or username is taken" });
+      res
+        .status(400)
+        .json({ passwordincorrect: "Password incorrect or username is taken" });
     }
   }
-}
+};
 
 updateUserOrder = async (req, res) => {
-  const { params: { sessionId } } = req
-  const { sessionUser, order } = req.body
+  const { params: { sessionId } } = req;
+  const { sessionUser, order } = req.body;
   const session = await Session.findById(sessionId);
-  const idx = session.users.findIndex((u) => u.name === sessionUser.name)
+  const idx = session.users.findIndex(u => u.name === sessionUser.name);
   if (order) {
     session.users[idx].orders = order;
     session.save();
   }
-  res.json(session.users[idx].orders)
-}
+  res.json(session.users[idx].orders);
+};
 
 module.exports = {
   getSessions,
@@ -155,5 +212,9 @@ module.exports = {
   getSessionName,
   updateSessionName,
   updateUserOrder,
-  findOrCreateUserInSession
+  findOrCreateUserInSession,
+  updateSessionMenuTotalSoFar,
+  updateSessionTipTotalSoFar,
+  getSessionMenuTotalSoFar,
+  getSessionTipTotalSoFar
 };

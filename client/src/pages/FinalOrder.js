@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import Theme from "styles/Theme";
 import { OrderContext } from "utils/Context";
-import sampleMenu from "assets/sampleMenu";
 import styled from "styled-components";
 import MenuSelector from "components/MenuSelector";
 import TotalAmount from "components/TotalAmount";
@@ -9,13 +10,11 @@ import Button from "components/Button";
 import TopTitleBar from "components/TopTitleBar";
 import TextIcon from "components/TextIcon";
 
-function FinalOrder() {
-  const [order, setOrder] = useState(null);
+const serverURL = "http://localhost:9000";
 
-  // TODO: get menu from server
-  const fetchMenu = () => {
-    return sampleMenu;
-  };
+function FinalOrder() {
+  const [finalOrders, setOrders] = useState(null);
+  const location = useLocation();
 
   const PageContainer = styled.div`
     height: 100%;
@@ -37,40 +36,59 @@ function FinalOrder() {
     color: ${p => p.theme.colors.text};
   `;
 
-  useEffect(() => {
+  const IconsContainer = styled.div``;
+
+  const getUserOrder = async sessionUser => {
+    return await axios.put(
+      `${serverURL}/api/sessions/${location.state.sessionId}/update_order`,
+      { sessionUser }
+    );
+  };
+
+  useEffect(async () => {
     // TODO: Perhaps implement webhook (socket) to listen for additional users
-    const initializeOrder = () => {
-      const menu = fetchMenu();
-      return menu.map(item => ({ item, quantity: 0 }));
+    const consolidateOrders = async () => {
+      let orders = location.state.menu;
+      orders.map(item => ({ item, quantity: 0 }));
+      location.state.users.map(async (user) => {
+        const { data } = await getUserOrder(user);
+        data.map(userOrder => {
+          if (userOrder.quantity !== 0) {
+            const idx = orders.findIndex(({ item }) => item.name === userOrder.item.name)
+            orders[idx].quantity += userOrder.quantity;
+          }
+        })
+      })
+      return orders;
     };
-    setOrder(initializeOrder());
+    setOrders(await consolidateOrders());
   }, []);
 
   return (
     <Theme>
-      <OrderContext.Provider value={[order, setOrder]}>
+      <OrderContext.Provider value={[finalOrders, setOrders]}>
         <PageContainer>
-          <TopTitleBar title={"nw++ Picnic"} backUrl={"/order-screen"} />
-          <TextIcon textLetter={"A"} size={"default"} color={"#31B4DB"}>
-            Allison
-          </TextIcon>
-          <TextIcon textLetter={"N"} size={"default"} color={"#91F4CA"}>
-            Nick
-          </TextIcon>
-          <TextIcon textLetter={"R"} size={"default"} color={"#49C4AB"}>
-            Rebecca
-          </TextIcon>
-          <TextIcon textLetter={"C"} size={"default"} color={"#61F4DB"}>
-            Christy
-          </TextIcon>
+          <TopTitleBar title={location.state.sessionName} backUrl={"/order-screen"} />
+          <IconsContainer>
+            {location.state.users.map(u => (
+              <TextIcon
+                key={u.name + u.date}
+                textLetter={u.name?.charAt(0).toUpperCase()}
+                size={"default"}
+                color={"#31B4DB"}
+              >
+                {u.name}
+              </TextIcon>
+            ))}
+          </IconsContainer>
           <StyledHeader>Final Order Summary</StyledHeader>
           <MenuContainer>
-            <MenuSelector order={order}/>
+            <MenuSelector order={finalOrders} disableSelect={true}/>
           </MenuContainer>
           <TotalAmount
             size={"medium"}
-            menuAmount={"12.99"}
-            tipAmount={"1.50"}
+            menuAmount={location.state.menuTotal}
+            tipAmount={location.state.tipTotal}
           />
           <Button
             size={"medium"}

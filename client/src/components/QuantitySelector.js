@@ -38,15 +38,19 @@ const QuantitySelectorInput = styled.input`
   }
 `;
 
-const QuantitySelector = ({ value, setValue, ...props }) => (
+const QuantitySelector = ({ value, setValue, disable, ...props }) => (
   <>
-    <QuantityButton onClick={() => handleDecrease(value, setValue)}>
-      <FaMinus />
-    </QuantityButton>
+    {!disable &&
+      <QuantityButton onClick={() => handleDecrease(value, setValue)}>
+        <FaMinus />
+      </QuantityButton>
+    }
     <QuantitySelectorInput value={value} readonly disabled {...props} />
+    {!disable &&
     <QuantityButton onClick={() => handleIncrease(value, setValue)}>
       <FaPlus />
     </QuantityButton>
+    }
   </>
 );
 
