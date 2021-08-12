@@ -6,6 +6,7 @@ import { Title, H2 } from "styles/styleUtils";
 import lettuce from "assets/lettuce.png";
 import apis from "api";
 import { useTranslation } from "react-i18next";
+import ToggleLinks from "components/ToggleLinks";
 
 const PageContainer = styled.div`
   display: flex;
@@ -73,8 +74,8 @@ function Register({ ...props }) {
     <Theme>
       <PageContainer>
         <img id="logo" alt="LettuceEat logo" width="200" src={lettuce} />
-        <Title>LettuceEat</Title>
-        <H2>Easy bill splitting</H2>
+        <Title>{t("title")}</Title>
+        <H2>{t("tagline")}</H2>
         <br />
         <br />
         <InputContainer>
@@ -101,6 +102,7 @@ function Register({ ...props }) {
           label={t("join")}
           onClick={register}
         />
+        <ToggleLinks />
       </PageContainer>
     </Theme>
   );

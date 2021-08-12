@@ -5,6 +5,7 @@ import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
 import lettuce from "assets/lettuce.png";
 import { useTranslation } from "react-i18next";
+import ToggleLinks from "components/ToggleLinks";
 
 const PageContainer = styled.div`
   display: flex;
@@ -68,6 +69,7 @@ function Login({ ...props }) {
           label={t("login")}
           onClick={login}
         />
+        <ToggleLinks />
       </PageContainer>
     </Theme>
   );

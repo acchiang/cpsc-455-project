@@ -10,6 +10,7 @@ import lettuce from "assets/lettuce.png";
 import Dropdown from "components/Dropdown";
 import apis from "api";
 import { useTranslation } from "react-i18next";
+import ToggleLinks from "components/ToggleLinks";
 
 const serverURL = "http://localhost:9000";
 
@@ -155,6 +156,7 @@ function CreateSession({ ...props }) {
           label={t("create")}
           onClick={register}
         />
+        <ToggleLinks />
       </PageContainer>
     </Theme>
   );
