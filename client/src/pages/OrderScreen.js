@@ -77,7 +77,7 @@ function OrderScreen() {
   const [sessionMenuTotal, setSessionMenuTotal] = useState(0);
   const [sessionTipTotal, setSessionTipTotal] = useState(0);
   const history = useHistory();
-  
+
   const fetchSessionData = async () => {
     return axios.get(
       `${serverURL +
@@ -86,7 +86,7 @@ function OrderScreen() {
     );
   };
 
-  const fetchMenu = async (menuId) => {
+  const fetchMenu = async menuId => {
     return axios.get(`${serverURL}/api/menus/${menuId}`);
   };
 
@@ -165,6 +165,21 @@ function OrderScreen() {
     });
   };
 
+  const refresh = async () => {
+    let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
+      .menuTotalSoFar;
+    let tipTotalInDBSoFar = (await fetchSessionTipTotalSoFar()).data
+      .tipTotalSoFar;
+    if (menuTotalInDBSoFar === null) {
+      menuTotalInDBSoFar = 0;
+    }
+    if (tipTotalInDBSoFar === null) {
+      tipTotalInDBSoFar = 0;
+    }
+    setSessionMenuTotal(menuTotalInDBSoFar.toFixed(2));
+    setSessionTipTotal(tipTotalInDBSoFar.toFixed(2));
+  };
+
   const findOrUpdateOrder = async order => {
     return await axios.put(
       `${serverURL}/api/sessions/${sessionId}/update_order`,
@@ -230,18 +245,7 @@ function OrderScreen() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    let menuTotalInDBSoFar = (await fetchSessionMenuTotalSoFar()).data
-      .menuTotalSoFar;
-    let tipTotalInDBSoFar = (await fetchSessionTipTotalSoFar()).data
-      .tipTotalSoFar;
-    if (menuTotalInDBSoFar === null) {
-      menuTotalInDBSoFar = 0;
-    }
-    if (tipTotalInDBSoFar === null) {
-      tipTotalInDBSoFar = 0;
-    }
-    setSessionMenuTotal(menuTotalInDBSoFar.toFixed(2));
-    setSessionTipTotal(tipTotalInDBSoFar.toFixed(2));
+    refresh();
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -261,7 +265,7 @@ function OrderScreen() {
     const initializeOrder = async () => {
       const { data } = await findOrUpdateOrder(null);
       if (data && !data.length) {
-      const {
+        const {
           data: { items: latestMenu }
         } = await fetchMenu(selectedMenuId || DEFAULT_MENU_ID);
         return latestMenu.map(item => ({ item, quantity: 0 }));
@@ -355,6 +359,12 @@ function OrderScreen() {
                         type={"primary"}
                         label={"Consolidate"}
                         onClick={() => consolidateOrder()}
+                      />
+                      <Button
+                        size={"medium"}
+                        type={"primary"}
+                        label={"Refresh"}
+                        onClick={() => refresh()}
                       />
                     </FinalOrderContainer>
                   </Panel>
