@@ -61,7 +61,10 @@ i18n.use(initReactI18next)
                     "link-alert":"Link copied to clipboard",
                     "link-failed-alert":"Link did not copy to clipboard",
                     "user-failed-alert":"Unable to create user or username is taken",
-                    "join":"Join"
+                    "join":"Join",
+                    "join-session":"Joining session...",
+                    "email":"Email*",
+                    "login":"Login"
                 }
             },
             fr: {
@@ -119,7 +122,10 @@ i18n.use(initReactI18next)
                     "link-alert":"Lien copié dans le presse-papiers",
                     "link-failed-alert":"Link did not copy to clipboard",
                     "user-failed-alert":"Le lien n'a pas été copié dans le presse-papiers",
-                    "join":"Rejoindre"
+                    "join":"Rejoindre",
+                    "join-session":"Rejoindre la session...",
+                    "email":"Courrier électronique*",
+                    "login":"Connexion"
                 }
             }
         },

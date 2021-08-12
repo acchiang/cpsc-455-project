@@ -4,6 +4,7 @@ import Button from "components/Button";
 import Input from "components/Input";
 import { Title, H2 } from "styles/styleUtils";
 import lettuce from "assets/lettuce.png";
+import { useTranslation } from "react-i18next";
 
 const PageContainer = styled.div`
   display: flex;
@@ -22,6 +23,8 @@ const InputContainer = styled.div`
 `;
 
 function Login({ ...props }) {
+
+  const { t } = useTranslation();
   const login = async () => {
     window.location.href = "/login-event-name";
   };
@@ -30,31 +33,31 @@ function Login({ ...props }) {
     <Theme>
       <PageContainer>
         <img id="logo" alt="LettuceEat logo" width="200" src={lettuce} />
-        <Title>LettuceEat</Title>
-        <H2>Easy bill splitting</H2>
+        <Title>{t("title")}</Title>
+        <H2>{t("tagline")}</H2>
         <br />
         <br />
         <InputContainer>
           <Input
             id={"input-session-name"}
             size={"medium"}
-            label={"Name*"}
-            placeholder={"John Doe"}
+            label={t("event-name")}
+            placeholder={t("event-name-placeholder")}
           />
         </InputContainer>
         <InputContainer>
           <Input
             id={"input-session-email"}
             size={"medium"}
-            label={"Email*"}
-            placeholder={"johndoe@gmail.com"}
+            label={t("email")}
+            placeholder={"email@gmail.com"}
           />
         </InputContainer>
         <InputContainer>
           <Input
             id={"input-session-password"}
             size={"medium"}
-            label={"Password"}
+            label={t("password")}
             placeholder={"optional"}
           />
         </InputContainer>
@@ -62,7 +65,7 @@ function Login({ ...props }) {
         <Button
           size={"medium"}
           type={"primary"}
-          label={"Login"}
+          label={t("login")}
           onClick={login}
         />
       </PageContainer>
