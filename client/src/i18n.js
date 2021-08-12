@@ -28,7 +28,7 @@ i18n.use(initReactI18next)
                     "side-by-side":"side-by-side",
                     "username":"username",
                     "dollar-amt-component": "Dollar Amount Component",
-                    "subtotal":"subtotal",
+                    "subtotal":"Subtotal",
                     "total-amt-component": "Total Amount Component",
                     "dropdown":"dropdown",
                     "other":"other",
