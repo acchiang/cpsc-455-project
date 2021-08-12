@@ -46,7 +46,7 @@ function Charcuterie({ children }) {
           size={"medium"}
           type={"primary"}
           label={"Take me to the front page"}
-          onClick={() => (window.location.href = "/welcome")}
+          onClick={() => (window.location.href = "/")}
         />
         <h2>User Icons</h2>
         <TextIcon textLetter={"a"} size={"small"} color={"#8EDB31"}>

@@ -12,8 +12,6 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/welcome" component={CreateSession}>
-        </Route>
         <Route path="/login">
           <Login />
         </Route>
@@ -27,8 +25,10 @@ function App() {
           <FinalOrder />
         </Route>
         <Route path="/sessions/:sessionId" component={JoinSession} />
-        <Route path="/">
+        <Route path="/charcuterie">
           <Charcuterie />
+        </Route>
+        <Route path="/" component={CreateSession}>
         </Route>
       </Switch>
     </BrowserRouter>
